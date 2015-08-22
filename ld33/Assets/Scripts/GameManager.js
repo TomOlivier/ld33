@@ -67,7 +67,7 @@ function Start () {
 	buildRoads();
 
 
-	buildingFactory.generateBuilding(0,0,4,4);
+	buildingFactory.generateBuilding(0,0,3,3);
 
 }
 

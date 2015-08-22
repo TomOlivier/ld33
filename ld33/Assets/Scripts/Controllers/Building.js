@@ -23,6 +23,10 @@ function Start () {
 	rb2D = GetComponent.<Rigidbody2D>();
 
 
+	boxCollider.offset = new Vector2((width-1)/2f, (height-1)/2f);
+	boxCollider.size = new Vector2(width,height);
+
+
 	//Peuple les sprites
 	var s_building : GameObject;
 
@@ -33,16 +37,41 @@ function Start () {
 	var i : int;
 	var j : int;
 
-	for(i = 1; i < width - 1; i++){
+	var doorX : int = Mathf.Floor(width/2f);
 
-		s_building = Instantiate (bottomInterMiddle, new Vector3 (this.transform.position.x + i, this.transform.position.y, 0f), Quaternion.identity) as GameObject;
+	for(i = 1; i < width ; i++){
+
+
+
+		for(j = 1 ; j < height ; j++){
+
+			s_building = Instantiate (middleMiddle, new Vector3 (this.transform.position.x + i, this.transform.position.y + j, 0f), Quaternion.identity) as GameObject;
+			s_building.transform.SetParent(this.transform);
+		}
+
+
+
+		s_building = Instantiate (top, new Vector3 (this.transform.position.x + i, this.transform.position.y + height, 0f), Quaternion.identity) as GameObject;
 		s_building.transform.SetParent(this.transform);
 
-		s_building = Instantiate (bottomInterMiddle, new Vector3 (this.transform.position.x + i, this.transform.position.y + height, 0f), Quaternion.identity) as GameObject;
+		if(i == doorX)
+			continue;
+		s_building = Instantiate (bottomInterMiddle, new Vector3 (this.transform.position.x + i, this.transform.position.y, 0f), Quaternion.identity) as GameObject;
 		s_building.transform.SetParent(this.transform);
 	}
 
-	s_building = Instantiate (bottomMiddle, new Vector3 (this.transform.position.x, this.transform.position.y, 0f), Quaternion.identity) as GameObject;
+	for(j = 1 ; j < height ; j++){
+
+		s_building = Instantiate (middleLeft, new Vector3 (this.transform.position.x, this.transform.position.y + j, 0f), Quaternion.identity) as GameObject;
+		s_building.transform.SetParent(this.transform);
+
+		s_building = Instantiate (middleLeft, new Vector3 (this.transform.position.x + width -1, this.transform.position.y + j, 0f), Quaternion.identity) as GameObject;
+		s_building.transform.SetParent(this.transform);
+
+	}
+
+
+	s_building = Instantiate (bottomMiddle, new Vector3 (this.transform.position.x + doorX, this.transform.position.y, 0f), Quaternion.identity) as GameObject;
 	s_building.transform.SetParent(this.transform);
 
 

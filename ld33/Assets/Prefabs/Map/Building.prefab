@@ -46,7 +46,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 2
 --- !u!61 &6199726
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -87,8 +87,7 @@ MonoBehaviour:
   bottomInterMiddle: {fileID: 0}
   middleLeft: {fileID: 0}
   middleMiddle: {fileID: 0}
-  topLeft: {fileID: 0}
-  topMiddle: {fileID: 0}
+  top: {fileID: 0}
   height: 0
   width: 0
   subBuilding: {fileID: 199522, guid: 5ca8dee622e064e638e8e1dbd5f1abb8, type: 2}
@@ -111,6 +110,10 @@ Prefab:
       propertyPath: subBuilding
       value: 
       objectReference: {fileID: 199522, guid: 5ca8dee622e064e638e8e1dbd5f1abb8, type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_Constraints
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 123128}
