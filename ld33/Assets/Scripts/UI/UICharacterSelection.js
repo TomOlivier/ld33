@@ -26,7 +26,7 @@ function Update () {
 
 function UpdateCharactersList()
 {
-
+	
 }
 
 function InsertCharacter()
