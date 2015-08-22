@@ -25,7 +25,7 @@ function Start ()
 function Update () {
 	// debug purpose
 	if (Input.GetMouseButtonDown(0)) {
-		StartGame();
+		//StartGame();
 	}
 }
 
@@ -37,4 +37,9 @@ function StartGame() {
 			pl.playerInstance.GetComponent.<PlayerController>().playerInfo = pl;
 		}
 	}
+}
+
+function GetPlayer(id: int) : Player
+{
+	return (players[id]);
 }

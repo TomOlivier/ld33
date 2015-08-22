@@ -130,6 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextState: 0
+  playersManager: {fileID: 56966951}
 --- !u!114 &42648968
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -193,6 +194,7 @@ MonoBehaviour:
       prefab: {fileID: 0}
       logoMini: {fileID: 0}
       logoMedium: {fileID: 0}
+    playerPrefab: {fileID: 0}
     color: {r: 1, g: 0, b: 0, a: 1}
     name: 
     uid: 1
@@ -208,7 +210,9 @@ MonoBehaviour:
       joystickId: 0
       isUsed: 0
       isValid: 0
-      isKeboard: 0
+      isKeyboard: 0
+      name: 
+    playerInstance: {fileID: 0}
   - controller: {fileID: 0}
     character:
       name: Unknown
@@ -216,6 +220,7 @@ MonoBehaviour:
       prefab: {fileID: 0}
       logoMini: {fileID: 0}
       logoMedium: {fileID: 0}
+    playerPrefab: {fileID: 0}
     color: {r: 0, g: 1, b: .213793039, a: 1}
     name: 
     uid: 2
@@ -231,7 +236,9 @@ MonoBehaviour:
       joystickId: 0
       isUsed: 0
       isValid: 0
-      isKeboard: 0
+      isKeyboard: 0
+      name: 
+    playerInstance: {fileID: 0}
   - controller: {fileID: 0}
     character:
       name: Unknown
@@ -239,6 +246,7 @@ MonoBehaviour:
       prefab: {fileID: 0}
       logoMini: {fileID: 0}
       logoMedium: {fileID: 0}
+    playerPrefab: {fileID: 0}
     color: {r: 0, g: .296551704, b: 1, a: 1}
     name: 
     uid: 3
@@ -254,7 +262,9 @@ MonoBehaviour:
       joystickId: 0
       isUsed: 0
       isValid: 0
-      isKeboard: 0
+      isKeyboard: 0
+      name: 
+    playerInstance: {fileID: 0}
   - controller: {fileID: 0}
     character:
       name: Unknown
@@ -262,6 +272,7 @@ MonoBehaviour:
       prefab: {fileID: 0}
       logoMini: {fileID: 0}
       logoMedium: {fileID: 0}
+    playerPrefab: {fileID: 0}
     color: {r: .903448343, g: 1, b: 0, a: 1}
     name: 
     uid: 4
@@ -277,7 +288,9 @@ MonoBehaviour:
       joystickId: 0
       isUsed: 0
       isValid: 0
-      isKeboard: 0
+      isKeyboard: 0
+      name: 
+    playerInstance: {fileID: 0}
   characters:
   - name: Ex. Chr
     uid: 0
