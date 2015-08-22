@@ -145,8 +145,12 @@ function getTileRoad(x : int, y : int) : GameObject{
 
 		}
 	}
-	else
+	else if (count == 1){
 		resRef = roads;
+	}
+	else {
+		resRef = roads;
+	}
 	//si on est à un tournan simple, on utilise un tournan
 
 
