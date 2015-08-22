@@ -22,6 +22,18 @@ function HideAll() {
 	panelGameover.SetActive(false);
 }
 
+function SwapUIState(state: GameState)
+{
+	HideAll();
+	switch (state)
+	{
+		case GameState.MAIN_MENU:
+			break;
+		default:
+			break;
+	}
+}
+
 // Event callbacks
 function OnPlayBtn()
 {

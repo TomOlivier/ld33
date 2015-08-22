@@ -1,0 +1,11 @@
+﻿#pragma strict
+
+enum GameState
+{
+	LOAD,
+	MAIN_MENU,
+	CHARACTER_SELECT,
+	PLAY_LOADING,
+	PLAYING,
+	GAME_OVER
+}
