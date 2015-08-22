@@ -3,6 +3,9 @@
 class Player
 {
 	public var controller: PlayerController;
+	public var character: Character;
+	public var playerPrefab: GameObject; // set to load correct display of player
+
 	public var color: Color;
 	public var name: String;
 	public var uid: int;
@@ -17,6 +20,9 @@ class Player
 	public var isIA: boolean = false;
 	public var isActive : boolean = false;
 
+	public var device : CompatibleDevice = null;
+	public var playerInstance : GameObject; // set once the game starts : instance of the prefab set before
+
 	public function FullReset() {
 		GameReset();
 		wins = 0;
@@ -30,9 +36,13 @@ class Player
 
 	public function GetDamaged(damage:int) {
 		life = life - damage;
-		if (life > 0)
-			controller.SendMessage ("GetHit", damage);
-		else 
-			controller.SendMessage ("Die");
+		if (life > 0) {
+			playerInstance.SendMessage ("GetHit", damage);
+		}
+		else {
+			playerInstance.SendMessage ("Die");
+			playerInstance = null;
+			GameReset();
+		}
 	}
 }

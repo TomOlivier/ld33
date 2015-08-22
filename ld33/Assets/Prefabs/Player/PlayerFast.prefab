@@ -46,7 +46,7 @@ GameObject:
   - 114: {fileID: 11455234}
   - 114: {fileID: 11429174}
   m_Layer: 0
-  m_Name: Player
+  m_Name: PlayerFast
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -143,8 +143,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01fb64da1bcc299488438e081d287e6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitPrefab: {fileID: 189786, guid: 063a0636c344e1d44900d1f1152d74f7, type: 2}
-  deadPrefab: {fileID: 150904, guid: 37928f9ec5d33914eac4cd714e38bc69, type: 2}
+  hitPrefab: {fileID: 0}
+  deadPrefab: {fileID: 0}
 --- !u!114 &11455234
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -162,6 +162,13 @@ MonoBehaviour:
   weakness: 20
   playerInfo:
     controller: {fileID: 11455234}
+    character:
+      name: Unknown
+      uid: -1
+      prefab: {fileID: 0}
+      logoMini: {fileID: 0}
+      logoMedium: {fileID: 0}
+    playerPrefab: {fileID: 0}
     color: {r: 0, g: 0, b: 0, a: 0}
     name: 
     uid: 0
@@ -172,6 +179,14 @@ MonoBehaviour:
     loses: 0
     isIA: 0
     isActive: 0
+    device:
+      isJoystick: 0
+      joystickId: 0
+      isUsed: 0
+      isValid: 0
+      isKeyboard: 0
+      name: 
+    playerInstance: {fileID: 0}
 --- !u!212 &21203088
 SpriteRenderer:
   m_ObjectHideFlags: 1

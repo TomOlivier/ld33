@@ -58,6 +58,11 @@ function OnPlayStartBtn()
 	BroadcastMessage("ChangeState", GameState.PLAY_LOADING);
 }
 
+function OnBackBtn()
+{
+	BroadcastMessage("ChangeState", GameState.MAIN_MENU);	
+}
+
 function OnExitBtn()
 {
 	#if UNITY_EDITOR
