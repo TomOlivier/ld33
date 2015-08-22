@@ -29,7 +29,10 @@ class Player
 	}
 
 	public function GetDamaged(damage:int) {
-		life -= damage;
-		controller.GetComponent.<ParticleSystem>().Play();
+		life = life - damage;
+		if (life > 0)
+			controller.SendMessage ("GetHit", damage);
+		else 
+			controller.SendMessage ("Die");
 	}
 }
