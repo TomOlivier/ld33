@@ -3,6 +3,8 @@
 class Player
 {
 	public var controller: PlayerController;
+	public var character: Character;
+
 	public var color: Color;
 	public var name: String;
 	public var uid: int;
@@ -16,6 +18,8 @@ class Player
 
 	public var isIA: boolean = false;
 	public var isActive : boolean = false;
+
+	public var device : CompatibleDevice;
 
 	public function FullReset() {
 		GameReset();
