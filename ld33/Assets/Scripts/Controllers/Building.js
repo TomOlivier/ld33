@@ -74,6 +74,8 @@ function Start () {
 	s_building = Instantiate (bottomMiddle, new Vector3 (this.transform.position.x + doorX, this.transform.position.y, 0f), Quaternion.identity) as GameObject;
 	s_building.transform.SetParent(this.transform);
 
+	this.transform.Rotate(new Vector3(270f,0f,0f));
+
 
 }
 
