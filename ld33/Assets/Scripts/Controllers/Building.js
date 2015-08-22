@@ -51,8 +51,9 @@ function Start () {
 
 
 
-		s_building = Instantiate (top, new Vector3 (this.transform.position.x + i, this.transform.position.y + height, 0f), Quaternion.identity) as GameObject;
-		s_building.transform.SetParent(this.transform);
+
+		
+		
 
 		if(i == doorX)
 			continue;
@@ -68,6 +69,12 @@ function Start () {
 		s_building = Instantiate (middleLeft, new Vector3 (this.transform.position.x + width -1, this.transform.position.y + j, 0f), Quaternion.identity) as GameObject;
 		s_building.transform.SetParent(this.transform);
 
+	}
+
+	for (i = 0; i < width; i++) {
+		s_building = Instantiate (top, new Vector3 (this.transform.position.x + i, this.transform.position.y + height - 0.49f, 0f), Quaternion.identity) as GameObject;
+		s_building.transform.SetParent(this.transform);
+		s_building.transform.Rotate(new Vector3(90f,0f,0f));
 	}
 
 
