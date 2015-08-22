@@ -12,12 +12,7 @@ private var playerXOffset: float = 0.0f;
 
 function Start () 
 {
-	InsertCharacter();
-	InsertCharacter();
 
-	InsertPlayer();
-	InsertPlayer();
-	InsertPlayer();
 }
 
 function Update () {
@@ -26,7 +21,7 @@ function Update () {
 
 function UpdateCharactersList()
 {
-	
+
 }
 
 function InsertCharacter()
@@ -38,7 +33,7 @@ function InsertCharacter()
 	charOffset.x += charEntryPrefab.GetComponent(RectTransform).rect.width;
 }
 
-function InsertPlayer()
+function InsertPlayer(player: Player)
 {
 	var obj: GameObject = Instantiate(playerEntryPrefab);
 
@@ -47,5 +42,6 @@ function InsertPlayer()
 	obj.transform.GetComponent(RectTransform).offsetMax = new Vector2(0.0f, 0.0f);
 	obj.transform.GetComponent(RectTransform).anchorMin.x = playerXOffset;
 	obj.transform.GetComponent(RectTransform).anchorMax.x = playerXOffset + 0.25f;
+	obj.GetComponent(UIPlayer).player = player;
 	playerXOffset += 0.25f;
 }
