@@ -18,5 +18,10 @@ function UpdateCharactersList()
 
 function InsertCharacter()
 {
+
+}
+
+function InsertPlayer()
+{
 	
 }
