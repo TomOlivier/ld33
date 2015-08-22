@@ -24,12 +24,15 @@ function UpdateCharactersList()
 
 }
 
-function InsertCharacter()
+function InsertCharacter(charc: Character)
 {
 	var obj: GameObject = Instantiate(charEntryPrefab);
 
 	obj.transform.parent = uiCharactersList.transform;
 	obj.transform.localPosition = charOffset;
+	obj.GetComponent(UICharacter).character = charc;
+	obj.GetComponent(UICharacter).characterSelection = this;
+	obj.GetComponent(UICharacter).RefreshCharacter();
 	charOffset.x += charEntryPrefab.GetComponent(RectTransform).rect.width;
 }
 
@@ -44,5 +47,6 @@ function InsertPlayer(player: Player)
 	obj.transform.GetComponent(RectTransform).anchorMax.x = playerXOffset + 0.25f;
 	obj.GetComponent(UIPlayer).player = player;
 	obj.GetComponent(UIPlayer).uiCharacter = this;
+	obj.GetComponent(UIPlayer).RefreshCharacter();
 	playerXOffset += 0.25f;
 }

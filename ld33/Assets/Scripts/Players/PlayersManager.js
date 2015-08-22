@@ -2,17 +2,23 @@
 
 import System.Collections.Generic;
 
+public var characters: Character[];
 public var players: Player[];
 public var spawnPositions : Vector2[]; // needs to be as many as players
-
+	
 function Start () 
 {
-	/*	var ui : ControllerUI = GameObject.Find("Game").GetComponent(ControllerUI);
+	var ui : ControllerUI = GameObject.Find("Game").GetComponent(ControllerUI);
 
 	for (var pl in players)
 	{
 		ui.characterSelection.InsertPlayer(pl);
-	}*/
+	}
+
+	for (var pl in characters)
+	{
+		ui.characterSelection.InsertCharacter(pl);
+	}
 }
 
 function Update () {
