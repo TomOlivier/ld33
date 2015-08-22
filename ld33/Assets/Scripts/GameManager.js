@@ -15,7 +15,7 @@ public var startPosY : int;
 public var nbCol : int;
 public var nbRow : int;
 
-
+public var buildingFactory : BuildingFactory;
 private var boardHolder : Transform;
 
 private var roadList : int[,];
@@ -65,6 +65,9 @@ function Start () {
 
 	cleanRoads();
 	buildRoads();
+
+
+	buildingFactory.generateBuilding(0,0,4,4);
 
 }
 
