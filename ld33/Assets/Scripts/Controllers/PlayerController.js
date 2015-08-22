@@ -21,7 +21,7 @@ function Start () {
 
 function Update () {
 	var moveX : float = Input.GetAxis ("Horizontal");
-	var moveY : float = Input.GetAxis ("Vertical");
+	var moveY : float = -Input.GetAxis ("Vertical");
 	var rb : Rigidbody2D = GetComponent.<Rigidbody2D>();
 	if (numberOfPushesLeft >= 0) {
 		if (numberOfPushesLeft == 0) {
@@ -67,6 +67,14 @@ function OnTriggerExit2D(collider : Collider2D) {
 		}
 	}
 	Debug.Log(this.gameObject + " canHit : " + touchedUnits);
+}
+
+function OnCollisionEnter2D(collision : Collision2D) {
+	if (collision.collider.isTrigger || collision.gameObject.tag != "PNJScared") {
+		return;
+	}
+	collision.gameObject.SendMessage ("Die");
+	Destroy(collision.gameObject);
 }
 
 
