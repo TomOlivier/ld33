@@ -2,6 +2,7 @@
 
 enum GameState
 {
+	NONE,
 	LOAD,
 	MAIN_MENU,
 	CHARACTER_SELECT,
