@@ -17,15 +17,47 @@ private var boardHolder : Transform;
 
 function Start () {
 
-
+	var toInstantiate : GameObject;
+	var instance : GameObject;
+	var i : int;
+	var j : int;
 	boardHolder = new GameObject ("Board").transform;
 
-	for (var i : int = 0; i < nbCol; i++) {
-		for (var j : int = 0; j < nbRow; j++){
-			var toInstantiate : GameObject = grass[Random.Range (0,grass.Length)];
-			var instance : GameObject = Instantiate (toInstantiate, new Vector3 (i + startPosX, j + startPosY, 0f), Quaternion.identity) as GameObject;
+	for ( i = startPosX; i < nbCol + startPosX; i++) {
+		for (j = startPosY; j < nbRow + startPosY; j++){
+			toInstantiate = grass[Random.Range (0,grass.Length)];
+			instance = Instantiate (toInstantiate, new Vector3 (i , j, 0f), Quaternion.identity) as GameObject;
+			instance.transform.Rotate(new Vector3(0, 0, Random.Range(0,4) * 90));
             instance.transform.SetParent (boardHolder);
 		}
+	}
+
+	//Road initialization
+
+	for (i = startPosX; i < nbCol + startPosX; i++) {
+		toInstantiate = roads[Random.Range (0,roads.Length)];
+
+		instance = Instantiate (toInstantiate, new Vector3 (i, -1f, 0f), Quaternion.identity) as GameObject;
+		instance.transform.localScale = new Vector3 (0.8f, 1f, 1f);
+		instance.transform.Rotate(new Vector3(0, 0, 90));
+        instance.transform.SetParent (boardHolder);
+
+        instance = Instantiate (toInstantiate, new Vector3 (i, 1f, 0f), Quaternion.identity) as GameObject;
+		instance.transform.localScale = new Vector3 (0.8f, 1f, 1f);
+		instance.transform.Rotate(new Vector3(0, 0, 90));
+        instance.transform.SetParent (boardHolder); 
+	}
+
+	for (j = startPosY; j < nbRow + startPosY; j++) {
+		toInstantiate = roads[Random.Range (0,roads.Length)];
+
+		instance = Instantiate (toInstantiate, new Vector3 (1f, j, 0f), Quaternion.identity) as GameObject;
+		instance.transform.localScale = new Vector3 (0.8f, 1f, 1f);
+        instance.transform.SetParent (boardHolder);
+
+        instance = Instantiate (toInstantiate, new Vector3 (-1f, j, 0f), Quaternion.identity) as GameObject;
+		instance.transform.localScale = new Vector3 (0.8f, 1f, 1f);
+        instance.transform.SetParent (boardHolder);
 	}
 
 
