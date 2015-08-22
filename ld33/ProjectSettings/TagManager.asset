@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Building
+  - PNJScared
+  - New Tag
   layers:
   - Default
   - TransparentFX

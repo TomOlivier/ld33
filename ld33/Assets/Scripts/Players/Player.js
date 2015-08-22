@@ -20,7 +20,7 @@ class Player
 	public var isIA: boolean = false;
 	public var isActive : boolean = false;
 
-	public var device : CompatibleDevice;
+	public var device : CompatibleDevice = null;
 	public var playerInstance : GameObject; // set once the game starts : instance of the prefab set before
 
 	public function FullReset() {

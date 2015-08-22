@@ -2,6 +2,7 @@
 
 static var activeState: GameState = GameState.LOAD;
 var nextState: GameState = GameState.NONE;
+var playersManager : PlayersManager;
 
 function Start () {
 
@@ -13,12 +14,16 @@ function Update () {
 	switch (activeState)
 	{
 		case GameState.LOAD:
-			Debug.Log("Game state PLAY_LOADING started");
+			Debug.Log("Game state LOAD started");
 
 			var idc : InputDevicesController = InputDevicesController.GetInstance();
 			nextState = GameState.MAIN_MENU;
+			if (idc.AssignDeviceToPlayer(idc.GetAvailableKeyboard(), playersManager.GetPlayer(0)) == false)
+			{
+				Debug.LogError("Warning: No device available to be auto assigned to player 0");
+			}
 
-			Debug.Log("Game state PLAY_LOADING completed");
+			Debug.Log("Game state LOAD completed");
 			break;
 		case GameState.PLAY_LOADING:
 			nextState = GameState.PLAYING;
