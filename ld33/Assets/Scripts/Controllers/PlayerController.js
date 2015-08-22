@@ -1,12 +1,12 @@
 ﻿#pragma strict
-@script RequireComponent(Rigidbody2D)
+@script RequireComponent(Rigidbody2D, Player)
 
 public var speed : float = 5;
 public var spriteRenderer : SpriteRenderer = null;
 public var pushStrength : float = 25;
 public var weakness : float = 20; // the higher, the more it will the pushed
 
-public var particleSystem : ParticleSystem;
+//public var particleSystem : ParticleSystem;
 
 private var pushedVector : Vector2;
 private var numberOfPushesLeft : int = 0; // number of time the push has to be applied
@@ -17,12 +17,11 @@ private var touchedUnits : Array = Array();
 public var playerInfo: Player;
 
 function Start () {
-
 }
 
 function Update () {
 	var moveX : float = Input.GetAxis ("Horizontal");
-	var moveY : float = -Input.GetAxis ("Vertical");
+	var moveY : float = Input.GetAxis ("Vertical");
 	var rb : Rigidbody2D = GetComponent.<Rigidbody2D>();
 	if (numberOfPushesLeft >= 0) {
 		if (numberOfPushesLeft == 0) {
@@ -78,4 +77,8 @@ function Push(playerToPush:GameObject) {
 	player.initialPushVector = direction;
 	player.numberOfPushesLeft = player.weakness;
 	player.playerInfo.GetDamaged(25);
+}
+
+function GetDamaged(damage:int) {
+	GetComponent.<ParticleSystem>().Play();
 }
