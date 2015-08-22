@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Building
   layers:
   - Default
   - TransparentFX
@@ -43,4 +44,10 @@ TagManager:
     locked: 0
   - name: roads
     uniqueID: 2462435737
+    locked: 0
+  - name: PlaneDecorator
+    uniqueID: 1851753071
+    locked: 0
+  - name: Player
+    uniqueID: 646545609
     locked: 0

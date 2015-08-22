@@ -4,6 +4,7 @@ class Player
 {
 	public var controller: PlayerController;
 	public var character: Character;
+	public var playerPrefab: GameObject; // set to load correct display of player
 
 	public var color: Color;
 	public var name: String;
@@ -20,6 +21,7 @@ class Player
 	public var isActive : boolean = false;
 
 	public var device : CompatibleDevice;
+	public var playerInstance : GameObject; // set once the game starts : instance of the prefab set before
 
 	public function FullReset() {
 		GameReset();
@@ -33,7 +35,14 @@ class Player
 	}
 
 	public function GetDamaged(damage:int) {
-		life -= damage;
-		controller.GetComponent.<ParticleSystem>().Play();
+		life = life - damage;
+		if (life > 0) {
+			playerInstance.SendMessage ("GetHit", damage);
+		}
+		else {
+			playerInstance.SendMessage ("Die");
+			playerInstance = null;
+			GameReset();
+		}
 	}
 }

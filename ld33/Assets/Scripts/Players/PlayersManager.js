@@ -23,5 +23,18 @@ function Start ()
 }
 
 function Update () {
-	
+	// debug purpose
+	if (Input.GetMouseButtonDown(0)) {
+		StartGame();
+	}
+}
+
+function StartGame() {
+	for (var pl:Player in players) {
+		if (pl.playerInstance == null) {
+			Debug.Log("new Player");
+			pl.playerInstance = Instantiate(pl.playerPrefab, Vector3(0,0,0), Quaternion.identity);
+			pl.playerInstance.GetComponent.<PlayerController>().playerInfo = pl;
+		}
+	}
 }
