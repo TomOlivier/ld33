@@ -1,5 +1,6 @@
 #pragma strict
 
+public var roadsEnd : GameObject [];
 public var roads : GameObject [];
 public var roadsTurning : GameObject [];
 public var roadsTri : GameObject [];
@@ -146,10 +147,24 @@ function getTileRoad(x : int, y : int) : GameObject{
 		}
 	}
 	else if (count == 1){
-		resRef = roads;
+		resRef = roadsEnd;
+		if(roadList[xShift, yShift - 1]){
+			tmpRotate = 0;
+		}
+		else if(roadList[xShift , yShift +1]){
+			tmpRotate = 180;
+		}
+		else if(roadList[xShift +1, yShift])
+		{
+			tmpRotate = 90;
+		}
+		else{
+			tmpRotate = 270;
+		}
 	}
 	else {
-		resRef = roads;
+		//on remove la road
+		return null;
 	}
 	//si on est à un tournan simple, on utilise un tournan
 
@@ -164,6 +179,9 @@ function pushTileRoad(x: float, y: float){
 
 	tmpRotate = 0;
 	toInstantiate = getTileRoad(x,y);
+
+	if(toInstantiate == null)
+		return;
 
 
 
