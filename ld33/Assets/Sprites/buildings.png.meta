@@ -1,18 +1,19 @@
 fileFormatVersion: 2
-guid: c61fe37eab25d4cc1abc6336882fd53e
-timeCreated: 1440247458
+guid: 1a7509d7ae99740cba1b9f733b994d47
+timeCreated: 1440247077
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: pnj_0
-    21300002: pnj_1
-    21300004: pnj_2
-    21300006: pnj_3
-    21300008: pnj_4
-    21300010: pnj_5
-    21300012: pnj_6
-    21300014: pnj_7
-    21300016: pnj_8
+    21300000: buildings_0
+    21300002: buildings_1
+    21300004: buildings_2
+    21300006: buildings_3
+    21300008: buildings_4
+    21300010: buildings_5
+    21300012: buildings_6
+    21300014: buildings_7
+    21300016: buildings_8
+    21300018: buildings_9
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -58,93 +59,103 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: pnj_0
+    - name: buildings_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 32
-        width: 8
-        height: 16
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: pnj_1
+    - name: buildings_1
       rect:
         serializedVersion: 2
-        x: 8
-        y: 32
-        width: 8
-        height: 16
+        x: 32
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: pnj_2
+    - name: buildings_2
       rect:
         serializedVersion: 2
-        x: 16
-        y: 32
-        width: 8
-        height: 16
+        x: 64
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: pnj_3
+    - name: buildings_3
       rect:
         serializedVersion: 2
-        x: 0
-        y: 16
-        width: 8
-        height: 16
+        x: 96
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: pnj_4
+    - name: buildings_4
       rect:
         serializedVersion: 2
-        x: 8
-        y: 16
-        width: 8
-        height: 16
+        x: 128
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: pnj_5
+    - name: buildings_5
       rect:
         serializedVersion: 2
-        x: 16
-        y: 16
-        width: 8
-        height: 16
+        x: 160
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: pnj_6
+    - name: buildings_6
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 8
-        height: 16
+        x: 192
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: pnj_7
+    - name: buildings_7
       rect:
         serializedVersion: 2
-        x: 8
-        y: 0
-        width: 8
-        height: 16
+        x: 224
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: pnj_8
+    - name: buildings_8
       rect:
         serializedVersion: 2
-        x: 16
-        y: 0
-        width: 8
-        height: 16
+        x: 256
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: buildings_9
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
