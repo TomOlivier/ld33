@@ -63,6 +63,7 @@ function Start () {
 		roadList[-1 - startPosX, j - startPosY] = 1;
 	}
 
+	cleanRoads();
 	buildRoads();
 
 }
@@ -71,24 +72,11 @@ function getTileRoad(x : int, y : int) : GameObject{
 
 	var resRef : GameObject [];
 
+
 	var xShift : int = x - startPosX;
 	var yShift : int = y - startPosY;
 
-	if(xShift == 0 || yShift == 0 || xShift >= nbCol -1 || yShift >= nbRow -1)
-		return roads[Random.Range(0,roads.Length)];
-
-	var count : int = 0;
-
-
-
-	if(roadList[xShift - 1, yShift] > 0)
-		count++;
-	if(roadList[xShift + 1, yShift] > 0)
-		count++;
-	if(roadList[xShift, yShift - 1] > 0)
-		count++;
-	if(roadList[xShift, yShift + 1] > 0)
-		count++;
+	var count : int = countRoad(x,y);
 
 	// Debug.Log("--------------");
 	// Debug.Log("coords : " +xShift + ", " + yShift);
@@ -199,6 +187,50 @@ function pushTileRoad(x: float, y: float){
 }
 
 
+function countRoad(rawX : int, rawY: int){
+
+	var xShift : int = rawX - startPosX;
+	var yShift : int = rawY - startPosY;
+
+	var count : int = 0;
+
+	if(xShift == 0 || yShift == 0 || xShift >= nbCol -1 || yShift >= nbRow -1)
+		return 0;
+
+	if(roadList[xShift - 1, yShift] > 0)
+		count++;
+	if(roadList[xShift + 1, yShift] > 0)
+		count++;
+	if(roadList[xShift, yShift - 1] > 0)
+		count++;
+	if(roadList[xShift, yShift + 1] > 0)
+		count++;
+
+	return count;
+
+}
+
+
+function cleanRoads() {
+	var i : int;
+	var j : int;
+
+	for ( i = startPosX; i < nbCol + startPosX; i++) {
+		for (j = startPosY; j < nbRow + startPosY; j++){
+			
+			if(countRoad(i,j) == 4)
+			{
+
+				if(countRoad(i+1 ,j) == 4 || countRoad(i-1 ,j) == 4 ||
+					countRoad(i ,j+1) == 4 ||	countRoad(i ,j-1) == 4)
+					roadList[i - startPosX, j- startPosY] = 0;
+				
+			}
+		}
+	}
+
+
+}
 
 function buildRoads() {
 

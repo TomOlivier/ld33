@@ -39,10 +39,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e0ce3bfd77bc2c4e84da439f731e062, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roadsEnd:
+  - {fileID: 183602, guid: dfaee0e7f22e64c4d8c68a81bd78fc6c, type: 2}
   roads:
   - {fileID: 132610, guid: a59c9c08935ca4ee2b2be69ffaf3a75d, type: 2}
   roadsTurning:
   - {fileID: 146406, guid: 6df2a1a8ee4e14cf9b2159a53c7b786b, type: 2}
+  - {fileID: 157054, guid: 09b938faf4618469e8534cba0d7614d0, type: 2}
   roadsTri:
   - {fileID: 103024, guid: 51bef6223293b4797a918263fcb2754e, type: 2}
   - {fileID: 158332, guid: 37f4efeca7cef43f5b84d8bbe0884ddf, type: 2}
@@ -87,12 +90,16 @@ Prefab:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 0}
+      propertyPath: roadsEnd.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
       propertyPath: roadsCross.Array.size
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: roadsTurning.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: startPosX
