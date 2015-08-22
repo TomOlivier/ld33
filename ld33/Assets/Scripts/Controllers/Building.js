@@ -75,6 +75,7 @@ function Start () {
 	s_building.transform.SetParent(this.transform);
 
 	this.transform.Rotate(new Vector3(270f,0f,0f));
+	this.transform.position.z = -0.5;
 
 
 }
