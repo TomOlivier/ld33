@@ -7,14 +7,27 @@ public var spawnPositions : Vector2[];
 	
 function Start () 
 {
-	var ui : ControllerUI = GameObject.Find("Game").GetComponent(ControllerUI);
+/*	var ui : ControllerUI = GameObject.Find("Game").GetComponent(ControllerUI);
 
 	for (var pl in players)
 	{
 		ui.characterSelection.InsertPlayer(pl);
-	}
+	}*/
 }
 
 function Update () {
-	
+	// debug purpose
+	if (Input.GetMouseButtonDown(0)) {
+		StartGame();
+	}
+}
+
+function StartGame() {
+	for (var pl:Player in players) {
+		if (pl.playerInstance == null) {
+			Debug.Log("new Player");
+			pl.playerInstance = Instantiate(pl.playerPrefab, Vector3(0,0,0), Quaternion.identity);
+			pl.playerInstance.GetComponent.<PlayerController>().playerInfo = pl;
+		}
+	}
 }

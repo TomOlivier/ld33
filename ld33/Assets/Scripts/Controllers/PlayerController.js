@@ -56,6 +56,9 @@ function OnTriggerEnter2D(collider : Collider2D) {
 	Debug.Log(this.gameObject + " canHit : " + touchedUnits);
 }
 function OnTriggerExit2D(collider : Collider2D) {
+	if (collider.isTrigger) {
+		return;
+	}
 	Debug.Log("canHit");
 	for (var i = 0; i < touchedUnits.Count; i++) {
 		if (touchedUnits[i] == collider.gameObject) {
@@ -68,6 +71,8 @@ function OnTriggerExit2D(collider : Collider2D) {
 
 
 function Push(playerToPush:GameObject) {
+	touchedUnits.Clear(); // clear of every units you touched before (in case it's been destroyed) ; maybe should only check null values..? ; it avoid button spamming also)
+	
 	var direction:Vector3 = (playerToPush.transform.position - this.gameObject.transform.position);
 	direction.Normalize();
 	direction *= pushStrength;
