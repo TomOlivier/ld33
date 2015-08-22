@@ -8,10 +8,11 @@ public var spriteRenderer : SpriteRenderer = null;
 public var pushStrength : float = 25;
 public var weakness : float = 20; // the higher, the more it will the pushed
 
+public var particleSystem : ParticleSystem;
+
 private var pushedVector : Vector2;
 private var numberOfPushesLeft : int = 0; // number of time the push has to be applied
 private var initialPushVector : Vector2;
-
 
 private var touchedUnits : Array = Array();
 
@@ -45,13 +46,6 @@ function Update () {
 			
 			this.Push(objectToHit);
 		}
-		/*if (hitCollider.gameObject != this.gameObject)
-			var direction:Vector3 = (this.gameObject.transform.position - hitColliders[i].gameObject.transform.position);
-			direction.Normalize();
-			direction *= pushStrength;
-			Debug.Log(hitColliders[i]);
-			this.Push(hitColliders[i].gameObject);
-		}*/
 	}
 }
 
@@ -83,4 +77,10 @@ function Push(playerToPush:GameObject) {
 	player.pushedVector = direction;
 	player.initialPushVector = direction;
 	player.numberOfPushesLeft = player.weakness;
+	player.GetDamaged(25);
+}
+
+function GetDamaged(damage:int) {
+	life--;
+	
 }

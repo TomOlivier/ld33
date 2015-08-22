@@ -4,10 +4,11 @@
 	public var spawnPositions : Vector2[];
 	public var selectedPlayers : PlayerController[];
 	
+	
 function Start () {
-
+	
 }
 
 function Update () {
-
+	
 }
