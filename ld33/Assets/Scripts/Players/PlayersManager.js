@@ -1,13 +1,13 @@
 ﻿#pragma strict
 
+import System.Collections.Generic;
+
 public var players: Player[];
-//public var playersControllers : PlayerController[];
-public var spawnPositions : Vector2[];
-//public var selectedPlayers : PlayerController[];
-	
+public var spawnPositions : Vector2[]; // needs to be as many as players
+
 function Start () 
 {
-/*	var ui : ControllerUI = GameObject.Find("Game").GetComponent(ControllerUI);
+	/*	var ui : ControllerUI = GameObject.Find("Game").GetComponent(ControllerUI);
 
 	for (var pl in players)
 	{
@@ -23,10 +23,15 @@ function Update () {
 }
 
 function StartGame() {
+	var spawnPositionsCopy : List.<Vector2> = new List.<Vector2>(spawnPositions);
+	
 	for (var pl:Player in players) {
 		if (pl.playerInstance == null) {
 			Debug.Log("new Player");
-			pl.playerInstance = Instantiate(pl.playerPrefab, Vector3(0,0,0), Quaternion.identity);
+			var randomIndex : int = Random.Range(0, spawnPositionsCopy.Count);
+			var randomSpawn : Vector2 = spawnPositionsCopy[randomIndex];
+			spawnPositionsCopy.RemoveAt(randomIndex);
+			pl.playerInstance = Instantiate(pl.playerPrefab, Vector3(randomSpawn.x,randomSpawn.y,0), Quaternion.identity);
 			pl.playerInstance.GetComponent.<PlayerController>().playerInfo = pl;
 		}
 	}
