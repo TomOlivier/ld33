@@ -70,7 +70,7 @@ function OnTriggerExit2D(collider : Collider2D) {
 }
 
 function OnCollisionEnter2D(collision : Collision2D) {
-	if (collision.collider.isTrigger || collision.gameObject.tag != "PNJScared") {
+	if (collision.gameObject.tag != "PNJScared") {
 		return;
 	}
 	collision.gameObject.SendMessage ("Die");
