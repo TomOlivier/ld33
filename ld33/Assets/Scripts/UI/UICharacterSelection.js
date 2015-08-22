@@ -43,5 +43,6 @@ function InsertPlayer(player: Player)
 	obj.transform.GetComponent(RectTransform).anchorMin.x = playerXOffset;
 	obj.transform.GetComponent(RectTransform).anchorMax.x = playerXOffset + 0.25f;
 	obj.GetComponent(UIPlayer).player = player;
+	obj.GetComponent(UIPlayer).uiCharacter = this;
 	playerXOffset += 0.25f;
 }

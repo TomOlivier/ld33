@@ -30,5 +30,6 @@ class Player
 
 	public function GetDamaged(damage:int) {
 		life -= damage;
+		controller.GetComponent.<ParticleSystem>().Play();
 	}
 }
