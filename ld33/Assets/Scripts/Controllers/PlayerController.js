@@ -1,8 +1,6 @@
 ﻿#pragma strict
 @script RequireComponent(Rigidbody2D)
 
-public var points : int = 0;
-public var life : int = 10;
 public var speed : float = 5;
 public var spriteRenderer : SpriteRenderer = null;
 public var pushStrength : float = 25;
@@ -15,6 +13,8 @@ private var numberOfPushesLeft : int = 0; // number of time the push has to be a
 private var initialPushVector : Vector2;
 
 private var touchedUnits : Array = Array();
+
+public var playerInfo: Player;
 
 function Start () {
 
@@ -77,10 +77,5 @@ function Push(playerToPush:GameObject) {
 	player.pushedVector = direction;
 	player.initialPushVector = direction;
 	player.numberOfPushesLeft = player.weakness;
-	player.GetDamaged(25);
-}
-
-function GetDamaged(damage:int) {
-	life--;
-	
+	player.playerInfo.GetDamaged(25);
 }
