@@ -45,3 +45,9 @@ TagManager:
   - name: roads
     uniqueID: 2462435737
     locked: 0
+  - name: PlaneDecorator
+    uniqueID: 1851753071
+    locked: 0
+  - name: Player
+    uniqueID: 646545609
+    locked: 0

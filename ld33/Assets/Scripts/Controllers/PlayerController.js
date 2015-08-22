@@ -1,5 +1,5 @@
 ﻿#pragma strict
-@script RequireComponent(Rigidbody2D, Player)
+@script RequireComponent(Rigidbody2D)
 
 public var speed : float = 5;
 public var spriteRenderer : SpriteRenderer = null;
@@ -41,7 +41,7 @@ function Update () {
 	var isHitting : boolean = Input.GetMouseButtonDown (0);
 	if (isHitting) {
 		for (var i = 0; i < touchedUnits.Count; i++) {
-			var objectToHit : GameObject = touchedUnits[i];
+			var objectToHit : GameObject = touchedUnits[i] as GameObject;
 			
 			this.Push(objectToHit);
 		}
@@ -77,8 +77,4 @@ function Push(playerToPush:GameObject) {
 	player.initialPushVector = direction;
 	player.numberOfPushesLeft = player.weakness;
 	player.playerInfo.GetDamaged(25);
-}
-
-function GetDamaged(damage:int) {
-	GetComponent.<ParticleSystem>().Play();
 }
