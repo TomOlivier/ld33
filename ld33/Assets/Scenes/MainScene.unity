@@ -1053,11 +1053,27 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11479966, guid: 1bffea54f383b48e6b26eb9e74e24fb6, type: 2}
       propertyPath: nbCol
-      value: 100
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 11479966, guid: 1bffea54f383b48e6b26eb9e74e24fb6, type: 2}
       propertyPath: nbRow
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 11479966, guid: 1bffea54f383b48e6b26eb9e74e24fb6, type: 2}
+      propertyPath: nbForest
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 11479966, guid: 1bffea54f383b48e6b26eb9e74e24fb6, type: 2}
+      propertyPath: nbTree
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 11479966, guid: 1bffea54f383b48e6b26eb9e74e24fb6, type: 2}
+      propertyPath: nbPNJScared
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 11479966, guid: 1bffea54f383b48e6b26eb9e74e24fb6, type: 2}
+      propertyPath: nbBuildings
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1bffea54f383b48e6b26eb9e74e24fb6, type: 2}
@@ -3974,7 +3990,7 @@ Canvas:
   serializedVersion: 2
   m_RenderMode: 1
   m_Camera: {fileID: 554999366}
-  m_PlaneDistance: 250
+  m_PlaneDistance: 1
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -4087,7 +4103,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1661621742
 RectTransform:
   m_ObjectHideFlags: 0

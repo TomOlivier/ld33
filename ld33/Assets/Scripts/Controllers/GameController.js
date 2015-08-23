@@ -48,10 +48,15 @@ function Update () {
 		case GameState.MAIN_MENU:
 			break;	
 		case GameState.PLAY_LOADING:
+			if (generator.generationStateComplete)
+			{
+				nextState = GameState.PLAY_LOADING_FINISHED;
+			}
+			break;		
+		case GameState.PLAY_LOADING_FINISHED:
 			roundCount++;
 			ResetGameConditions();
 			playersManager.StartGame();
-			generator.Generate();
 			BroadcastMessage("UIEventGameStart");
 			nextState = GameState.PLAYING;
 			break;
@@ -87,7 +92,11 @@ function ApplyStateSwitch()
 			isInGUI = true;
 			break;	
 		case GameState.PLAY_LOADING:
+			var testCoroutineFunction : function():System.Collections.IEnumerator = generator.Generate;
+
 			isInGUI = true;
+			generator.generationStateComplete = false;
+			StartCoroutine(testCoroutineFunction());
 			break;
 		case GameState.PLAYING:
 			isInGUI = false;
