@@ -112,7 +112,7 @@ function Update () {
 }
 
 function GetDamaged(damage:float) {
-	Debug.Log("life : " + currentLife + " ; damage : " + damage);
+//	Debug.Log("life : " + currentLife + " ; damage : " + damage);
 
 	var curLifeIndex : int = currentLife/(height * width) + width;
 	var nextLifeIndex : int = (currentLife-damage)/(height * width);
@@ -188,7 +188,7 @@ function removeSubBuilding() {
 
 function OnCollisionEnter2D(collision : Collision2D) {
 	if (collision.gameObject.tag.Equals("PNJScared")) {
-		Debug.Log("npc entered");
+//		Debug.Log("npc entered");
 		nbPNJScared++;
 	}
 }

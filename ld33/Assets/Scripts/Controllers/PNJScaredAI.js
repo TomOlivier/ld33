@@ -24,6 +24,14 @@ private var delayBeforePanic : float = 0;
 
 private var isPanicking : boolean = false;
 
+public var dieingSounds : AudioClip [];
+
+
+private var animators : Animator [];
+
+function Awake () {
+	animators = GetComponentsInChildren.<Animator>();
+}
 
 function Start () {
 	// Debug.Log("start");
@@ -35,7 +43,6 @@ function Start () {
 
 function Update () {
 
-	
 	/*var randomVector : Vector2 = Vector2(Random.Range(-maxSpeed, maxSpeed), Random.Range(-maxSpeed, maxSpeed));
 	randomVector.Normalize();
 	rb.velocity = randomVector;
@@ -43,9 +50,9 @@ function Update () {
 	//transform.position += direction * speed * Time.deltaTime;
 	//rb.velocity = randomVector;
 	//currentSpeed += Time.deltaTime * Random.Range(-speedVariability, speedVariability);
-	
+
 	CalculatePanic();
-	
+
 	//transform.localPosition.y += (Mathf.PingPong(-1, 1));
 	//distanceDone += calculatedSpeed * Time.deltaTime;
 	//transform.Translate(Vector3.forward * Time.deltaTime * (currentSpeed + (isPanicking ? panicSpeedBoost : 0)));
@@ -53,8 +60,8 @@ function Update () {
 	if (Vector2.Distance(transform.position,targetPosition) <= 0.2) {
 		AcquireNewTargetPosition();
 	}
-	
-	
+
+
 	//decisionTimer += Time.deltaTime;
 }
 
@@ -80,8 +87,8 @@ function CalculatePanic() {
 }
 
 function startPanicking(delayPanic:float) {
-	Debug.Log("start Panicking");
-	Debug.Log("relayPanic: " + delayPanic);
+//	Debug.Log("start Panicking");
+//	Debug.Log("relayPanic: " + delayPanic);
   	delayBeforePanic = delayPanic;
 	panicTimeLeft = panicDuration;
   	var results : Collider2D[] = Physics2D.OverlapCircleAll(Vector2(this.transform.position.x, this.transform.position.y), 10);
@@ -94,7 +101,7 @@ function startPanicking(delayPanic:float) {
 			if (!pnjScared.IsPanicking()) {
 				pnjScared.delayBeforePanic = delayPanic * realDistance;
 			}
-			
+
 			rc.gameObject.GetComponent.<PNJScaredAI>().panicTimeLeft = panicDuration;
 		}
 	}
@@ -112,16 +119,34 @@ function setNewTargetLocalPosition(localPTarget:Vector3) {
 	localTargetPosition = localPTarget;
 	targetPosition = transform.TransformPoint(localTargetPosition);
 	this.GetComponent.<Rigidbody2D>().velocity = (targetPosition - transform.position).normalized * (currentSpeed + (isPanicking ? panicSpeedBoost : 0));
-	
+
 	var dir = targetPosition - transform.position;
  	var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
- 	
+
  	transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 	distanceToRun = Vector3.Distance(transform.position, targetPosition);
 	distanceDone = 0;
+
+	triggerAnimations(angle);
 	//var direction : Vector3 = (targetPosition - transform.position).normalized;
 	//var rot_z:float = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
 	//transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, rot_z - 90f);
+}
+
+function triggerAnimations (a : float) {
+
+	if (a > -45f && a <= 45f) {
+		animators[0].SetTrigger('setBack');
+		animators[1].SetTrigger('setBack');
+	}
+	else if ((a > 45f && a <= 135f) || (a <= -45f && a > -135f)) {
+		animators[0].SetTrigger('setSide');
+		animators[1].SetTrigger('setSide');
+	}
+	else {
+		animators[0].SetTrigger('setFace');
+		animators[1].SetTrigger('setFace');
+	}
 }
 
 function OnTriggerEnter2D(collider : Collider2D) {
