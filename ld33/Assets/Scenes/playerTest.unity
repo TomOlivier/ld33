@@ -502,6 +502,10 @@ Prefab:
       propertyPath: roads.Array.data[1]
       value: 
       objectReference: {fileID: 157054, guid: 09b938faf4618469e8534cba0d7614d0, type: 2}
+    - target: {fileID: 11479966, guid: 1bffea54f383b48e6b26eb9e74e24fb6, type: 2}
+      propertyPath: nbBuildings
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1bffea54f383b48e6b26eb9e74e24fb6, type: 2}
   m_IsPrefabParent: 0
