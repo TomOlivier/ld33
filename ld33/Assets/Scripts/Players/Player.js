@@ -14,8 +14,11 @@ class Player
 	public var uid: int;
 	
 	public var points : int = 0;
-	public var life : int = 10;
-	public var lifeDef : int = 10;
+	public var life : int = 100;
+	public var lifeDef : int = 100;
+	public var maxLife : int = 100;
+	public var maxLifeDef : int = 100;
+	public var isAlive : boolean = true;
 
 	public var wins : int = 0;
 	public var loses : int = 0;
@@ -35,6 +38,8 @@ class Player
 	public function GameReset() {
 		points = 0;
 		life = lifeDef;
+		maxLife = maxLifeDef;
+		isAlive = true;
 	}
 
 	public function GetDamaged(damage:int) {
@@ -45,7 +50,7 @@ class Player
 		else {
 			playerInstance.SendMessage ("Die");
 			playerInstance = null;
-			GameReset();
+			//GameReset();
 		}
 	}
 }
