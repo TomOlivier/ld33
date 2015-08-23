@@ -109,6 +109,10 @@ function OnTriggerExit2D(collider : Collider2D) {
 function OnCollisionEnter2D(collision : Collision2D) {
 	if (collision.gameObject.tag.Equals("PNJScared")) {
 		collision.gameObject.GetComponent.<PNJScaredAI>().startPanicking(0.1);
+
+		var dieingAudio : AudioClip [] = collision.gameObject.GetComponent.<PNJScaredAI>().dieingSounds;
+
+		SoundManager.instance.PlaySfx(dieingAudio[Random.Range(0,dieingAudio.length)]);
 		collision.gameObject.GetComponent.<Hittable>().Die();
 		Destroy(collision.gameObject);
 	} else if (collision.gameObject.tag.Equals("Tree")) {

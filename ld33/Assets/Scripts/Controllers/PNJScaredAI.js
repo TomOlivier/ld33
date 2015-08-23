@@ -24,6 +24,8 @@ private var delayBeforePanic : float = 0;
 
 private var isPanicking : boolean = false;
 
+public var dieingSounds : AudioClip [];
+
 
 function Start () {
 	// Debug.Log("start");
