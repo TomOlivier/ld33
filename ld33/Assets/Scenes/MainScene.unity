@@ -228,6 +228,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextState: 0
   playersManager: {fileID: 56966951}
+  generator: {fileID: 1384314254}
 --- !u!114 &42648968
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3596,6 +3597,12 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1297785486}
+--- !u!114 &1384314254 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11479966, guid: 1bffea54f383b48e6b26eb9e74e24fb6,
+    type: 2}
+  m_PrefabInternal: {fileID: 557069275}
+  m_Script: {fileID: 11500000, guid: 9e0ce3bfd77bc2c4e84da439f731e062, type: 3}
 --- !u!1 &1402332270
 GameObject:
   m_ObjectHideFlags: 0
