@@ -1,6 +1,10 @@
 ﻿#pragma strict
 
-static var activeState: GameState = GameState.LOAD;
+static var isInGUI : boolean = true;						// Is GUI visible and locking other controls
+static var guiLock : boolean = false;						// Is GUI locking all controls
+static var activeState: GameState = GameState.LOAD;			// FSM state
+static var roundCount : int = 0;							// Total of rounds played
+
 var nextState: GameState = GameState.NONE;
 var playersManager : PlayersManager;
 var generator : GameManager;
@@ -14,6 +18,14 @@ function Start () {
 
 function ResetGameConditions() {
 	timeLeft = timeLeftDef;
+	playersManager.ResetAll(false);
+	
+}
+
+function FullReset() {
+	timeLeft = timeLeftDef;
+	roundCount = 0;
+	playersManager.ResetAll(true);
 }
 
 function Update () {
@@ -33,7 +45,10 @@ function Update () {
 
 			Debug.Log("Game state LOAD completed");
 			break;
+		case GameState.MAIN_MENU:
+			break;	
 		case GameState.PLAY_LOADING:
+			roundCount++;
 			ResetGameConditions();
 			playersManager.StartGame();
 			generator.Generate();
@@ -54,8 +69,35 @@ function Update () {
 	if (nextState != GameState.NONE) {
 		Debug.Log("Game state change from " + activeState + " to " + nextState);
 		activeState = nextState;
+		ApplyStateSwitch();
 		BroadcastMessage("OnStateChanged", activeState);
 		nextState = GameState.NONE;
+	}
+}
+
+function ApplyStateSwitch()
+{
+	switch (activeState)
+	{
+		case GameState.LOAD:
+			isInGUI = true;
+			break;
+		case GameState.MAIN_MENU:
+			FullReset();
+			isInGUI = true;
+			break;	
+		case GameState.PLAY_LOADING:
+			isInGUI = true;
+			break;
+		case GameState.PLAYING:
+			isInGUI = false;
+			break;
+		case GameState.GAME_OVER:
+			isInGUI = true;
+			playersManager.EndGame();		
+			break;	
+		default:
+			break;
 	}
 }
 

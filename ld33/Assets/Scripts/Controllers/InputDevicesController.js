@@ -13,6 +13,12 @@ class CompatibleDevice
 	public var name : String = "Unknown Device";
 }
 
+enum ActionButton
+{
+	ATTACK,
+	BACK,
+}
+
 class InputDevicesController
 {
     private static var Instance : InputDevicesController = new InputDevicesController();
@@ -191,5 +197,35 @@ class InputDevicesController
     		}
     	}
     	return (0);
+    }
+
+    public function GetButtonForDevice(btnId: ActionButton, dev: CompatibleDevice) : boolean
+    {
+    	var res : boolean = false;
+
+    	if (dev != null)
+    	{
+    		if (dev.isKeyboard) {
+    			switch (btnId)
+    			{
+    				case ActionButton.ATTACK:
+    					res = Input.GetKeyDown("space") != 0;
+    					break;
+    				default:
+	    				break;
+    			}
+    		}
+    		else if (dev.isJoystick) {
+    			switch (btnId)
+    			{
+    				case ActionButton.ATTACK:
+    					res = Input.GetKey("joystick "+ (dev.joystickId) +" button 0") != 0;
+    					break;
+    				default:
+	    				break;
+    			}
+    		}
+    	}
+    	return (res);
     }
 }

@@ -7,6 +7,7 @@ var panelGameover: GameObject;
 
 var characterSelection: UICharacterSelection;
 var hudController: UIHUDController;
+var uiGameover : UIGameOver;
 
 function Start () {
 
@@ -47,6 +48,7 @@ function SwapUIState(state: GameState)
 			break;
 		case GameState.GAME_OVER:
 			panelGameover.SetActive(true);
+			uiGameover.OnShow();
 			panelGameover.Find("Buttons/PlayBtn").GetComponent(UI.Button).Select();
 			break;
 		default:

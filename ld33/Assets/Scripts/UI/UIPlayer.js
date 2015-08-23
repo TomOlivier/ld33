@@ -38,7 +38,7 @@ function RefreshCharacter()
 		pType.transform.Find("Text").GetComponent(UI.Text).text = "P" + player.uid;
 		pType.transform.Find("Text").GetComponent(UI.Text).color = new Color(0, 0, 0, 255);
 		transform.Find("Image").GetComponent(UI.Image).color = player.color;
-		if (player.character) {
+		if (player.character != null) {
 			pCImage.SetActive(true);
 			pCImage.GetComponent(UI.Image).sprite = player.character.logoMedium;			
 			//pCImage.GetComponent(UI.Image).color = player.color;
