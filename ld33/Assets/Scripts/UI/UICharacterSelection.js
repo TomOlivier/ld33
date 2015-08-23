@@ -39,11 +39,13 @@ function Update ()
 		gameSetupUpdated = false;
 		if (gameObject.Find("Game/Players").GetComponent(PlayersManager).AreAllPlayersReady())
 		{
-			startBtn.interactable = true;
+			Debug.Log("YEYEYE");
+			startBtn.gameObject.active = true;
 		}
 		else 
 		{
-			startBtn.interactable = false;
+			Debug.Log("NONO");
+			startBtn.gameObject.active = false;
 		}			
 	}
 
