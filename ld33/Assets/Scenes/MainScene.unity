@@ -330,8 +330,8 @@ MonoBehaviour:
     uid: 2
     points: 0
     pointsMax: 100
-    life: 10
-    lifeDef: 10
+    life: 100
+    lifeDef: 100
     maxLife: 100
     maxLifeDef: 100
     isAlive: 1
@@ -363,8 +363,8 @@ MonoBehaviour:
     uid: 3
     points: 0
     pointsMax: 100
-    life: 10
-    lifeDef: 10
+    life: 100
+    lifeDef: 100
     maxLife: 100
     maxLifeDef: 100
     isAlive: 1
@@ -396,8 +396,8 @@ MonoBehaviour:
     uid: 4
     points: 0
     pointsMax: 100
-    life: 10
-    lifeDef: 10
+    life: 100
+    lifeDef: 100
     maxLife: 100
     maxLifeDef: 100
     isAlive: 1
@@ -2584,6 +2584,23 @@ MonoBehaviour:
   scoresContainer: {fileID: 83043042}
   roundNumber: {fileID: 1708375920}
   winnerStr: {fileID: 654817064}
+--- !u!95 &947550254
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 947550251}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ced28502a7396be44bbb662f04fd4f86, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &961760231
 GameObject:
   m_ObjectHideFlags: 0
