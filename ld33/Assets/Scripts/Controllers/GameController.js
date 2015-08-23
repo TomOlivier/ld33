@@ -2,6 +2,7 @@
 
 static var isInGUI : boolean = true;						// Is GUI visible and locking other controls
 static var guiLock : boolean = false;						// Is GUI locking all controls
+static var gamePlaying : boolean = false;					// If game is playing or over
 static var activeState: GameState = GameState.LOAD;			// FSM state
 static var roundCount : int = 0;							// Total of rounds played
 
@@ -61,10 +62,15 @@ function Update () {
 			nextState = GameState.PLAYING;
 			break;
 		case GameState.PLAYING:
-			timeLeft -= Time.deltaTime;
-			if (timeLeft <= 0.0f)
+			if (gamePlaying)
 			{
-				nextState = GameState.GAME_OVER;
+				timeLeft -= Time.deltaTime;
+				if (timeLeft <= 0.0f)
+				{
+					timeLeft = 0.0f;
+					gamePlaying = false;
+					BroadcastMessage("GameTimeOver");
+				}				
 			}
 			break;
 		default:
@@ -78,6 +84,11 @@ function Update () {
 		BroadcastMessage("OnStateChanged", activeState);
 		nextState = GameState.NONE;
 	}
+}
+
+function GameTrueBegin()
+{
+	gamePlaying = true;
 }
 
 function ApplyStateSwitch()
