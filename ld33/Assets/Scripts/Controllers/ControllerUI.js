@@ -4,6 +4,7 @@ var panelMainMenu: GameObject;
 var panelPlaySelect: GameObject;
 var panelPlayingHUD: GameObject;
 var panelGameover: GameObject;
+var panelLoadingSplash : GameObject;
 
 var characterSelection: UICharacterSelection;
 var hudController: UIHUDController;
@@ -22,6 +23,7 @@ function HideAll() {
 	panelPlaySelect.SetActive(false);
 	panelPlayingHUD.SetActive(false);
 	panelGameover.SetActive(false);
+	panelLoadingSplash.SetActive(false);
 }
 
 function OnStateChanged(state: GameState)
@@ -42,6 +44,9 @@ function SwapUIState(state: GameState)
 		case GameState.CHARACTER_SELECT:
 			panelPlaySelect.SetActive(true);
 			panelPlaySelect.Find("Characters/CharactersList/List/CharacterEntry(Clone)").GetComponent(UI.Button).Select();
+			break;
+		case GameState.PLAY_LOADING:
+			panelLoadingSplash.SetActive(true);		
 			break;
 		case GameState.PLAYING:
 			panelPlayingHUD.SetActive(true);
