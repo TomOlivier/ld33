@@ -64,8 +64,11 @@ MonoBehaviour:
   roadsCross:
   - {fileID: 136662, guid: fdc49b0cdb67941689c66e7086663f7f, type: 2}
   - {fileID: 139998, guid: 70b1e9fcf06c14e79b59732aca162baf, type: 2}
+  limitGameObject: {fileID: 118920, guid: 25107aebb8245471dba0933c516dd105, type: 2}
   nbBuildings: 300
   nbPNJScared: 100
+  nbTree: 100
+  nbForest: 10
   grass:
   - {fileID: 154748, guid: 0c8897bf573b546f399b4ca52d8e2e32, type: 2}
   - {fileID: 150468, guid: 116442c9fd79149afbfcd53917f20ff2, type: 2}
@@ -170,6 +173,18 @@ Prefab:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: nbTree
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: nbForest
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: limitGameObject
+      value: 
+      objectReference: {fileID: 118920, guid: 25107aebb8245471dba0933c516dd105, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 195130}

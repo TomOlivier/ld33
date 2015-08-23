@@ -6,8 +6,12 @@ public var roadsTurning : GameObject [];
 public var roadsTri : GameObject [];
 public var roadsCross : GameObject [];
 
+public var limitGameObject : GameObject ;
+
 public var nbBuildings : int = 50;
 public var nbPNJScared : int = 100;
+public var nbTree : int;
+public var nbForest : int;
 
 public var grass : GameObject [];
 
@@ -86,8 +90,8 @@ function Generate () {
 	for (i = 0; i < nbBuildings; i++) {
 		var evenNumber : int = Random.Range(0,6)/2 +1;
 
-		posX = Random.Range(0, nbCol) + startPosX;
-		posY = Random.Range(0, nbRow) + startPosY;
+		posX = Random.Range(1, nbCol -1) + startPosX;
+		posY = Random.Range(1, nbRow -1) + startPosY;
 		width = evenNumber;
 		height = Random.Range(2,5);
 
@@ -108,13 +112,34 @@ function Generate () {
 	}
 
 
-	for (i = 0; i < 1000; i++) {
+	for (i = 0; i < nbTree; i++) {
 		generateTree(startPosX + Random.Range(0, (nbCol)*100) / 100f, startPosY + Random.Range(0, (nbRow)*100) / 100f);
 	};
 
-	for (i = 0; i < 100; i++) {
+	for (i = 0; i < nbForest; i++) {
 		generateForest(startPosX + Random.Range(0, (nbCol)*100) / 100f, startPosY + Random.Range(0, (nbRow)*100) / 100f, Random.Range(5,16));
 	};
+
+
+
+	//Génération des limites
+
+	instance = Instantiate (limitGameObject, new Vector3 (0f, nbRow + startPosY, 0f), Quaternion.identity) as GameObject;
+	instance.transform.localScale = new Vector3(1f + nbCol, 1f, 1f);
+    instance.transform.SetParent (boardHolder);
+
+    instance = Instantiate (limitGameObject, new Vector3 (0f, startPosY -1f, 0f), Quaternion.identity) as GameObject;
+	instance.transform.localScale = new Vector3(1f + nbCol, 1f, 1f);
+    instance.transform.SetParent (boardHolder);
+
+    instance = Instantiate (limitGameObject, new Vector3 (nbCol + startPosX, 0f, 0f), Quaternion.identity) as GameObject;
+	instance.transform.localScale = new Vector3(1f, 1f + nbRow, 1f);
+    instance.transform.SetParent (boardHolder);
+
+    instance = Instantiate (limitGameObject, new Vector3 (startPosX -1f , 0f, 0f), Quaternion.identity) as GameObject;
+	instance.transform.localScale = new Vector3(1f, 1f + nbRow, 1f);
+    instance.transform.SetParent (boardHolder);
+
 }
 
 
@@ -124,7 +149,7 @@ function canPlaceBuilding(x: int, y: int, width: int) : int{
 	var xShift : int = x - startPosX;
 	var yShift : int = y - startPosY;
 
-	if(xShift + width >= nbCol)
+	if(xShift + width >= nbCol -1)
 		return 0;
 
 	for (i = 0; i < width; i++) {
