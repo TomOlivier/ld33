@@ -24,6 +24,14 @@ function UpdateCharactersList()
 
 }
 
+function SelectCharacterForPlayer(charc: Character, pl: Player)
+{
+	if (pl == null || charc == null)
+		return ;
+	pl.character = charc;
+	pl.relatedSelectionBox.GetComponent(UIPlayer).RefreshCharacter();
+}
+
 function InsertCharacter(charc: Character)
 {
 	var obj: GameObject = Instantiate(charEntryPrefab);
@@ -48,5 +56,6 @@ function InsertPlayer(player: Player)
 	obj.GetComponent(UIPlayer).player = player;
 	obj.GetComponent(UIPlayer).uiCharacter = this;
 	obj.GetComponent(UIPlayer).RefreshCharacter();
+	player.relatedSelectionBox = obj;
 	playerXOffset += 0.25f;
 }

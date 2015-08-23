@@ -95,6 +95,7 @@ class InputDevicesController
     	res.isValid = true;
     	res.name = "Keyboard";
     	devices.Add(res);
+		devicesCount++;
 
     	Debug.Log("Controller listing started");
     	for (var js in Input.GetJoystickNames())
@@ -120,5 +121,75 @@ class InputDevicesController
     	{
     		Debug.Log(dev + " isused=" + dev.isUsed + " name=" + dev.name);
     	}
+    }
+
+	// Returns the last device that pressed submit key
+    public function GetCurrentlySubmittingDevice()
+    {
+    	Debug.Log("GetCurrentlySubmittingDevice");
+    	if (Input.GetKey("space") || Input.GetKey("enter") || Input.GetMouseButtonDown(0))
+    	{
+	    	Debug.Log("GetCurrentlySubmittingDevice:IsKeyboard");
+    		return (devices[0]); // keyboard
+    	}
+    	for (var dev : CompatibleDevice in devices)
+    	{
+    		if (dev.isKeyboard)
+    			continue ;
+    		if (dev.isJoystick)
+    		{
+    			if (Input.GetKey("joystick "+ (dev.joystickId) +" button 0")) {
+	    			Debug.Log("GetCurrentlySubmittingDevice:isJoystick " + dev.joystickId);
+    				return (dev);
+    			}
+    		}
+    	}
+    	Debug.Log("GetCurrentlySubmittingDevice:NULL => Mouse click/KB");
+    	return (devices[0]);
+    }
+
+    public function GetAxisForDevice(axisName: String, dev: CompatibleDevice) : float
+    {
+    	if (dev != null)
+    	{
+    		if (dev.isKeyboard) {
+    			if (axisName == "Vertical") {
+	    			return (Input.GetKey("up") ? 1 : (Input.GetKey("down") ? -1 : 0));
+	    		}
+    			if (axisName == "Horizontal") {
+	    			return (Input.GetKey("right") ? 1 : (Input.GetKey("left") ? -1 : 0));
+	    		}
+    		}
+    		if (dev.isJoystick) {
+    			if (axisName == "Vertical") {
+    				if (Input.GetKey("joystick "+ (dev.joystickId) +" button 5"))
+    				{
+						return (1);   
+    				}
+    				else if (Input.GetKey("joystick "+ (dev.joystickId) +" button 6"))
+    				{
+						return (-1);   
+    				}
+    				else 
+    				{
+	    				return (-Input.GetAxis("VJoy"+(dev.joystickId)+""));    					
+    				}
+    			} else if (axisName == "Horizontal") {
+    				if (Input.GetKey("joystick "+ (dev.joystickId) +" button 7"))
+    				{
+						return (1);   
+    				}
+    				else if (Input.GetKey("joystick "+ (dev.joystickId) +" button 8"))
+    				{
+						return (-1);   
+    				}
+    				else 
+    				{
+    					return (Input.GetAxis("HJoy"+(dev.joystickId)+""));
+	    			}
+    			}
+    		}
+    	}
+    	return (0);
     }
 }

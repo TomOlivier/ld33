@@ -33,6 +33,7 @@ function StartGame() {
 	
 	for (var pl:Player in players) {
 		if (pl.isActive && pl.playerInstance == null) {
+			pl.GameReset();
 			Debug.Log("new Player");
 			var randomIndex : int = Random.Range(0, spawnPositionsCopy.Count);
 			var randomSpawn : Vector2 = spawnPositionsCopy[randomIndex];
@@ -41,6 +42,19 @@ function StartGame() {
 			pl.playerInstance.GetComponent.<PlayerController>().playerInfo = pl;
 		}
 	}
+}
+
+function FindSubmittingPlayerFromDevice() : Player
+{
+	var idc : InputDevicesController = InputDevicesController.GetInstance();
+	var dev : CompatibleDevice = idc.GetCurrentlySubmittingDevice();
+
+	for (var pl:Player in players) {
+		if (pl.device != null && pl.device == dev) {
+			return (pl);
+		}
+	}
+	return null;
 }
 
 function GetPlayer(id: int) : Player
