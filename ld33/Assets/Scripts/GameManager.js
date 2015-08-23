@@ -6,7 +6,9 @@ public var roadsTurning : GameObject [];
 public var roadsTri : GameObject [];
 public var roadsCross : GameObject [];
 
-public var nbBuildings : int;
+public var nbBuildings : int = 50;
+public var nbPNJScared : int = 100;
+
 public var grass : GameObject [];
 
 public var startPosX : int;
@@ -15,7 +17,11 @@ public var startPosY : int;
 public var nbCol : int;
 public var nbRow : int;
 
+public var trees : GameObject [];
+
 public var buildingFactory : BuildingFactory;
+public var pnjFactory : PNJFactory;
+
 private var boardHolder : Transform;
 
 private var roadList : int[,];
@@ -76,6 +82,39 @@ function Generate () {
 
 		buildingFactory.generateBuilding(Random.Range(startPosX, nbCol + startPosX), Random.Range(startPosY, nbRow + startPosY), evenNumber, Random.Range(2,5));
 	};
+	for (i = 0; i < nbPNJScared; i++) {
+		pnjFactory.generatePNJScared(Random.Range(startPosX, nbCol + startPosX), Random.Range(startPosX, nbCol + startPosX));
+	}
+
+
+	for (i = 0; i < 1000; i++) {
+		generateTree(startPosX + Random.Range(0, (nbCol)*100) / 100f, startPosY + Random.Range(0, (nbRow)*100) / 100f);
+	};
+
+	for (i = 0; i < 100; i++) {
+		generateForest(startPosX + Random.Range(0, (nbCol)*100) / 100f, startPosY + Random.Range(0, (nbRow)*100) / 100f, Random.Range(5,16));
+	};
+}
+
+
+function generateTree(x: float, y: float){
+	var instance : GameObject;
+	var toInstantiate : GameObject = trees[Random.Range (0,trees.Length)];
+	instance = Instantiate (toInstantiate, new Vector3 (x, y, 0.5f), Quaternion.identity) as GameObject;
+	instance.transform.Rotate(new Vector3(290f,180f,0));
+	instance.transform.localScale = new Vector3(0.5f,1f,1f);
+    instance.transform.SetParent (boardHolder);
+
+}
+
+function generateForest(x: float, y: float, length : int){
+
+	var i : int;
+
+	for (i = 0; i < 100; i++) {
+		generateTree(x + Random.Range(1,length*50)/100f, y + Random.Range(1,length*50)/100f);
+	};
+
 
 }
 
@@ -181,7 +220,6 @@ function pushTileRoad(x: float, y: float){
 
 	if(toInstantiate == null)
 		return;
-
 
 
 	instance = Instantiate (toInstantiate, new Vector3 (x, y, 0f), Quaternion.identity) as GameObject;

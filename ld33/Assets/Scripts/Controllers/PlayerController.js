@@ -1,10 +1,14 @@
 ﻿#pragma strict
 @script RequireComponent(Rigidbody2D)
 
+import System.Collections.Generic;
+
 public var speed : float = 5;
 public var spriteRenderer : SpriteRenderer = null;
 public var pushStrength : float = 25;
 public var weakness : float = 20; // the higher, the more it will the pushed
+public var attackCooldownDef : float = 0.5;
+
 
 //public var particleSystem : ParticleSystem;
 
@@ -12,7 +16,9 @@ private var pushedVector : Vector2;
 private var numberOfPushesLeft : int = 0; // number of time the push has to be applied
 private var initialPushVector : Vector2;
 
-private var touchedUnits : Array = Array();
+private var touchedUnits : Array = new Array();
+
+private var cooldownAttack : float = 0;
 
 public var playerInfo: Player;
 
@@ -37,51 +43,75 @@ function Update () {
 	//Debug.Log(rb.velocity);
 		rb.velocity = Vector2 (moveX * speed, moveY * speed) + pushedVector;
 
-		var rot_z:float = Mathf.Atan2(moveY, moveX) * Mathf.Rad2Deg;
-         transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, rot_z - 90f);
+	if ((moveX != 0 || moveY != 0) && true) { // TODO: check if there's no pause / gui display
+		var rot_z:float = Mathf.Atan2(moveX, moveY) * Mathf.Rad2Deg;
+    	transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, rot_z - 90f);
+	}
+	rb.angularVelocity = 0;
 	
 	var isHitting : boolean = Input.GetMouseButtonDown (0);
-	if (isHitting) {
-		for (var i = 0; i < touchedUnits.Count; i++) {
-			var objectToHit : GameObject = touchedUnits[i] as GameObject;
-			
-			this.Push(objectToHit);
+	cooldownAttack -= Time.deltaTime;
+	if (cooldownAttack > 0) {
+		cooldownAttack -= Time.deltaTime;
+	} else if (isHitting) {
+		if (cooldownAttack > 0) {
+			cooldownAttack -= Time.deltaTime;
+			Debug.Log("can't attack !");
+		} else { 
+			// ATTACK !
+			for (var i = 0; i < touchedUnits.length; i++) {
+				var objectToHit : GameObject = touchedUnits[i] as GameObject;
+				if (!objectToHit) {
+					touchedUnits.RemoveAt(i);
+				} else {
+					if (objectToHit.tag == "Player") {
+						this.Push(objectToHit);
+					} else {
+						this.AttackBuilding(objectToHit);
+					}
+				}
+			}
+			cooldownAttack = attackCooldownDef;
 		}
 	}
 }
 
 function OnTriggerEnter2D(collider : Collider2D) {
-	if (collider.gameObject.tag.Equals("Player") == false) {
+	if (collider.gameObject == gameObject || (collider.gameObject.tag != "Player" == false && collider.gameObject.tag != "Building")) {
 		return;
 	}
-	touchedUnits.Push(collider.gameObject);
-	Debug.Log(this.gameObject + " canHit : " + touchedUnits);
+	if (ArrayUtility.Contains(touchedUnits.ToBuiltin(GameObject), collider.gameObject)) {
+		return;
+	}
+	touchedUnits.Add(collider.gameObject);
+	Debug.Log("canHit: " + collider.gameObject.tag);
+	Debug.Log("touchedUnits: " + touchedUnits);
 }
 function OnTriggerExit2D(collider : Collider2D) {
-	if (collider.gameObject.tag.Equals("Player") == false) {
+	if (collider.gameObject.tag != "Player" == false && collider.gameObject.tag != "Building") {
 		return;
 	}
-	Debug.Log("canHit");
+	Debug.Log("cantHit: " + collider.gameObject.tag);
 	for (var i = 0; i < touchedUnits.Count; i++) {
 		if (touchedUnits[i] == collider.gameObject) {
+			Debug.Log("removed 1 at index: " + i);
 			touchedUnits.RemoveAt(i);
 			break;
 		}
 	}
-	Debug.Log(this.gameObject + " canHit : " + touchedUnits);
+	Debug.Log(this.gameObject + "touchedUnits : " + touchedUnits);
 }
 
 function OnCollisionEnter2D(collision : Collision2D) {
 	if (collision.gameObject.tag.Equals("PNJScared") == false) {
 		return;
 	}
-	collision.gameObject.SendMessage ("Die");
+	collision.gameObject.GetComponent.<Hittable>().Die();
 	Destroy(collision.gameObject);
 }
 
 
 function Push(playerToPush:GameObject) {
-	touchedUnits.Clear(); // clear of every units you touched before (in case it's been destroyed) ; maybe should only check null values..? ; it avoid button spamming also)
 	
 	var direction:Vector3 = (playerToPush.transform.position - this.gameObject.transform.position);
 	direction.Normalize();
@@ -92,4 +122,8 @@ function Push(playerToPush:GameObject) {
 	player.initialPushVector = direction;
 	player.numberOfPushesLeft = player.weakness;
 	player.playerInfo.GetDamaged(25);
+}
+
+function AttackBuilding(buildingToHit:GameObject) {
+	buildingToHit.GetComponent.<Hittable>().GetHit(this.pushStrength);
 }
