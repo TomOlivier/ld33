@@ -84,11 +84,11 @@ function Start () {
 
 	}
 
-	for (i = 0; i < width; i++) {
-		s_building = Instantiate (top, new Vector3 (root_asset_building.transform.position.x + i, root_asset_building.transform.position.y + height - 0.49f, 0f), Quaternion.identity) as GameObject;
-		s_building.transform.SetParent(root_asset_building.transform);
-		s_building.transform.Rotate(new Vector3(90f,0f,0f));
-	}
+	// for (i = 0; i < width; i++) {
+	// 	s_building = Instantiate (top, new Vector3 (root_asset_building.transform.position.x + i, root_asset_building.transform.position.y + height - 0.49f, 0f), Quaternion.identity) as GameObject;
+	// 	s_building.transform.SetParent(root_asset_building.transform);
+	// 	s_building.transform.Rotate(new Vector3(90f,0f,0f));
+	// }
 
 
 	s_building = Instantiate (bottomMiddle, new Vector3 (root_asset_building.transform.position.x + doorX, root_asset_building.transform.position.y, 0f), Quaternion.identity) as GameObject;
@@ -113,10 +113,63 @@ function Update () {
 
 function GetDamaged(damage:float) {
 	Debug.Log("life : " + currentLife + " ; damage : " + damage);
+
+	var curLifeIndex : int = currentLife/50;
+	var nextLifeIndex : int = (currentLife-damage)/50;
+
+
+	//si on doit perdre un étage
+	if(nextLifeIndex < curLifeIndex)
+	{
+		// Debug.Log("idjfosdf : " + (curLifeIndex - nextLifeIndex));
+		for (var i : int = 0; i < (curLifeIndex - nextLifeIndex); i++) {
+			removeSubBuilding();
+		};
+		
+	}
+
 	currentLife -= damage;
 	if (currentLife < 0)
 		this.gameObject.GetComponent.<Hittable>().Die();
 	else {
 		this.gameObject.GetComponent.<Hittable>().GetHit(damage);
+	}
+}
+
+
+function removeSubBuilding() {
+	var i : int = 0;
+	var sub_child : Transform;
+	var child : Transform;
+	var shouldbreak : int = 0;
+	var objectToRemove : GameObject;
+	for (child in transform) {
+		for (sub_child in child) {
+			// Debug.Log("tag : " + sub_child.tag + ", " + sub_child.localPosition.y);
+			if(sub_child.tag == 'building_top' && sub_child.localPosition.y > shouldbreak){
+				shouldbreak = sub_child.localPosition.y;
+				objectToRemove = sub_child.gameObject;
+			}
+
+		}
+
+		if(shouldbreak){
+			Destroy(objectToRemove);
+			// Debug.Log("Removing " + objectToRemove);
+			break;
+		}
+
+		for (sub_child in child) {
+			if(sub_child.tag == 'building_bot' && sub_child.localPosition.y > shouldbreak){
+				shouldbreak = sub_child.localPosition.y;
+				objectToRemove = sub_child.gameObject;
+			}
+		}
+
+		if(shouldbreak){
+			Destroy(objectToRemove);
+			// Debug.Log("Removing " + objectToRemove);
+			break;
+		}
 	}
 }

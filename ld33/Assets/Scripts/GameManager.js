@@ -90,8 +90,8 @@ function Generate () {
 	for (i = 0; i < nbBuildings; i++) {
 		var evenNumber : int = Random.Range(0,6)/2 +1;
 
-		posX = Random.Range(1, nbCol -1) + startPosX;
-		posY = Random.Range(1, nbRow -1) + startPosY;
+		posX = Random.Range(1, nbCol - 1) + startPosX;
+		posY = Random.Range(1, nbRow - 1) + startPosY;
 		width = evenNumber;
 		height = Random.Range(2,5);
 
@@ -355,15 +355,15 @@ function buildRoads() {
 	var i : int;
 	var j : int;
 
-	var str : String;
+	// var str : String;
 
-	for ( i = startPosX; i < nbCol + startPosX; i++) {
-		for (j = startPosY; j < nbRow + startPosY; j++){
-			str += roadList[i - startPosX,j -startPosY] + ",";
-		}
-		Debug.Log(str);
-		str = "";
-	}
+	// for ( i = startPosX; i < nbCol + startPosX; i++) {
+		// for (j = startPosY; j < nbRow + startPosY; j++){
+			// str += roadList[i - startPosX,j -startPosY] + ",";
+		// }
+		// Debug.Log(str);
+		// str = "";
+	// }
 
 	for ( i = startPosX; i < nbCol + startPosX; i++) {
 		for (j = startPosY; j < nbRow + startPosY; j++){
