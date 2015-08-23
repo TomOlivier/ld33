@@ -112,7 +112,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 403798}
   m_Layer: 0
-  m_Name: Bras droite Pivot
+  m_Name: Bras gauche Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -127,7 +127,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 454376}
   m_Layer: 0
-  m_Name: Bras gauche Pivot
+  m_Name: Bras droit Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
