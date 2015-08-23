@@ -74,7 +74,9 @@ MonoBehaviour:
   duration: 2
   killOnFaded: 1
   endColor: {r: 0, g: 0, b: 0, a: 0}
-  rendererToFade: {fileID: 21245422}
+  renderersToFade:
+  - {fileID: 21245422}
+  playOnStart: 1
 --- !u!198 &19812026
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -1198,6 +1200,10 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 0}
+      propertyPath: renderersToFade.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
       propertyPath: m_SortingLayerID
       value: 1851753071
       objectReference: {fileID: 0}
@@ -1208,6 +1214,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: ForceModule.z.scalar
       value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: playOnStart
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

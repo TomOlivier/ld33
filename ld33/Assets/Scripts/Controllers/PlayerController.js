@@ -103,9 +103,11 @@ function OnTriggerExit2D(collider : Collider2D) {
 }
 
 function OnCollisionEnter2D(collision : Collision2D) {
-	if (collision.gameObject.tag.Equals("PNJScared") || collision.gameObject.tag.Equals("Tree")) {
-		Debug.Log("collision : tag : "  + collision.gameObject.tag);
-
+	if (collision.gameObject.tag.Equals("PNJScared")) {
+		collision.gameObject.GetComponent.<PNJScaredAI>().startPanicking(0);
+		collision.gameObject.GetComponent.<Hittable>().Die();
+		Destroy(collision.gameObject);
+	} else if (collision.gameObject.tag.Equals("Tree")) {
 		collision.gameObject.GetComponent.<Hittable>().Die();
 		Destroy(collision.gameObject);
 	}
