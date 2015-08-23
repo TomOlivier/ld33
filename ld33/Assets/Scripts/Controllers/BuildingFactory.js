@@ -21,6 +21,13 @@ function Awake () {
 
 }
 
+function Clear() {
+	if (boardHolder)
+	{
+		Destroy(boardHolder.gameObject);
+		boardHolder = null;
+	}
+}
 
 function generateBuilding(x : int, y : int, width : int, height : int) : GameObject {
 	if (!boardHolder) {
