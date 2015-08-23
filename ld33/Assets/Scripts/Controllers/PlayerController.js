@@ -43,10 +43,11 @@ function Update () {
 	//Debug.Log(rb.velocity);
 		rb.velocity = Vector2 (moveX * speed, moveY * speed) + pushedVector;
 
-	if (moveX != 0 || moveY != 0) {
-		var rot_z:float = Mathf.Atan2(moveY, moveX) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, rot_z - 90f);
+	if ((moveX != 0 || moveY != 0) && true) { // TODO: check if there's no pause / gui display
+		var rot_z:float = Mathf.Atan2(moveX, moveY) * Mathf.Rad2Deg;
+    	transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, rot_z - 90f);
 	}
+	rb.angularVelocity = 0;
 	
 	var isHitting : boolean = Input.GetMouseButtonDown (0);
 	cooldownAttack -= Time.deltaTime;
