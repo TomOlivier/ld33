@@ -6,7 +6,9 @@ public var roadsTurning : GameObject [];
 public var roadsTri : GameObject [];
 public var roadsCross : GameObject [];
 
-public var nbBuildings : int;
+public var nbBuildings : int = 50;
+public var nbPNJScared : int = 100;
+
 public var grass : GameObject [];
 
 public var startPosX : int;
@@ -16,6 +18,8 @@ public var nbCol : int;
 public var nbRow : int;
 
 public var buildingFactory : BuildingFactory;
+public var pnjFactory : PNJFactory;
+
 private var boardHolder : Transform;
 
 private var roadList : int[,];
@@ -76,6 +80,9 @@ function Generate () {
 
 		buildingFactory.generateBuilding(Random.Range(startPosX, nbCol + startPosX), Random.Range(startPosY, nbRow + startPosY), evenNumber, Random.Range(2,5));
 	};
+	for (i = 0; i < nbPNJScared; i++) {
+		pnjFactory.generatePNJScared(Random.Range(startPosX, nbCol + startPosX), Random.Range(startPosX, nbCol + startPosX));
+	}
 
 }
 
