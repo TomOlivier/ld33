@@ -79,10 +79,10 @@ MonoBehaviour:
   - {fileID: 179114, guid: fe711852adfbe401da59680525ab977c, type: 2}
   - {fileID: 178580, guid: 395b511d69d2346239055c7061bd0fd9, type: 2}
   - {fileID: 153580, guid: 91375be61f77f4bb184897b50fff16f3, type: 2}
-  startPosX: -50
-  startPosY: -50
-  nbCol: 100
-  nbRow: 100
+  startPosX: -25
+  startPosY: -25
+  nbCol: 50
+  nbRow: 50
   trees:
   - {fileID: 151010, guid: 98688faea174a4cdeac645791ab1c68a, type: 2}
   - {fileID: 151010, guid: a7de2c0070b4e40c4aa4ad457b7b08d2, type: 2}
@@ -127,19 +127,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: startPosX
-      value: -50
+      value: -25
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: startPosY
-      value: -50
+      value: -25
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: nbCol
-      value: 100
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: nbRow
-      value: 100
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: buildingFactory
