@@ -12,7 +12,7 @@ function Update () {
 }
 
 function GetHit(damage:int) {
-	Debug.Log("get hit");
+//	Debug.Log("get hit");
 	Instantiate(hitPrefab, transform.position, Quaternion.identity);
 	//GetComponent.<ParticleSystem>().Play();
 }
