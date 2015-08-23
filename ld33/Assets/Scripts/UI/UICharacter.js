@@ -17,5 +17,6 @@ function RefreshCharacter() {
 }
 
 function OnSelected() {
-
+	characterSelection.SelectCharacterForPlayer(character,
+	 	GameObject.Find("Game/Players").GetComponent(PlayersManager).FindSubmittingPlayerFromDevice());
 }

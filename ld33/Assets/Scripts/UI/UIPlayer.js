@@ -6,6 +6,7 @@ var uiCharacter : UICharacterSelection;
 var pType : GameObject;
 var pInput : GameObject;
 var pCName : GameObject;
+var pCImage : GameObject;
 
 var pInputKB : GameObject;
 var pInputJS : GameObject;
@@ -21,9 +22,11 @@ function Update () {
 
 function RefreshCharacter() 
 {
+	pCImage.SetActive(false);
+	pInput.SetActive(false);
+	
 	if (player.isIA)
 	{
-		pInput.SetActive(false);
 		pType.transform.Find("Text").GetComponent(UI.Text).text = "IA";
 		pType.transform.Find("Text").GetComponent(UI.Text).color = new Color(0, 0, 0, 255);
 		transform.Find("Image").GetComponent(UI.Image).color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
@@ -35,14 +38,18 @@ function RefreshCharacter()
 		pType.transform.Find("Text").GetComponent(UI.Text).text = "P" + player.uid;
 		pType.transform.Find("Text").GetComponent(UI.Text).color = new Color(0, 0, 0, 255);
 		transform.Find("Image").GetComponent(UI.Image).color = player.color;
-		if (player.character)
-			pCName.GetComponent(UI.Text).text = player.character.name;
-		else
+		if (player.character) {
+			pCImage.SetActive(true);
+			pCImage.GetComponent(UI.Image).sprite = player.character.logoMedium;			
+			//pCImage.GetComponent(UI.Image).color = player.color;
+			pCName.GetComponent(UI.Text).text = player.character.name;			
+		}
+		else {
 			pCName.GetComponent(UI.Text).text = "SELECT";
+		}
 	}
 	else
 	{
-		pInput.SetActive(false);
 		pType.transform.Find("Text").GetComponent(UI.Text).text = "--";
 		pType.transform.Find("Text").GetComponent(UI.Text).color = new Color(0, 0, 0, 255);
 		transform.Find("Image").GetComponent(UI.Image).color = new Color(0.7f, 0.7f, 0.7f, 1.0f);
@@ -93,7 +100,6 @@ function OnPlayerInputTypeClick() {
 	var getkb = (player.device == null || player.device.isJoystick);
 	var getjoy = (player.device == null || player.device.isKeyboard);
 
-	Debug.Log("Input Change " + getkb + " - " + getjoy);	
 	idc.UnassignDeviceFromPlayer(player.device, player);
 
 	var dev : CompatibleDevice = idc.GetAvailableDevice(getkb, getjoy);
@@ -119,7 +125,5 @@ function OnPlayerInputTypeClick() {
 			pInputKB.SetActive(true);
 		}
 	}
-	
-	idc.DebugDevices();
 
 }

@@ -35,9 +35,11 @@ function SwapUIState(state: GameState)
 	{
 		case GameState.MAIN_MENU:
 			panelMainMenu.SetActive(true);
+			panelMainMenu.Find("PlayBtn").GetComponent(UI.Button).Select();
 			break;
 		case GameState.CHARACTER_SELECT:
 			panelPlaySelect.SetActive(true);
+			panelPlaySelect.Find("Characters/CharactersList/List/CharacterEntry(Clone)").GetComponent(UI.Button).Select();
 			break;
 		case GameState.PLAYING:
 			panelPlayingHUD.SetActive(true);
