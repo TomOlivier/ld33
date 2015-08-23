@@ -49,7 +49,7 @@ function Update () {
 		}
 		
 		var isHitting : boolean = inputDevicesController.GetButtonForDevice(ActionButton.ATTACK, playerInfo.device);
-		Debug.Log("isHitting: " + isHitting);
+//		Debug.Log("isHitting: " + isHitting);
 		cooldownAttack -= Time.deltaTime;
 		if (cooldownAttack > 0) {
 			cooldownAttack -= Time.deltaTime;
