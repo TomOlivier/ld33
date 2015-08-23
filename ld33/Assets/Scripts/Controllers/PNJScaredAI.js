@@ -13,7 +13,7 @@ private var distanceDone : float = 0;
 private var distanceToRun : float = 0;
 
 function Start () {
-	Debug.Log("start");
+	// Debug.Log("start");
 	AcquireNewTargetPosition();
 	currentSpeed = maxSpeed;
 }
@@ -62,6 +62,6 @@ function AcquireNewTargetPosition() {
  	transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
  	//transform.Rotate(0,180,0);
 	distanceToRun = Vector3.Distance(transform.position, targetPosition);
-	Debug.Log(distanceToRun);
+	// Debug.Log(distanceToRun);
 	distanceDone = 0;
 }
