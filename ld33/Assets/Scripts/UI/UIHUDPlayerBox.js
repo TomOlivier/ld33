@@ -2,12 +2,12 @@
 
 var player : Player;
 var displayObj : GameObject;
+var charIcon : UI.Image;
 
 var visibleHP : float;
 var visiblePwr : float;
 
 var stateAlive : boolean;
-
 
 function Start () {
 
@@ -16,6 +16,7 @@ function Start () {
 function UIEventGameStart() {
 	if (player != null && player.isActive) {
 		displayObj.SetActive(true);
+		charIcon.sprite = player.character.logoMini;
 		displayObj.transform.Find("PName/Image").GetComponent(UI.Image).color = player.color;
 		displayObj.transform.Find("PName/Image/Text").GetComponent(UI.Text).text = "P"+ (player.uid).ToString();
 		displayObj.transform.Find("TorusInfos").gameObject.SetActive(true);
