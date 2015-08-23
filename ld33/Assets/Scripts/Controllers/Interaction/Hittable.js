@@ -18,6 +18,7 @@ function GetHit(damage:int) {
 }
 
 function Die() {
-	Instantiate(deadPrefab, transform.position, Quaternion.identity);
+	if(deadPrefab)
+		Instantiate(deadPrefab, transform.position, Quaternion.identity);
 	Destroy(gameObject);
 }

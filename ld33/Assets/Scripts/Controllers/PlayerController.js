@@ -77,7 +77,7 @@ function Update () {
 }
 
 function OnTriggerEnter2D(collider : Collider2D) {
-	if (collider.gameObject == gameObject || (collider.gameObject.tag != "Player" == false && collider.gameObject.tag != "Building")) {
+	if (collider.gameObject.tag.Equals("PNJScared") || collider.gameObject.tag.Equals("Tree") || collider.gameObject.tag.Equals("Building")) {
 		return;
 	}
 	if (ArrayUtility.Contains(touchedUnits.ToBuiltin(GameObject), collider.gameObject)) {
@@ -88,7 +88,7 @@ function OnTriggerEnter2D(collider : Collider2D) {
 	//Debug.Log("touchedUnits: " + touchedUnits);
 }
 function OnTriggerExit2D(collider : Collider2D) {
-	if (collider.gameObject.tag != "Player" == false && collider.gameObject.tag != "Building") {
+	if (collider.gameObject.tag.Equals("PNJScared") || collider.gameObject.tag.Equals("Tree") || collider.gameObject.tag.Equals("Building")) {
 		return;
 	}
 	//Debug.Log("cantHit: " + collider.gameObject.tag);
@@ -103,11 +103,12 @@ function OnTriggerExit2D(collider : Collider2D) {
 }
 
 function OnCollisionEnter2D(collision : Collision2D) {
-	if (collision.gameObject.tag.Equals("PNJScared") == false) {
-		return;
+	if (collision.gameObject.tag.Equals("PNJScared") || collision.gameObject.tag.Equals("Tree")) {
+		Debug.Log("collision : tag : "  + collision.gameObject.tag);
+
+		collision.gameObject.GetComponent.<Hittable>().Die();
+		Destroy(collision.gameObject);
 	}
-	collision.gameObject.GetComponent.<Hittable>().Die();
-	Destroy(collision.gameObject);
 }
 
 
