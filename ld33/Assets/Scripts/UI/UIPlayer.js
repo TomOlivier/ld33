@@ -56,6 +56,7 @@ function OnPlayerTypeClick() {
 	Debug.Log("Type change");
 	if (!player.isIA)
 	{
+		ClearPlayerControllerDevice();
 		if (player.isActive)
 		{
 			player.isActive = false;
@@ -71,15 +72,54 @@ function OnPlayerTypeClick() {
 	{
 		player.isIA = false;
 		player.isActive = true;
+		OnPlayerInputTypeClick();
 	}
 	RefreshCharacter();
 }
 
 function RefreshInput() {
-	
+
+}
+
+function ClearPlayerControllerDevice()
+{
+	var idc : InputDevicesController = InputDevicesController.GetInstance();
+	idc.UnassignDeviceFromPlayer(player.device, player);
 }
 
 function OnPlayerInputTypeClick() {
-	Debug.Log("Input Change");
+
+	var idc : InputDevicesController = InputDevicesController.GetInstance();
+	var getkb = (player.device == null || player.device.isJoystick);
+	var getjoy = (player.device == null || player.device.isKeyboard);
+
+	Debug.Log("Input Change " + getkb + " - " + getjoy);	
+	idc.UnassignDeviceFromPlayer(player.device, player);
+
+	var dev : CompatibleDevice = idc.GetAvailableDevice(getkb, getjoy);
+
+	if (dev == null && getkb == false) {
+		dev = idc.GetAvailableKeyboard();
+	} else if (dev == null) {
+		dev = idc.GetAvailableJoypad();
+	}
+
+	pInputKB.SetActive(false);
+	pInputJS.SetActive(false);
+	pInputUnknown.SetActive(false);
+
+	if (dev == null) {
+		pInputUnknown.SetActive(true);
+	} else {
+		idc.AssignDeviceToPlayer(dev, player);
+		if (player.device.isJoystick) {
+			pInputJS.SetActive(true);
+			//pInputJS.Find("Image/Text").GetComponent(UI.Text).text = "";//(player.device.joystickId + 1).ToString();
+		} else {
+			pInputKB.SetActive(true);
+		}
+	}
+	
+	idc.DebugDevices();
 
 }

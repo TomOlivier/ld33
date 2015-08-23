@@ -3,6 +3,7 @@
 static var activeState: GameState = GameState.LOAD;
 var nextState: GameState = GameState.NONE;
 var playersManager : PlayersManager;
+var generator : GameManager;
 
 function Start () {
 
@@ -26,6 +27,8 @@ function Update () {
 			Debug.Log("Game state LOAD completed");
 			break;
 		case GameState.PLAY_LOADING:
+			playersManager.StartGame();
+			generator.Generate();
 			nextState = GameState.PLAYING;
 			break;
 		default:

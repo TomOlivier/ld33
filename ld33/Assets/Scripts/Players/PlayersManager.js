@@ -31,6 +31,7 @@ function Update () {
 function StartGame() {
 	var spawnPositionsCopy : List.<Vector2> = new List.<Vector2>(spawnPositions);
 	
+	return ;
 	for (var pl:Player in players) {
 		if (pl.playerInstance == null) {
 			Debug.Log("new Player");
