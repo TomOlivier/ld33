@@ -94,3 +94,8 @@ function UIEventGameStart()
 		hudController.pboxHUD[i].UIEventGameStart();
 	}
 }
+
+function GameTimeOver()
+{
+	hudController.TimeOverAnimate();
+}

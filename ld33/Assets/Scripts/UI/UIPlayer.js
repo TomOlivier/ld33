@@ -29,7 +29,7 @@ function RefreshCharacter()
 	{
 		pType.transform.Find("Text").GetComponent(UI.Text).text = "IA";
 		pType.transform.Find("Text").GetComponent(UI.Text).color = new Color(0, 0, 0, 255);
-		transform.Find("Image").GetComponent(UI.Image).color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+		transform.Find("BGImgBt").GetComponent(UI.Image).color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
 		pCName.GetComponent(UI.Text).text = "Random";
 	}
 	else if (player.isActive)
@@ -37,7 +37,7 @@ function RefreshCharacter()
 		pInput.SetActive(true);
 		pType.transform.Find("Text").GetComponent(UI.Text).text = "P" + player.uid;
 		pType.transform.Find("Text").GetComponent(UI.Text).color = new Color(0, 0, 0, 255);
-		transform.Find("Image").GetComponent(UI.Image).color = player.color;
+		transform.Find("BGImgBt").GetComponent(UI.Image).color = player.color;
 		if (player.character != null) {
 			pCImage.SetActive(true);
 			pCImage.GetComponent(UI.Image).sprite = player.character.logoMedium;			
@@ -52,7 +52,7 @@ function RefreshCharacter()
 	{
 		pType.transform.Find("Text").GetComponent(UI.Text).text = "--";
 		pType.transform.Find("Text").GetComponent(UI.Text).color = new Color(0, 0, 0, 255);
-		transform.Find("Image").GetComponent(UI.Image).color = new Color(0.7f, 0.7f, 0.7f, 1.0f);
+		transform.Find("BGImgBt").GetComponent(UI.Image).color = new Color(0.7f, 0.7f, 0.7f, 1.0f);
 		pCName.GetComponent(UI.Text).text = "--";
 	}
 

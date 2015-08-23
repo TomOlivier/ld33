@@ -163,7 +163,7 @@ GameObject:
   - 222: {fileID: 22283896}
   - 114: {fileID: 11424522}
   m_Layer: 5
-  m_Name: Image (1)
+  m_Name: BGButtons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -264,7 +264,7 @@ GameObject:
   - 222: {fileID: 22287222}
   - 114: {fileID: 11418272}
   m_Layer: 5
-  m_Name: Image
+  m_Name: BGImgBt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1054,8 +1054,8 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -15}
-  m_SizeDelta: {x: -40, y: -50}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: -40, y: -120}
   m_Pivot: {x: .5, y: .5}
 --- !u!224 &22457916
 RectTransform:
