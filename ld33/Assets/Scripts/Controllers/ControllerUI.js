@@ -40,10 +40,12 @@ function SwapUIState(state: GameState)
 	switch (state)
 	{
 		case GameState.MAIN_MENU:
+			SoundManager.instance.PlayMusic("titleMusic");
 			panelMainMenu.SetActive(true);
 			panelMainMenu.Find("PlayBtn").GetComponent(UI.Button).Select();
 			break;
 		case GameState.CHARACTER_SELECT:
+			SoundManager.instance.PlayMusic("characterMusic");
 			panelPlaySelect.SetActive(true);
 			panelPlaySelect.Find("Characters/CharactersList/List/CharacterEntry(Clone)").GetComponent(UI.Button).Select();
 			break;
@@ -51,9 +53,11 @@ function SwapUIState(state: GameState)
 			panelLoadingSplash.SetActive(true);		
 			break;
 		case GameState.PLAYING:
+			SoundManager.instance.PlayMusic("gameMusic");
 			panelPlayingHUD.SetActive(true);
 			break;
 		case GameState.GAME_OVER:
+			SoundManager.instance.PlayMusic("titleMusic");
 			panelGameover.SetActive(true);
 			uiGameover.OnShow();
 			panelGameover.Find("Buttons/PlayBtn").GetComponent(UI.Button).Select();
