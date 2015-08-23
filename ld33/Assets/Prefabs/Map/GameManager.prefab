@@ -70,6 +70,7 @@ MonoBehaviour:
   startPosY: -50
   nbCol: 100
   nbRow: 100
+  buildingFactory: {fileID: 11472626, guid: cd3c7bfb491a343a6b3e596082081fec, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -117,6 +118,11 @@ Prefab:
       propertyPath: nbRow
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: buildingFactory
+      value: 
+      objectReference: {fileID: 11472626, guid: cd3c7bfb491a343a6b3e596082081fec,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 195130}

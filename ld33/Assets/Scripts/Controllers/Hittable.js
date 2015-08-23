@@ -1,5 +1,4 @@
 ﻿#pragma strict
-@script RequireComponent(ParticleSystem)
 
 public var hitPrefab: GameObject;
 public var deadPrefab: GameObject;

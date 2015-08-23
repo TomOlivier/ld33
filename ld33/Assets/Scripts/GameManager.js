@@ -6,7 +6,7 @@ public var roadsTurning : GameObject [];
 public var roadsTri : GameObject [];
 public var roadsCross : GameObject [];
 
-public var buildings : GameObject [];
+public var nbBuildings : int;
 public var grass : GameObject [];
 
 public var startPosX : int;
@@ -15,7 +15,7 @@ public var startPosY : int;
 public var nbCol : int;
 public var nbRow : int;
 
-
+public var buildingFactory : BuildingFactory;
 private var boardHolder : Transform;
 
 private var roadList : int[,];
@@ -65,6 +65,13 @@ function Start () {
 
 	cleanRoads();
 	buildRoads();
+
+
+	for (i = 0; i < nbBuildings; i++) {
+		var evenNumber : int = Random.Range(0,6)/2 +1;
+
+		buildingFactory.generateBuilding(Random.Range(startPosX, nbCol + startPosX), Random.Range(startPosY, nbRow + startPosY), evenNumber, Random.Range(2,5));
+	};
 
 }
 
