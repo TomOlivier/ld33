@@ -100,7 +100,6 @@ function Start () {
 
 }
 
-
 function calculate() {
 
 

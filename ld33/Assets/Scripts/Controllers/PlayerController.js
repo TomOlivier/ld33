@@ -77,7 +77,7 @@ function Update () {
 }
 
 function OnTriggerEnter2D(collider : Collider2D) {
-	if (collider.gameObject.tag.Equals("PNJScared") || collider.gameObject.tag.Equals("Tree") || collider.gameObject.tag.Equals("Building")) {
+	if (!collider.gameObject.tag.Equals("Building") && !collider.gameObject.tag.Equals("Player")) {
 		return;
 	}
 	if (ArrayUtility.Contains(touchedUnits.ToBuiltin(GameObject), collider.gameObject)) {
@@ -88,7 +88,7 @@ function OnTriggerEnter2D(collider : Collider2D) {
 	//Debug.Log("touchedUnits: " + touchedUnits);
 }
 function OnTriggerExit2D(collider : Collider2D) {
-	if (collider.gameObject.tag.Equals("PNJScared") || collider.gameObject.tag.Equals("Tree") || collider.gameObject.tag.Equals("Building")) {
+	if (!collider.gameObject.tag.Equals("Building") && !collider.gameObject.tag.Equals("Player")) {
 		return;
 	}
 	//Debug.Log("cantHit: " + collider.gameObject.tag);
