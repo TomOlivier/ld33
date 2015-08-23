@@ -6,6 +6,7 @@ var panelPlayingHUD: GameObject;
 var panelGameover: GameObject;
 
 var characterSelection: UICharacterSelection;
+var hudController: UIHUDController;
 
 function Start () {
 
@@ -44,6 +45,10 @@ function SwapUIState(state: GameState)
 		case GameState.PLAYING:
 			panelPlayingHUD.SetActive(true);
 			break;
+		case GameState.GAME_OVER:
+			panelGameover.SetActive(true);
+			panelGameover.Find("Buttons/PlayBtn").GetComponent(UI.Button).Select();
+			break;
 		default:
 			break;
 	}
@@ -72,4 +77,13 @@ function OnExitBtn()
 	#else
 	Application.Quit();
 	#endif
+}
+
+
+function UIEventGameStart()
+{
+	for (var i = 0; i < 4; i++)
+	{
+		hudController.pboxHUD[i].UIEventGameStart();
+	}
 }
