@@ -45,10 +45,10 @@ class Player
 	public function GetDamaged(damage:int) {
 		life = life - damage;
 		if (life > 0) {
-			playerInstance.SendMessage ("GetHit", damage);
+			playerInstance.GetComponent.<Hittable>().GetHit(damage);
 		}
 		else {
-			playerInstance.SendMessage ("Die");
+			playerInstance.GetComponent.<Hittable>().Die();
 			playerInstance = null;
 			//GameReset();
 		}

@@ -17,13 +17,16 @@ private var boardHolder : Transform;
 
 function Awake () {
 
-	boardHolder = new GameObject ("Buildings").transform;
+	// boardHolder = new GameObject ("Buildings").transform;
 
 }
 
 
 function generateBuilding(x : int, y : int, width : int, height : int) : GameObject {
-
+	if (!boardHolder) {
+		boardHolder = new GameObject ("Buildings").transform;
+	}
+	
 	var building : GameObject;
 
 	building = Instantiate (prefabBuilding, new Vector3 (x, y, 0f), Quaternion.identity) as GameObject;
