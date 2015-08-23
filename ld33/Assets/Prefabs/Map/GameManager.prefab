@@ -64,7 +64,7 @@ MonoBehaviour:
   roadsCross:
   - {fileID: 136662, guid: fdc49b0cdb67941689c66e7086663f7f, type: 2}
   - {fileID: 139998, guid: 70b1e9fcf06c14e79b59732aca162baf, type: 2}
-  nbBuildings: 20
+  nbBuildings: 300
   nbPNJScared: 100
   grass:
   - {fileID: 154748, guid: 0c8897bf573b546f399b4ca52d8e2e32, type: 2}
@@ -148,7 +148,7 @@ Prefab:
         type: 2}
     - target: {fileID: 0}
       propertyPath: nbBuildings
-      value: 100
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: trees.Array.data[0]
