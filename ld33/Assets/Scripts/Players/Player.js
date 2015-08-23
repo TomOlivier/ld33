@@ -21,10 +21,15 @@ class Player
 	public var maxLifeDef : int = 100;		// max hp on start
 	public var isAlive : boolean = true;
 
+	public var roundDeathId : int = 0;
+	public var roundKills : int = 0;		// Total of kills this round
+	public var kills : int = 0;				// Total of kills
+	public var deaths : int = 0;			// Total of deaths
+	public var wins : int = 0;				// Number of wins
+	public var loses : int = 0;				// Number of loses
+
 	public var rank : int = 0;				// Rank 1-4 of player
 	public var score : int = 0;				// Round sets score
-	public var wins : int = 0;				// Number of wins in set
-	public var loses : int = 0;				// Number of loses
 
 	public var isIA: boolean = false;
 	public var isActive : boolean = false;
@@ -37,6 +42,8 @@ class Player
 		wins = 0;
 		loses = 0;
 		score = 0;
+		kills = 0;
+		deaths = 0;
 	}
 
 	public function GameReset() {
@@ -44,16 +51,22 @@ class Player
 		life = lifeDef;
 		maxLife = maxLifeDef;
 		isAlive = true;
+		roundKills = 0;
 	}
 
 	public function GetDamaged(damage:int) {
 		life = life - damage;
-		if (life > 0) {
+		if (life > 0 && isAlive) {
 			playerInstance.GetComponent.<Hittable>().GetHit(damage);
 		}
 		else {
-			playerInstance.GetComponent.<Hittable>().Die();
+			if (playerInstance)
+			{
+				playerInstance.GetComponent.<Hittable>().Die();
+			}
 			playerInstance = null;
+			isAlive = false;
+			GameObject.Find("Game").BroadcastMessage("PlayerDied", this);
 			//GameReset();
 		}
 	}

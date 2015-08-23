@@ -128,7 +128,14 @@ function Push(playerToPush:GameObject) {
 	player.pushedVector = direction;
 	player.initialPushVector = direction;
 	player.numberOfPushesLeft = player.weakness;
+	
 	player.playerInfo.GetDamaged(25);
+
+	if (player.playerInfo.isAlive == false) 
+	{
+		playerInfo.kills++;
+		playerInfo.roundKills++;
+	}
 }
 
 function AttackBuilding(buildingToHit:GameObject) {

@@ -130,20 +130,25 @@ function CreateGameLeaderboard()
 
 function CreateLeaderboard()
 {
-	var cnt : float = 0.0f;
+	var cnt : int = 0;
+	var topScore : int = 0;
 
 	leaderboard.Clear();
+	for (var it = 0; it < players.length; it++)
+	{
+		players[it].rank = -1;
+	}	
 	while (cnt < players.length)
 	{
 		var selectedPl : Player = null;
 		
-		for (var i = cnt; i < players.length; i++)
+		for (var i = 0; i < players.length; i++)
 		{
 			var activePl = players[i];
 
-			if (selectedPl == null)
+			if (selectedPl == null && activePl.rank == -1)
 				selectedPl = activePl;
-			else if (selectedPl.score < activePl.score && selectedPl.isActive)
+			else if (selectedPl && selectedPl.score < activePl.score && activePl.rank == -1)
 				selectedPl = activePl;
 		}
 		
@@ -153,5 +158,52 @@ function CreateLeaderboard()
 			leaderboard.Add(selectedPl);
 		}
 		cnt++;
+	}
+}
+
+function PlayerDied(pl : Player)
+{
+	var alive : int = 0;
+	var plAlive : Player;
+	
+	pl.deaths++;
+
+	for (var apl in players)
+	{
+		if (apl.isAlive && apl.isActive) {
+			alive++;
+			plAlive = apl;
+		}
+	}
+
+	pl.roundDeathId = alive;
+
+	for (var i = 0; i < players.length; i++)
+	{
+		if (i < alive)
+		{
+			if (gameLeaderboard[i] == pl) {
+				gameLeaderboard[i] = gameLeaderboard[i + 1];
+				gameLeaderboard[i + 1] = pl;
+			}
+		}
+	}
+
+	// Force end game before timer
+	if (alive <= 1)
+	{
+		if (plAlive) {
+			plAlive.wins++;
+			for (var apl in players)
+			{
+				if (apl != plAlive)
+					apl.loses++;
+			}
+		}
+		GameObject.Find("Game").GetComponent(GameController).gamePlaying = false;
+		GameObject.Find("Game").BroadcastMessage("GameTimeOver");
+	} else {
+		
+		
 	}
 }

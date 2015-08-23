@@ -203,7 +203,7 @@ MonoBehaviour:
   playersManager: {fileID: 56966951}
   generator: {fileID: 1384314254}
   timeLeft: 0
-  timeLeftDef: 5
+  timeLeftDef: 80
 --- !u!114 &42648968
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -378,10 +378,13 @@ MonoBehaviour:
     maxLife: 100
     maxLifeDef: 100
     isAlive: 1
-    rank: 0
-    score: 0
+    roundKills: 0
+    kills: 0
+    deaths: 0
     wins: 0
     loses: 0
+    rank: 0
+    score: 0
     isIA: 0
     isActive: 1
     device:
@@ -412,10 +415,13 @@ MonoBehaviour:
     maxLife: 100
     maxLifeDef: 100
     isAlive: 1
-    rank: 0
-    score: 0
+    roundKills: 0
+    kills: 0
+    deaths: 0
     wins: 0
     loses: 0
+    rank: 0
+    score: 0
     isIA: 0
     isActive: 0
     device:
@@ -446,10 +452,13 @@ MonoBehaviour:
     maxLife: 100
     maxLifeDef: 100
     isAlive: 1
-    rank: 0
-    score: 0
+    roundKills: 0
+    kills: 0
+    deaths: 0
     wins: 0
     loses: 0
+    rank: 0
+    score: 0
     isIA: 0
     isActive: 0
     device:
@@ -480,10 +489,13 @@ MonoBehaviour:
     maxLife: 100
     maxLifeDef: 100
     isAlive: 1
-    rank: 0
-    score: 0
+    roundKills: 0
+    kills: 0
+    deaths: 0
     wins: 0
     loses: 0
+    rank: 0
+    score: 0
     isIA: 0
     isActive: 0
     device:
