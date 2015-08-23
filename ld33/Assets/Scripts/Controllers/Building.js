@@ -1,5 +1,6 @@
 ﻿#pragma strict
 
+public var pnjPrefab : GameObject;
 
 public var bottomLeft : GameObject;
 public var bottomMiddle : GameObject;
@@ -20,6 +21,8 @@ public var subBuilding : GameObject;
 public var lifeDef : float = 0; // if lifeDef == 0; lifeDef = height * 50;
 
 private var currentLife : float = 10;
+
+private var nbPNJScared : int = 5;
 
 function Start () {
 	if (lifeDef == 0)
@@ -62,12 +65,6 @@ function Start () {
 			s_building.transform.SetParent(root_asset_building.transform);
 		}
 
-
-
-
-		
-		
-
 		if(i == doorX)
 			continue;
 		s_building = Instantiate (bottomInterMiddle, new Vector3 (root_asset_building.transform.position.x + i, root_asset_building.transform.position.y, 0f), Quaternion.identity) as GameObject;
@@ -100,6 +97,9 @@ function Start () {
 
 }
 
+function OnDestroy() {
+}
+
 function calculate() {
 
 
@@ -112,15 +112,28 @@ function Update () {
 }
 
 function GetDamaged(damage:float) {
-	Debug.Log("life : " + currentLife + " ; damage : " + damage);
+//	Debug.Log("life : " + currentLife + " ; damage : " + damage);
 
-	var curLifeIndex : int = currentLife/50;
-	var nextLifeIndex : int = (currentLife-damage)/50;
+	var curLifeIndex : int = currentLife/(height * width) + width;
+	var nextLifeIndex : int = (currentLife-damage)/(height * width);
 
-
+	
+	currentLife -= damage;
+	
 	//si on doit perdre un étage
 	if(nextLifeIndex < curLifeIndex)
 	{
+		var npcToSpawn = nbPNJScared * (1 - currentLife / lifeDef);
+		//Debug.Log("nbPNJToSpawn : " + npcToSpawn);
+		while (npcToSpawn > 0) {
+			var toSpawnLocalPosition : Vector2 = Random.insideUnitCircle * width / 2;
+			toSpawnLocalPosition.x += Random.value >= 0.5 ? 1.5 : -1.5;
+			toSpawnLocalPosition.y += width / 2;
+			Instantiate(pnjPrefab, this.transform.TransformPoint(toSpawnLocalPosition), Quaternion.identity);
+			nbPNJScared--;
+			npcToSpawn--;
+		}
+
 		// Debug.Log("idjfosdf : " + (curLifeIndex - nextLifeIndex));
 		for (var i : int = 0; i < (curLifeIndex - nextLifeIndex); i++) {
 			removeSubBuilding();
@@ -128,7 +141,6 @@ function GetDamaged(damage:float) {
 		
 	}
 
-	currentLife -= damage;
 	if (currentLife < 0)
 		this.gameObject.GetComponent.<Hittable>().Die();
 	else {
@@ -171,5 +183,12 @@ function removeSubBuilding() {
 			// Debug.Log("Removing " + objectToRemove);
 			break;
 		}
+	}
+}
+
+function OnCollisionEnter2D(collision : Collision2D) {
+	if (collision.gameObject.tag.Equals("PNJScared")) {
+//		Debug.Log("npc entered");
+		nbPNJScared++;
 	}
 }

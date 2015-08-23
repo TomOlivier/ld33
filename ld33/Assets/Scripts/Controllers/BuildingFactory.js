@@ -48,7 +48,6 @@ function generateBuilding(x : int, y : int, width : int, height : int) : GameObj
 
     if(Random.Range(0,2) < 1f)
     {
-
 	    buildingScript.bottomLeft = bottomLeft;
 		buildingScript.bottomMiddle = bottomMiddle;
 		buildingScript.bottomInterMiddle = bottomInterMiddle;
