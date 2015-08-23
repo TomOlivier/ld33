@@ -10,6 +10,8 @@ var characterSelection: UICharacterSelection;
 var hudController: UIHUDController;
 var uiGameover : UIGameOver;
 
+var uiSoundPlayer : AudioSource;
+
 function Start () {
 
 }

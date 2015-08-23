@@ -10,6 +10,13 @@ function Awake () {
 	//holder = new GameObject ("PNJs").transform;
 }
 
+function Clear() {
+	if (holder)
+	{
+		Destroy(holder.gameObject);
+		holder = null;
+	}
+}
 
 function generatePNJScared(x : float, y : float) : GameObject {
 	if (!holder) {

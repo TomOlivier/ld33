@@ -38,6 +38,17 @@ function Start() {
 
 }
 
+function Clear() {
+
+	if (boardHolder)
+	{
+		Destroy(boardHolder.gameObject);
+		boardHolder = null;		
+	}
+	buildingFactory.Clear();
+	pnjFactory.Clear();
+}
+
 function Generate () : System.Collections.IEnumerator {
 
 	var toInstantiate : GameObject;

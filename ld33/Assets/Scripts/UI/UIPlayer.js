@@ -25,18 +25,8 @@ function RefreshCharacter()
 	pCImage.SetActive(false);
 	pInput.SetActive(false);
 	
-	if (player.isIA)
+	if (player.isIA || player.isActive)
 	{
-		pType.transform.Find("Text").GetComponent(UI.Text).text = "IA";
-		pType.transform.Find("Text").GetComponent(UI.Text).color = new Color(0, 0, 0, 255);
-		transform.Find("BGImgBt").GetComponent(UI.Image).color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
-		pCName.GetComponent(UI.Text).text = "Random";
-	}
-	else if (player.isActive)
-	{
-		pInput.SetActive(true);
-		pType.transform.Find("Text").GetComponent(UI.Text).text = "P" + player.uid;
-		pType.transform.Find("Text").GetComponent(UI.Text).color = new Color(0, 0, 0, 255);
 		transform.Find("BGImgBt").GetComponent(UI.Image).color = player.color;
 		if (player.character != null) {
 			pCImage.SetActive(true);
@@ -47,6 +37,19 @@ function RefreshCharacter()
 		else {
 			pCName.GetComponent(UI.Text).text = "SELECT";
 		}
+
+		if (player.isIA)
+		{
+			pType.transform.Find("Text").GetComponent(UI.Text).text = "IA";
+			pType.transform.Find("Text").GetComponent(UI.Text).color = new Color(0, 0, 0, 255);	
+			transform.Find("BGImgBt").GetComponent(UI.Image).color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+		}
+		else if (player.isActive)
+		{
+			pInput.SetActive(true);
+			pType.transform.Find("Text").GetComponent(UI.Text).text = "P" + player.uid;
+			pType.transform.Find("Text").GetComponent(UI.Text).color = new Color(0, 0, 0, 255);
+		}
 	}
 	else
 	{
@@ -55,8 +58,6 @@ function RefreshCharacter()
 		transform.Find("BGImgBt").GetComponent(UI.Image).color = new Color(0.7f, 0.7f, 0.7f, 1.0f);
 		pCName.GetComponent(UI.Text).text = "--";
 	}
-
-
 }
 
 function OnPlayerTypeClick() {
@@ -76,6 +77,9 @@ function OnPlayerTypeClick() {
 		{
 			player.isActive = true;
 			player.isIA = true;
+			uiCharacter.SelectCharacterForPlayer(
+				gameObject.Find("Game/Players").GetComponent(PlayersManager).GetRandomCharacter(),
+				player);
 		}
 	}
 	else
@@ -85,6 +89,8 @@ function OnPlayerTypeClick() {
 		OnPlayerInputTypeClick();
 	}
 	RefreshCharacter();
+	uiCharacter.gameSetupUpdated = true;
+
 }
 
 function RefreshInput() {
@@ -130,5 +136,6 @@ function OnPlayerInputTypeClick() {
 			pInputKB.SetActive(true);
 		}
 	}
+	uiCharacter.gameSetupUpdated = true;
 
 }

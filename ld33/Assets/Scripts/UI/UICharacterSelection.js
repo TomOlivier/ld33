@@ -7,11 +7,13 @@ var uiCharactersList: GameObject;
 var charEntryPrefab: GameObject;
 var playerEntryPrefab: GameObject;
 
+var startBtn : UI.Button;
+var gameSetupUpdated : boolean = false;
+
 private var charOffset: Vector3;
 private var playerXOffset: float = 0.0f;
 
 private var anim : Animator;
-
 
 function Start () 
 {
@@ -32,6 +34,21 @@ function Update ()
 		gameObject.SetActive(false);
 		GameController.guiLock = false;
 	}
+	if (gameSetupUpdated)
+	{
+		gameSetupUpdated = false;
+		if (gameObject.Find("Game/Players").GetComponent(PlayersManager).AreAllPlayersReady())
+		{
+			Debug.Log("YEYEYE");
+			startBtn.gameObject.active = true;
+		}
+		else 
+		{
+			Debug.Log("NONO");
+			startBtn.gameObject.active = false;
+		}			
+	}
+
 }
 
 function UpdateCharactersList()
@@ -61,6 +78,8 @@ function SelectCharacterForPlayer(charc: Character, pl: Player)
 		return ;
 	pl.character = charc;
 	pl.relatedSelectionBox.GetComponent(UIPlayer).RefreshCharacter();
+	gameObject.Find("Game").GetComponent(ControllerUI).uiSoundPlayer.clip = pl.character.selectSound;
+	gameObject.Find("Game").GetComponent(ControllerUI).uiSoundPlayer.Play(); 
 }
 
 function InsertCharacter(charc: Character)

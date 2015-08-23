@@ -105,6 +105,7 @@ function ApplyStateSwitch()
 		case GameState.PLAY_LOADING:
 			var testCoroutineFunction : function():System.Collections.IEnumerator = generator.Generate;
 
+			generator.Clear();		
 			isInGUI = true;
 			generator.generationStateComplete = false;
 			StartCoroutine(testCoroutineFunction());

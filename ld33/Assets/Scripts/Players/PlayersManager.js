@@ -24,6 +24,26 @@ function Start ()
 	}
 }
 
+function GetRandomCharacter() : Character {
+	return characters[Random.Range(0, characters.length)];
+}
+
+function AreAllPlayersReady() : boolean {
+	Debug.Log("All ready ?");
+	for (var pl in players)
+	{
+		if (pl.isActive)
+		{
+			if (pl.character == null)
+				return (false);
+			if (!pl.isIA && pl.device == null)
+				return (false);
+		}
+	}
+	Debug.Log("Yes they are");
+	return (true);	
+}
+
 function ResetAll(hard: boolean) {
 	for (var pl in players)
 	{
@@ -46,6 +66,11 @@ function StartGame() {
 	
 	CreateGameLeaderboard();
 	for (var pl:Player in players) {
+		if (pl.playerInstance)
+		{
+			Destroy(pl.playerInstance);
+			pl.playerInstance = null;
+		}
 		if (pl.isActive && pl.playerInstance == null) {
 			pl.GameReset();	
 			Debug.Log("new Player");

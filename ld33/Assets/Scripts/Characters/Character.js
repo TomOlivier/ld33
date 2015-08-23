@@ -9,5 +9,5 @@ class Character
 	public var logoMini: Sprite;
 	public var logoMedium: Sprite;
 
-	
+	public var selectSound : AudioClip;
 }
