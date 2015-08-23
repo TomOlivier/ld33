@@ -26,6 +26,7 @@ GameObject:
   - 4: {fileID: 439650}
   - 199: {fileID: 19905238}
   - 198: {fileID: 19835770}
+  - 114: {fileID: 11453684}
   m_Layer: 0
   m_Name: bloodSplat
   m_TagString: Untagged
@@ -58,6 +59,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 439650}
   m_RootOrder: 0
+--- !u!114 &11453684
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 189786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08e40f692e8c68e41882cc3c0bd37c2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delay: 2
+  duration: 2
+  killOnFaded: 1
+  endColor: {r: 0, g: 0, b: 0, a: 0}
+  renderersToFade:
+  - {fileID: 21241186}
+  playOnStart: 1
 --- !u!198 &19835770
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -1227,6 +1246,22 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: ForceModule.z.scalar
       value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: renderersToFade.Array.data[0]
+      value: 
+      objectReference: {fileID: 21241186}
+    - target: {fileID: 0}
+      propertyPath: playOnStart
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: delay
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: duration
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

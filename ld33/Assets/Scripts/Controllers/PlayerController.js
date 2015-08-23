@@ -26,54 +26,58 @@ function Start () {
 }
 
 function Update () {
-	var inputDevicesController : InputDevicesController = InputDevicesController.GetInstance();
-	
-	var moveX : float = inputDevicesController.GetAxisForDevice("Horizontal", playerInfo.device);
-	var moveY : float = -inputDevicesController.GetAxisForDevice("Vertical", playerInfo.device);
-	var rb : Rigidbody2D = GetComponent.<Rigidbody2D>();
-	if (numberOfPushesLeft >= 0) {
-		if (numberOfPushesLeft == 0) {
-			pushedVector = Vector2(0,0);
-			initialPushVector = Vector2(0,0);
-		} else {
-			pushedVector -= initialPushVector / weakness;
-		}
-		numberOfPushesLeft--;
-	}
-	//Debug.Log(rb.velocity);
-	rb.velocity = Vector2 (moveX * speed, moveY * speed) + pushedVector;
 
-	if ((moveX != 0 || moveY != 0) && true) { // TODO: check if there's no pause / gui display
-		var rot_z:float = Mathf.Atan2(moveX, -moveY) * Mathf.Rad2Deg; // - moveY because we did shit with cameras
-    	transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, rot_z - 90f);
-	}
-	rb.angularVelocity = 0;
-	
-	var isHitting : boolean = Input.GetMouseButtonDown (0);
-	cooldownAttack -= Time.deltaTime;
-	if (cooldownAttack > 0) {
+	if (GameController.isInGUI == false && GameController.gamePlaying) {
+		var inputDevicesController : InputDevicesController = InputDevicesController.GetInstance();
+		
+		var moveX : float = inputDevicesController.GetAxisForDevice("Horizontal", playerInfo.device);
+		var moveY : float = -inputDevicesController.GetAxisForDevice("Vertical", playerInfo.device);
+		if (numberOfPushesLeft >= 0) {
+			if (numberOfPushesLeft == 0) {
+				pushedVector = Vector2(0,0);
+				initialPushVector = Vector2(0,0);
+			} else {
+				pushedVector -= initialPushVector / weakness;
+			}
+			numberOfPushesLeft--;
+		}
+		
+
+		if (moveX != 0 || moveY != 0) { // TODO: check if there's no pause / gui display
+			var rot_z:float = Mathf.Atan2(moveX, -moveY) * Mathf.Rad2Deg; // - moveY because we did shit with cameras
+	    	transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, rot_z - 90f);
+		}
+		
+		var isHitting : boolean = inputDevicesController.GetButtonForDevice(ActionButton.ATTACK, playerInfo.device);
+		Debug.Log("isHitting: " + isHitting);
 		cooldownAttack -= Time.deltaTime;
-	} else if (isHitting) {
 		if (cooldownAttack > 0) {
 			cooldownAttack -= Time.deltaTime;
-			Debug.Log("can't attack !");
-		} else { 
-			// ATTACK !
-			for (var i = 0; i < touchedUnits.length; i++) {
-				var objectToHit : GameObject = touchedUnits[i] as GameObject;
-				if (!objectToHit) {
-					touchedUnits.RemoveAt(i);
-				} else {
-					if (objectToHit.tag == "Player") {
-						this.Push(objectToHit);
-					} else if (objectToHit.tag == "Building") {
-						this.AttackBuilding(objectToHit);
+		} else if (isHitting) {
+			if (cooldownAttack > 0) {
+				cooldownAttack -= Time.deltaTime;
+				Debug.Log("can't attack !");
+			} else { 
+				// ATTACK !
+				for (var i = 0; i < touchedUnits.length; i++) {
+					var objectToHit : GameObject = touchedUnits[i] as GameObject;
+					if (!objectToHit) {
+						touchedUnits.RemoveAt(i);
+					} else {
+						if (objectToHit.tag == "Player") {
+							this.Push(objectToHit);
+						} else if (objectToHit.tag == "Building") {
+							this.AttackBuilding(objectToHit);
+						}
 					}
 				}
+				cooldownAttack = attackCooldownDef;
 			}
-			cooldownAttack = attackCooldownDef;
 		}
 	}
+	var rb : Rigidbody2D = GetComponent.<Rigidbody2D>();
+	rb.angularVelocity = 0;
+	rb.velocity = Vector2 (moveX * speed, moveY * speed) + pushedVector;
 }
 
 function OnTriggerEnter2D(collider : Collider2D) {
@@ -103,9 +107,11 @@ function OnTriggerExit2D(collider : Collider2D) {
 }
 
 function OnCollisionEnter2D(collision : Collision2D) {
-	if (collision.gameObject.tag.Equals("PNJScared") || collision.gameObject.tag.Equals("Tree")) {
-		Debug.Log("collision : tag : "  + collision.gameObject.tag);
-
+	if (collision.gameObject.tag.Equals("PNJScared")) {
+		collision.gameObject.GetComponent.<PNJScaredAI>().startPanicking(0.1);
+		collision.gameObject.GetComponent.<Hittable>().Die();
+		Destroy(collision.gameObject);
+	} else if (collision.gameObject.tag.Equals("Tree")) {
 		collision.gameObject.GetComponent.<Hittable>().Die();
 		Destroy(collision.gameObject);
 	}
