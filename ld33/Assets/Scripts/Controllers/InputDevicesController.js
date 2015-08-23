@@ -153,7 +153,12 @@ class InputDevicesController
     	if (dev != null)
     	{
     		if (dev.isKeyboard) {
-    			return (Input.GetAxis(axisName));
+    			if (axisName == "Vertical") {
+	    			return (Input.GetKey("up") ? 1 : (Input.GetKey("down") ? -1 : 0));
+	    		}
+    			if (axisName == "Horizontal") {
+	    			return (Input.GetKey("right") ? 1 : (Input.GetKey("left") ? -1 : 0));
+	    		}
     		}
     		if (dev.isJoystick) {
     			if (axisName == "Vertical") {
