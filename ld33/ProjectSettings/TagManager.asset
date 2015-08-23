@@ -10,6 +10,7 @@ TagManager:
   - Tree
   - building_top
   - building_bot
+  - Border
   layers:
   - Default
   - TransparentFX

@@ -49,7 +49,7 @@ function Update () {
 function fadeAgainNow(endColor) {
 	elapsedTime = 0;
 	delay = 0;
-	duration = 1;
+	duration = 10;
 	endColor = endColor;
 	startColor = renderersToFade[0].material.color;
 	isFading = true;
