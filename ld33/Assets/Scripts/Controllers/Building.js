@@ -124,7 +124,7 @@ function GetDamaged(damage:float) {
 	if(nextLifeIndex < curLifeIndex)
 	{
 		var npcToSpawn = nbPNJScared * (1 - currentLife / lifeDef);
-		Debug.Log("nbPNJToSpawn : " + npcToSpawn);
+		//Debug.Log("nbPNJToSpawn : " + npcToSpawn);
 		while (npcToSpawn > 0) {
 			var toSpawnLocalPosition : Vector2 = Random.insideUnitCircle * width / 2;
 			toSpawnLocalPosition.x += Random.value >= 0.5 ? 1.5 : -1.5;
