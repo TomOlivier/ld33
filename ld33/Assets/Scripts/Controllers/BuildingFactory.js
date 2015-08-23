@@ -7,7 +7,12 @@ public var bottomMiddle : GameObject;
 public var bottomInterMiddle: GameObject;
 public var middleLeft : GameObject;
 public var middleMiddle : GameObject;
-public var top : GameObject;
+
+public var bottomLeft2 : GameObject;
+public var bottomMiddle2 : GameObject;
+public var bottomInterMiddle2: GameObject;
+public var middleLeft2 : GameObject;
+public var middleMiddle2 : GameObject;
 
 
 public var prefabBuilding : GameObject;
@@ -34,12 +39,24 @@ function generateBuilding(x : int, y : int, width : int, height : int) : GameObj
 
     var buildingScript = building.GetComponent.<Building>();
 
-    buildingScript.bottomLeft = bottomLeft;
-	buildingScript.bottomMiddle = bottomMiddle;
-	buildingScript.bottomInterMiddle = bottomInterMiddle;
-	buildingScript.middleLeft = middleLeft;
-	buildingScript.middleMiddle = middleMiddle;
-	buildingScript.top = top;
+    if(Random.Range(0,2) < 1f)
+    {
+
+	    buildingScript.bottomLeft = bottomLeft;
+		buildingScript.bottomMiddle = bottomMiddle;
+		buildingScript.bottomInterMiddle = bottomInterMiddle;
+		buildingScript.middleLeft = middleLeft;
+		buildingScript.middleMiddle = middleMiddle;
+    }
+    else {
+	    buildingScript.bottomLeft = bottomLeft2;
+		buildingScript.bottomMiddle = bottomMiddle2;
+		buildingScript.bottomInterMiddle = bottomInterMiddle2;
+		buildingScript.middleLeft = middleLeft2;
+		buildingScript.middleMiddle = middleMiddle2;
+    }
+
+
 
 	buildingScript.width = width;
 	buildingScript.height = height;
