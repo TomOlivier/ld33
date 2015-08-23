@@ -1,19 +1,18 @@
 fileFormatVersion: 2
-guid: f4535ae33d70f439fa9879ad407740c8
-timeCreated: 1440323166
+guid: 711f6a8d61e0440639124e8796d10701
+timeCreated: 1440324141
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: test_mob_01
-    21300002: test_mob_01_0
-    21300004: test_mob_01_1
-    21300006: test_mob_01_2
-    21300008: test_mob_01_3
-    21300010: test_mob_01_4
-    21300012: test_mob_01_5
-    21300014: test_mob_01_6
-    21300016: test_mob_01_7
-    21300018: test_mob_01_8
+    21300000: monster1_basic_0
+    21300002: monster1_basic_1
+    21300004: monster1_basic_2
+    21300006: monster1_basic_3
+    21300008: monster1_basic_4
+    21300010: monster1_basic_5
+    21300012: monster1_basic_6
+    21300014: monster1_basic_7
+    21300016: monster1_basic_8
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -39,7 +38,7 @@ TextureImporter:
   textureFormat: -1
   maxTextureSize: 2048
   textureSettings:
-    filterMode: -1
+    filterMode: 0
     aniso: 16
     mipBias: -1
     wrapMode: 1
@@ -52,14 +51,14 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: .5, y: .5}
-  spriteBorder: {x: 32, y: 0, z: 32, w: 0}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
   alphaIsTransparency: 1
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: test_mob_01_0
+    - name: monster1_basic_0
       rect:
         serializedVersion: 2
         x: 0
@@ -69,7 +68,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: test_mob_01_1
+    - name: monster1_basic_1
       rect:
         serializedVersion: 2
         x: 64
@@ -79,7 +78,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: test_mob_01_2
+    - name: monster1_basic_2
       rect:
         serializedVersion: 2
         x: 128
@@ -89,7 +88,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: test_mob_01_3
+    - name: monster1_basic_3
       rect:
         serializedVersion: 2
         x: 0
@@ -99,7 +98,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: test_mob_01_4
+    - name: monster1_basic_4
       rect:
         serializedVersion: 2
         x: 64
@@ -109,7 +108,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: test_mob_01_5
+    - name: monster1_basic_5
       rect:
         serializedVersion: 2
         x: 128
@@ -119,7 +118,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: test_mob_01_6
+    - name: monster1_basic_6
       rect:
         serializedVersion: 2
         x: 0
@@ -129,7 +128,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: test_mob_01_7
+    - name: monster1_basic_7
       rect:
         serializedVersion: 2
         x: 64
@@ -139,7 +138,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: test_mob_01_8
+    - name: monster1_basic_8
       rect:
         serializedVersion: 2
         x: 128
