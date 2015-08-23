@@ -9,6 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 475590}
   - 114: {fileID: 11479966}
+  - 114: {fileID: 11408724}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -28,6 +29,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &11408724
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 195130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc704c7cfaf40490b85e72def3f01b78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11479966
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -71,6 +83,11 @@ MonoBehaviour:
   startPosY: -50
   nbCol: 100
   nbRow: 100
+  trees:
+  - {fileID: 151010, guid: 98688faea174a4cdeac645791ab1c68a, type: 2}
+  - {fileID: 151010, guid: a7de2c0070b4e40c4aa4ad457b7b08d2, type: 2}
+  - {fileID: 151010, guid: fd6ebea74d86c4c9c88860c0c1d562bd, type: 2}
+  - {fileID: 151010, guid: 8386ccbca8e664fbdba9b50d4bcb6fb8, type: 2}
   buildingFactory: {fileID: 11472626, guid: cd3c7bfb491a343a6b3e596082081fec, type: 2}
   pnjFactory: {fileID: 11446474, guid: 05a3e03fb1d314b409aa6b74bfa8a4da, type: 2}
 --- !u!1001 &100100000
@@ -87,6 +104,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: roads.Array.size
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: trees.Array.size
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: roadsTri.Array.size
@@ -125,6 +146,26 @@ Prefab:
       value: 
       objectReference: {fileID: 11472626, guid: cd3c7bfb491a343a6b3e596082081fec,
         type: 2}
+    - target: {fileID: 0}
+      propertyPath: nbBuildings
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: trees.Array.data[0]
+      value: 
+      objectReference: {fileID: 160980, guid: 86f600b6c871d4912b27736035fbbf36, type: 2}
+    - target: {fileID: 0}
+      propertyPath: trees.Array.data[1]
+      value: 
+      objectReference: {fileID: 186054, guid: 75ec5369f58c04638b50707804348f36, type: 2}
+    - target: {fileID: 0}
+      propertyPath: trees.Array.data[2]
+      value: 
+      objectReference: {fileID: 170334, guid: 9bec3082ddb134342a4997d62d1bc8da, type: 2}
+    - target: {fileID: 0}
+      propertyPath: trees.Array.data[3]
+      value: 
+      objectReference: {fileID: 177444, guid: fd0347ef62c464781b0d2f374a53c1ff, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 195130}
