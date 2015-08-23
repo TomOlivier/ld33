@@ -43,6 +43,19 @@ function StartGame() {
 	}
 }
 
+function FindSubmittingPlayerFromDevice() : Player
+{
+	var idc : InputDevicesController = InputDevicesController.GetInstance();
+	var dev : CompatibleDevice = idc.GetCurrentlySubmittingDevice();
+
+	for (var pl:Player in players) {
+		if (pl.device != null && pl.device == dev) {
+			return (pl);
+		}
+	}
+	return null;
+}
+
 function GetPlayer(id: int) : Player
 {
 	return (players[id]);

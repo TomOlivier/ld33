@@ -6,6 +6,9 @@ class Player
 	public var character: Character;
 	public var playerPrefab: GameObject; // set to load correct display of player
 
+	// UI Vars
+	public var relatedSelectionBox: GameObject; // related char selection Player box on bottom
+
 	public var color: Color;
 	public var name: String;
 	public var uid: int;
