@@ -1607,6 +1607,48 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -7.62939453e-06}
   m_SizeDelta: {x: 0, y: -7.62939453e-06}
   m_Pivot: {x: 0, y: 1}
+--- !u!1001 &675551222
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 424294, guid: 43b331f8a236f47e48734d5fa7960f1d, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 424294, guid: 43b331f8a236f47e48734d5fa7960f1d, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 424294, guid: 43b331f8a236f47e48734d5fa7960f1d, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 424294, guid: 43b331f8a236f47e48734d5fa7960f1d, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 424294, guid: 43b331f8a236f47e48734d5fa7960f1d, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 424294, guid: 43b331f8a236f47e48734d5fa7960f1d, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -.707106829
+      objectReference: {fileID: 0}
+    - target: {fileID: 424294, guid: 43b331f8a236f47e48734d5fa7960f1d, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: .707106829
+      objectReference: {fileID: 0}
+    - target: {fileID: 424294, guid: 43b331f8a236f47e48734d5fa7960f1d, type: 2}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 43b331f8a236f47e48734d5fa7960f1d, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &682102562
 Prefab:
   m_ObjectHideFlags: 0
@@ -4481,6 +4523,7 @@ MonoBehaviour:
   characterSelection: {fileID: 1968652127}
   hudController: {fileID: 1795009469}
   uiGameover: {fileID: 333536824}
+  uiSoundPlayer: {fileID: 0}
 --- !u!114 &1540615767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5938,6 +5981,8 @@ MonoBehaviour:
   uiCharactersList: {fileID: 98319897}
   charEntryPrefab: {fileID: 104934, guid: c96d0e2e66ce92546b3188d0f592fe07, type: 2}
   playerEntryPrefab: {fileID: 196066, guid: 6a1983cd12cd4d24a9b9c41ebdece007, type: 2}
+  startBtn: {fileID: 0}
+  gameSetupUpdated: 0
 --- !u!95 &1968652128
 Animator:
   serializedVersion: 3
@@ -6029,11 +6074,13 @@ MonoBehaviour:
     prefab: {fileID: 142084, guid: f5decd1b58425c541b4643e4dde7dc68, type: 2}
     logoMini: {fileID: 21300000, guid: c61fe37eab25d4cc1abc6336882fd53e, type: 3}
     logoMedium: {fileID: 21300008, guid: c61fe37eab25d4cc1abc6336882fd53e, type: 3}
+    selectSound: {fileID: 0}
   - name: Oth Chr;
     uid: 1
     prefab: {fileID: 142084, guid: f5decd1b58425c541b4643e4dde7dc68, type: 2}
     logoMini: {fileID: 21300000, guid: 560d340c7e9bbaf43b84d808ae18fd27, type: 3}
     logoMedium: {fileID: 21300000, guid: 560d340c7e9bbaf43b84d808ae18fd27, type: 3}
+    selectSound: {fileID: 0}
   players:
   - controller: {fileID: 0}
     character:
@@ -6042,6 +6089,7 @@ MonoBehaviour:
       prefab: {fileID: 0}
       logoMini: {fileID: 0}
       logoMedium: {fileID: 0}
+      selectSound: {fileID: 0}
     playerPrefab: {fileID: 142084, guid: f5decd1b58425c541b4643e4dde7dc68, type: 2}
     relatedSelectionBox: {fileID: 0}
     color: {r: .669117689, g: .201719299, b: .201719299, a: 1}
@@ -6075,6 +6123,7 @@ MonoBehaviour:
       prefab: {fileID: 0}
       logoMini: {fileID: 0}
       logoMedium: {fileID: 0}
+      selectSound: {fileID: 0}
     playerPrefab: {fileID: 142084, guid: f5decd1b58425c541b4643e4dde7dc68, type: 2}
     relatedSelectionBox: {fileID: 0}
     color: {r: .134948075, g: .470588207, b: .2067056, a: 1}
@@ -6108,6 +6157,7 @@ MonoBehaviour:
       prefab: {fileID: 0}
       logoMini: {fileID: 0}
       logoMedium: {fileID: 0}
+      selectSound: {fileID: 0}
     playerPrefab: {fileID: 142084, guid: f5decd1b58425c541b4643e4dde7dc68, type: 2}
     relatedSelectionBox: {fileID: 0}
     color: {r: 0, g: .167900592, b: .566176474, a: 1}
@@ -6141,6 +6191,7 @@ MonoBehaviour:
       prefab: {fileID: 0}
       logoMini: {fileID: 0}
       logoMedium: {fileID: 0}
+      selectSound: {fileID: 0}
     playerPrefab: {fileID: 142084, guid: f5decd1b58425c541b4643e4dde7dc68, type: 2}
     relatedSelectionBox: {fileID: 0}
     color: {r: .772058845, g: .335446239, b: 0, a: 1}
