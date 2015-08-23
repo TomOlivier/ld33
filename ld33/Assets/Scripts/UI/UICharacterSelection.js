@@ -10,18 +10,49 @@ var playerEntryPrefab: GameObject;
 private var charOffset: Vector3;
 private var playerXOffset: float = 0.0f;
 
+private var anim : Animator;
+
+
 function Start () 
 {
-
+	anim = GetComponent(Animator);
 }
 
-function Update () {
-
+function Update () 
+{
+	if (anim.GetCurrentAnimatorStateInfo(0).IsName("StartFinished"))
+	{
+		gameObject.Find("Game").GetComponent(ControllerUI).OnPlayStartBtn();
+		gameObject.SetActive(false);
+		GameController.guiLock = false;
+	}
+	if (anim.GetCurrentAnimatorStateInfo(0).IsName("BackFinished"))
+	{
+		gameObject.Find("Game").GetComponent(ControllerUI).OnBackBtn();
+		gameObject.SetActive(false);
+		GameController.guiLock = false;
+	}
 }
 
 function UpdateCharactersList()
 {
 
+}
+
+function BeginBackAnim()
+{
+	if (GameController.guiLock)
+		return ;
+	anim.Play("Back");
+	GameController.guiLock = true;
+}
+
+function BeginStartAnim()
+{
+	if (GameController.guiLock)
+		return ;
+	anim.Play("Start");	
+	GameController.guiLock = true;
 }
 
 function SelectCharacterForPlayer(charc: Character, pl: Player)

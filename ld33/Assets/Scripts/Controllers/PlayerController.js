@@ -80,9 +80,9 @@ function OnTriggerEnter2D(collider : Collider2D) {
 	if (!collider.gameObject.tag.Equals("Building") && !collider.gameObject.tag.Equals("Player")) {
 		return;
 	}
-	if (ArrayUtility.Contains(touchedUnits.ToBuiltin(GameObject), collider.gameObject)) {
+	/*if (ArrayUtility.Contains(touchedUnits.ToBuiltin(GameObject), collider.gameObject)) {
 		return;
-	}
+	}*/
 	touchedUnits.Add(collider.gameObject);
 	//Debug.Log("canHit: " + collider.gameObject.tag);
 	//Debug.Log("touchedUnits: " + touchedUnits);
