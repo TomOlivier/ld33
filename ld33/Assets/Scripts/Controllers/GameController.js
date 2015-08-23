@@ -5,8 +5,15 @@ var nextState: GameState = GameState.NONE;
 var playersManager : PlayersManager;
 var generator : GameManager;
 
+var timeLeft: float;
+var timeLeftDef: float = 90.00f;
+
 function Start () {
 
+}
+
+function ResetGameConditions() {
+	timeLeft = timeLeftDef;
 }
 
 function Update () {
@@ -27,9 +34,18 @@ function Update () {
 			Debug.Log("Game state LOAD completed");
 			break;
 		case GameState.PLAY_LOADING:
+			ResetGameConditions();
 			playersManager.StartGame();
 			generator.Generate();
+			BroadcastMessage("UIEventGameStart");
 			nextState = GameState.PLAYING;
+			break;
+		case GameState.PLAYING:
+			timeLeft -= Time.deltaTime;
+			if (timeLeft <= 0.0f)
+			{
+				nextState = GameState.GAME_OVER;
+			}
 			break;
 		default:
 			break;

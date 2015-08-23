@@ -33,6 +33,7 @@ function StartGame() {
 	
 	for (var pl:Player in players) {
 		if (pl.isActive && pl.playerInstance == null) {
+			pl.GameReset();
 			Debug.Log("new Player");
 			var randomIndex : int = Random.Range(0, spawnPositionsCopy.Count);
 			var randomSpawn : Vector2 = spawnPositionsCopy[randomIndex];
