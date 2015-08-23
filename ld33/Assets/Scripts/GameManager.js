@@ -32,16 +32,20 @@ private var roadList : int[,];
 private var buildingList : int[,];
 private var tmpRotate : int;
 
+public var generationStateComplete : boolean = false;
+
 function Start() {
 
 }
 
-function Generate () {
+function Generate () : System.Collections.IEnumerator {
 
 	var toInstantiate : GameObject;
 	var instance : GameObject;
 	var i : int;
 	var j : int;
+
+	generationStateComplete = false;
 
 	roadList = new int [nbCol, nbRow];
 	buildingList = new int [nbCol, nbRow];
@@ -53,6 +57,7 @@ function Generate () {
 		}
 	}
 
+	yield;
 
 	boardHolder = new GameObject ("Board").transform;
 
@@ -65,6 +70,8 @@ function Generate () {
 		}
 	}
 
+	yield;
+
 	//Road initialization
 
 	for (i = startPosX; i < nbCol + startPosX; i++) {
@@ -74,13 +81,22 @@ function Generate () {
 		roadList[i - startPosX, 1 - startPosY] = 1;
 	}
 
+	yield;
+
 	for (j = startPosY; j < nbRow + startPosY; j++) {
 		roadList[1 - startPosX, j - startPosY] = 1;
 		roadList[-1 - startPosX, j - startPosY] = 1;
 	}
 
+	yield;
+
 	cleanRoads();
+	
+	yield;
+
 	buildRoads();
+
+	yield;
 
 	var posX : int;
 	var posY : int;
@@ -90,8 +106,8 @@ function Generate () {
 	for (i = 0; i < nbBuildings; i++) {
 		var evenNumber : int = Random.Range(0,6)/2 +1;
 
-		posX = Random.Range(1, nbCol -1) + startPosX;
-		posY = Random.Range(1, nbRow -1) + startPosY;
+		posX = Random.Range(1, nbCol - 1) + startPosX;
+		posY = Random.Range(1, nbRow - 1) + startPosY;
 		width = evenNumber;
 		height = Random.Range(2,5);
 
@@ -104,23 +120,25 @@ function Generate () {
 			i--;
 			continue;
 		}
-
 		
 	};
 	for (i = 0; i < nbPNJScared; i++) {
 		pnjFactory.generatePNJScared(Random.Range(startPosX, nbCol + startPosX), Random.Range(startPosX, nbCol + startPosX));
 	}
 
+	yield;
 
 	for (i = 0; i < nbTree; i++) {
 		generateTree(startPosX + Random.Range(0, (nbCol)*100) / 100f, startPosY + Random.Range(0, (nbRow)*100) / 100f);
 	};
 
+	yield;
+
 	for (i = 0; i < nbForest; i++) {
 		generateForest(startPosX + Random.Range(0, (nbCol)*100) / 100f, startPosY + Random.Range(0, (nbRow)*100) / 100f, Random.Range(5,16));
 	};
 
-
+	yield;
 
 	//Génération des limites
 
@@ -139,6 +157,10 @@ function Generate () {
     instance = Instantiate (limitGameObject, new Vector3 (startPosX -1f , 0f, 0f), Quaternion.identity) as GameObject;
 	instance.transform.localScale = new Vector3(1f, 1f + nbRow, 1f);
     instance.transform.SetParent (boardHolder);
+
+    generationStateComplete = true;
+
+    yield;
 
 }
 
@@ -355,15 +377,15 @@ function buildRoads() {
 	var i : int;
 	var j : int;
 
-	var str : String;
+	// var str : String;
 
-	for ( i = startPosX; i < nbCol + startPosX; i++) {
-		for (j = startPosY; j < nbRow + startPosY; j++){
-			str += roadList[i - startPosX,j -startPosY] + ",";
-		}
-		Debug.Log(str);
-		str = "";
-	}
+	// for ( i = startPosX; i < nbCol + startPosX; i++) {
+		// for (j = startPosY; j < nbRow + startPosY; j++){
+			// str += roadList[i - startPosX,j -startPosY] + ",";
+		// }
+		// Debug.Log(str);
+		// str = "";
+	// }
 
 	for ( i = startPosX; i < nbCol + startPosX; i++) {
 		for (j = startPosY; j < nbRow + startPosY; j++){

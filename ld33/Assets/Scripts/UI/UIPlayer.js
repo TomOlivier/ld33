@@ -60,6 +60,9 @@ function RefreshCharacter()
 }
 
 function OnPlayerTypeClick() {
+	if (GameController.guiLock)
+		return ;
+
 	Debug.Log("Type change");
 	if (!player.isIA)
 	{
@@ -95,6 +98,8 @@ function ClearPlayerControllerDevice()
 }
 
 function OnPlayerInputTypeClick() {
+	if (GameController.guiLock)
+		return ;
 
 	var idc : InputDevicesController = InputDevicesController.GetInstance();
 	var getkb = (player.device == null || player.device.isJoystick);
