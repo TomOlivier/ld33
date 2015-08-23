@@ -5,7 +5,7 @@ import Physics2D;
 
 public var maxSpeed : int = 3;
 public var panicSpeedBoost : int = 3;
-public var panicDuration : float = 2;
+public var panicDuration : float = 1.5;
 public var timeBeforeChangeDecision : float = 2;
 public var pnjRenderers : Renderer[];
 
@@ -50,7 +50,7 @@ function Update () {
 	//distanceDone += calculatedSpeed * Time.deltaTime;
 	//transform.Translate(Vector3.forward * Time.deltaTime * (currentSpeed + (isPanicking ? panicSpeedBoost : 0)));
 	//transform.localPosition += transform.up * Time.deltaTime * (currentSpeed + (isPanicking ? panicSpeedBoost : 0));
-	if (Vector2.Distance(transform.position,targetPosition) <= 0.1) {
+	if (Vector2.Distance(transform.position,targetPosition) <= 0.2) {
 		AcquireNewTargetPosition();
 	}
 	
@@ -95,7 +95,7 @@ function startPanicking(delayPanic:float) {
 				pnjScared.delayBeforePanic = delayPanic * realDistance;
 			}
 			
-			rc.gameObject.GetComponent.<PNJScaredAI>().panicTimeLeft = 3;
+			rc.gameObject.GetComponent.<PNJScaredAI>().panicTimeLeft = panicDuration;
 		}
 	}
 }
