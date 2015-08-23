@@ -39,14 +39,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8eadbaafededa04e931b5d38a637753, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabPNJScared: {fileID: 180130, guid: d8bc6b5da9e98a443808e05577bd8dd5, type: 2}
+  prefabPNJScared:
+  - {fileID: 180130, guid: 43b331f8a236f47e48734d5fa7960f1d, type: 2}
+  - {fileID: 180130, guid: d61991465f65d40a39c45734f3dce70b, type: 2}
+  - {fileID: 180130, guid: e5f0d5c0c815d4504be9b73b55b1b1b8, type: 2}
+  - {fileID: 180130, guid: 51879b0fc14a141a19a7c8791ddee90e, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: prefabPNJScared.Array.size
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 137014}
