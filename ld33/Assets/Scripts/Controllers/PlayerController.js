@@ -36,7 +36,7 @@ function Update () {
 		rb.velocity = Vector2 (moveX * speed, moveY * speed) + pushedVector;
 
 		var rot_z:float = Mathf.Atan2(moveY, moveX) * Mathf.Rad2Deg;
-         transform.rotation = Quaternion.Euler(0f, 0f, rot_z - 90f);
+         transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, rot_z - 90f);
 	
 	var isHitting : boolean = Input.GetMouseButtonDown (0);
 	if (isHitting) {
@@ -70,7 +70,7 @@ function OnTriggerExit2D(collider : Collider2D) {
 }
 
 function OnCollisionEnter2D(collision : Collision2D) {
-	if (collision.collider.isTrigger || collision.gameObject.tag != "PNJScared") {
+	if (collision.gameObject.tag != "PNJScared") {
 		return;
 	}
 	collision.gameObject.SendMessage ("Die");
