@@ -29,11 +29,11 @@ function InsertCharacter(charc: Character)
 	var obj: GameObject = Instantiate(charEntryPrefab);
 
 	obj.transform.parent = uiCharactersList.transform;
-	obj.transform.localPosition = charOffset;
+	obj.transform.localPosition = charOffset + new Vector2(0, 80.0f);
 	obj.GetComponent(UICharacter).character = charc;
 	obj.GetComponent(UICharacter).characterSelection = this;
 	obj.GetComponent(UICharacter).RefreshCharacter();
-	charOffset.x += charEntryPrefab.GetComponent(RectTransform).rect.width;
+	charOffset.x += charEntryPrefab.GetComponent(RectTransform).rect.width + 5;
 }
 
 function InsertPlayer(player: Player)

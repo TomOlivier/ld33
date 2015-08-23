@@ -26,6 +26,7 @@ function Update () {
 			Debug.Log("Game state LOAD completed");
 			break;
 		case GameState.PLAY_LOADING:
+			playersManager.StartGame();
 			nextState = GameState.PLAYING;
 			break;
 		default:
