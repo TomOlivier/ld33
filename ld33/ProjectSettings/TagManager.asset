@@ -8,6 +8,8 @@ TagManager:
   - PNJScared
   - New Tag
   - Tree
+  - building_top
+  - building_bot
   layers:
   - Default
   - TransparentFX
