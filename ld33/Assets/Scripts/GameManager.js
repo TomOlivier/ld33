@@ -6,8 +6,12 @@ public var roadsTurning : GameObject [];
 public var roadsTri : GameObject [];
 public var roadsCross : GameObject [];
 
+public var limitGameObject : GameObject ;
+
 public var nbBuildings : int = 50;
 public var nbPNJScared : int = 100;
+public var nbTree : int;
+public var nbForest : int;
 
 public var grass : GameObject [];
 
@@ -25,6 +29,7 @@ public var pnjFactory : PNJFactory;
 private var boardHolder : Transform;
 
 private var roadList : int[,];
+private var buildingList : int[,];
 private var tmpRotate : int;
 
 function Start() {
@@ -39,6 +44,7 @@ function Generate () {
 	var j : int;
 
 	roadList = new int [nbCol, nbRow];
+	buildingList = new int [nbCol, nbRow];
 	//Init road list avec random
 	for ( i = startPosX; i < nbCol + startPosX; i++) {
 		for (j = startPosY; j < nbRow + startPosY; j++){
@@ -76,26 +82,89 @@ function Generate () {
 	cleanRoads();
 	buildRoads();
 
+	var posX : int;
+	var posY : int;
+	var width : int;
+	var height : int;
 
 	for (i = 0; i < nbBuildings; i++) {
 		var evenNumber : int = Random.Range(0,6)/2 +1;
 
-		buildingFactory.generateBuilding(Random.Range(startPosX, nbCol + startPosX), Random.Range(startPosY, nbRow + startPosY), evenNumber, Random.Range(2,5));
+		posX = Random.Range(1, nbCol -1) + startPosX;
+		posY = Random.Range(1, nbRow -1) + startPosY;
+		width = evenNumber;
+		height = Random.Range(2,5);
+
+		//si on peut placer le building (ie : endroit vide), on le place. Sinon on reesaye
+		if(canPlaceBuilding(posX, posY, width)){
+			buildingFactory.generateBuilding(posX, posY, width, height);
+		}
+		else
+		{
+			i--;
+			continue;
+		}
+
+		
 	};
 	for (i = 0; i < nbPNJScared; i++) {
 		pnjFactory.generatePNJScared(Random.Range(startPosX, nbCol + startPosX), Random.Range(startPosX, nbCol + startPosX));
 	}
 
 
-	for (i = 0; i < 1000; i++) {
+	for (i = 0; i < nbTree; i++) {
 		generateTree(startPosX + Random.Range(0, (nbCol)*100) / 100f, startPosY + Random.Range(0, (nbRow)*100) / 100f);
 	};
 
-	for (i = 0; i < 100; i++) {
+	for (i = 0; i < nbForest; i++) {
 		generateForest(startPosX + Random.Range(0, (nbCol)*100) / 100f, startPosY + Random.Range(0, (nbRow)*100) / 100f, Random.Range(5,16));
 	};
+
+
+
+	//Génération des limites
+
+	instance = Instantiate (limitGameObject, new Vector3 (0f, nbRow + startPosY, 0f), Quaternion.identity) as GameObject;
+	instance.transform.localScale = new Vector3(1f + nbCol, 1f, 1f);
+    instance.transform.SetParent (boardHolder);
+
+    instance = Instantiate (limitGameObject, new Vector3 (0f, startPosY -1f, 0f), Quaternion.identity) as GameObject;
+	instance.transform.localScale = new Vector3(1f + nbCol, 1f, 1f);
+    instance.transform.SetParent (boardHolder);
+
+    instance = Instantiate (limitGameObject, new Vector3 (nbCol + startPosX, 0f, 0f), Quaternion.identity) as GameObject;
+	instance.transform.localScale = new Vector3(1f, 1f + nbRow, 1f);
+    instance.transform.SetParent (boardHolder);
+
+    instance = Instantiate (limitGameObject, new Vector3 (startPosX -1f , 0f, 0f), Quaternion.identity) as GameObject;
+	instance.transform.localScale = new Vector3(1f, 1f + nbRow, 1f);
+    instance.transform.SetParent (boardHolder);
+
 }
 
+
+function canPlaceBuilding(x: int, y: int, width: int) : int{
+
+	var i : int = 0;
+	var xShift : int = x - startPosX;
+	var yShift : int = y - startPosY;
+
+	if(xShift + width >= nbCol -1)
+		return 0;
+
+	for (i = 0; i < width; i++) {
+		if(buildingList[xShift + i, yShift] || roadList[xShift + i, yShift])
+			return 0;
+	};
+
+
+	for (i = 0; i < width; i++) {
+		buildingList[xShift + i, yShift] = 1;
+	};
+
+
+	return 1;
+}
 
 function generateTree(x: float, y: float){
 	var instance : GameObject;

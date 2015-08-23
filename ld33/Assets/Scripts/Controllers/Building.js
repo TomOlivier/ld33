@@ -17,7 +17,15 @@ private var rb2D : Rigidbody2D;
 
 public var subBuilding : GameObject;
 
+public var lifeDef : float = 0; // if lifeDef == 0; lifeDef = height * 50;
+
+private var currentLife : float = 10;
+
 function Start () {
+	if (lifeDef == 0)
+		lifeDef = height * 50;
+	
+	currentLife = lifeDef;
 	spriteRenderer = GetComponent.<SpriteRenderer> ();
 	boxCollider = GetComponent.<BoxCollider2D> ();
 	rb2D = GetComponent.<Rigidbody2D>();
@@ -92,7 +100,6 @@ function Start () {
 
 }
 
-
 function calculate() {
 
 
@@ -102,4 +109,14 @@ function calculate() {
 
 function Update () {
 
+}
+
+function GetDamaged(damage:float) {
+	Debug.Log("life : " + currentLife + " ; damage : " + damage);
+	currentLife -= damage;
+	if (currentLife < 0)
+		this.gameObject.GetComponent.<Hittable>().Die();
+	else {
+		this.gameObject.GetComponent.<Hittable>().GetHit(damage);
+	}
 }

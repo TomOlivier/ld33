@@ -41,10 +41,10 @@ function Update () {
 		numberOfPushesLeft--;
 	}
 	//Debug.Log(rb.velocity);
-		rb.velocity = Vector2 (moveX * speed, moveY * speed) + pushedVector;
+	rb.velocity = Vector2 (moveX * speed, moveY * speed) + pushedVector;
 
 	if ((moveX != 0 || moveY != 0) && true) { // TODO: check if there's no pause / gui display
-		var rot_z:float = Mathf.Atan2(moveX, moveY) * Mathf.Rad2Deg;
+		var rot_z:float = Mathf.Atan2(moveX, -moveY) * Mathf.Rad2Deg; // - moveY because we did shit with cameras
     	transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, rot_z - 90f);
 	}
 	rb.angularVelocity = 0;
@@ -66,7 +66,7 @@ function Update () {
 				} else {
 					if (objectToHit.tag == "Player") {
 						this.Push(objectToHit);
-					} else {
+					} else if (objectToHit.tag == "Building") {
 						this.AttackBuilding(objectToHit);
 					}
 				}
@@ -77,37 +77,38 @@ function Update () {
 }
 
 function OnTriggerEnter2D(collider : Collider2D) {
-	if (collider.gameObject == gameObject || (collider.gameObject.tag != "Player" == false && collider.gameObject.tag != "Building")) {
+	if (!collider.gameObject.tag.Equals("Building") && !collider.gameObject.tag.Equals("Player")) {
 		return;
 	}
 	/*if (ArrayUtility.Contains(touchedUnits.ToBuiltin(GameObject), collider.gameObject)) {
 		return;
 	}*/
 	touchedUnits.Add(collider.gameObject);
-	Debug.Log("canHit: " + collider.gameObject.tag);
-	Debug.Log("touchedUnits: " + touchedUnits);
+	//Debug.Log("canHit: " + collider.gameObject.tag);
+	//Debug.Log("touchedUnits: " + touchedUnits);
 }
 function OnTriggerExit2D(collider : Collider2D) {
-	if (collider.gameObject.tag != "Player" == false && collider.gameObject.tag != "Building") {
+	if (!collider.gameObject.tag.Equals("Building") && !collider.gameObject.tag.Equals("Player")) {
 		return;
 	}
-	Debug.Log("cantHit: " + collider.gameObject.tag);
+	//Debug.Log("cantHit: " + collider.gameObject.tag);
 	for (var i = 0; i < touchedUnits.Count; i++) {
 		if (touchedUnits[i] == collider.gameObject) {
-			Debug.Log("removed 1 at index: " + i);
+			//Debug.Log("removed 1 at index: " + i);
 			touchedUnits.RemoveAt(i);
 			break;
 		}
 	}
-	Debug.Log(this.gameObject + "touchedUnits : " + touchedUnits);
+	//Debug.Log(this.gameObject + "touchedUnits : " + touchedUnits);
 }
 
 function OnCollisionEnter2D(collision : Collision2D) {
-	if (collision.gameObject.tag.Equals("PNJScared") == false) {
-		return;
+	if (collision.gameObject.tag.Equals("PNJScared") || collision.gameObject.tag.Equals("Tree")) {
+		Debug.Log("collision : tag : "  + collision.gameObject.tag);
+
+		collision.gameObject.GetComponent.<Hittable>().Die();
+		Destroy(collision.gameObject);
 	}
-	collision.gameObject.GetComponent.<Hittable>().Die();
-	Destroy(collision.gameObject);
 }
 
 
@@ -125,5 +126,5 @@ function Push(playerToPush:GameObject) {
 }
 
 function AttackBuilding(buildingToHit:GameObject) {
-	buildingToHit.GetComponent.<Hittable>().GetHit(this.pushStrength);
+	buildingToHit.GetComponent.<Building>().GetDamaged(this.pushStrength);
 }

@@ -92,6 +92,7 @@ MonoBehaviour:
   height: 0
   width: 0
   subBuilding: {fileID: 199522, guid: 5ca8dee622e064e638e8e1dbd5f1abb8, type: 2}
+  lifeDef: 0
 --- !u!114 &11457724
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -127,6 +128,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Constraints
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: lifeDef
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
