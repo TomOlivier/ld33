@@ -20,6 +20,8 @@ function Start () {
 }
 
 function Update () {
+	var inputDevicesController : InputDevicesController = InputDevicesController.GetInstance();
+	
 	var moveX : float = Input.GetAxis ("Horizontal");
 	var moveY : float = -Input.GetAxis ("Vertical");
 	var rb : Rigidbody2D = GetComponent.<Rigidbody2D>();
