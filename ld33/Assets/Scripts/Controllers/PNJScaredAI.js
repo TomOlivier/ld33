@@ -127,14 +127,13 @@ function setNewTargetLocalPosition(localPTarget:Vector3) {
 function OnTriggerEnter2D(collider : Collider2D) {
 	if (collider.gameObject.tag.Equals("Building") || collider.gameObject.tag.Equals("Border")) {
 		//print("PNJ: OnTriggerEnter2D building");
-		if (decisionTimer >= timeBeforeChangeDecision) {
-			if (this.IsPanicking()) { // not a lot of chance to reevaluate route when seeing a building
-				AcquireNewTargetPosition();// TODO: straight to building
+		//if (decisionTimer >= timeBeforeChangeDecision) {
+			if (isPanicking) { // not a lot of chance to reevaluate route when seeing a building
+				//AcquireNewTargetPosition();// TODO: straight to building
 			} else {
-				setNewTargetLocalPosition(-localTargetPosition);
+				setNewTargetLocalPosition(-localTargetPosition); // try to avoid
 			}
-			//decisionTimer = 0;
-		}
+		//}
 	}
 }
 

@@ -117,17 +117,21 @@ function GetDamaged(damage:float) {
 	var curLifeIndex : int = currentLife/(height * width) + width;
 	var nextLifeIndex : int = (currentLife-damage)/(height * width);
 
-
+	
+	currentLife -= damage;
+	
 	//si on doit perdre un étage
 	if(nextLifeIndex < curLifeIndex)
 	{
-		Debug.Log("nbPNJToSpawn : " + nbPNJScared);
-		while (nbPNJScared > 0) {
+		var npcToSpawn = nbPNJScared * (1 - currentLife / lifeDef);
+		Debug.Log("nbPNJToSpawn : " + npcToSpawn);
+		while (npcToSpawn > 0) {
 			var toSpawnLocalPosition : Vector2 = Random.insideUnitCircle * width / 2;
-			toSpawnLocalPosition.x += width / 2;
-			toSpawnLocalPosition.y = Random.value >= 0.5 ? 1 : 0;
+			toSpawnLocalPosition.x += Random.value >= 0.5 ? 1.5 : -1.5;
+			toSpawnLocalPosition.y += width / 2;
 			Instantiate(pnjPrefab, this.transform.TransformPoint(toSpawnLocalPosition), Quaternion.identity);
 			nbPNJScared--;
+			npcToSpawn--;
 		}
 
 		// Debug.Log("idjfosdf : " + (curLifeIndex - nextLifeIndex));
@@ -137,7 +141,6 @@ function GetDamaged(damage:float) {
 		
 	}
 
-	currentLife -= damage;
 	if (currentLife < 0)
 		this.gameObject.GetComponent.<Hittable>().Die();
 	else {
@@ -185,6 +188,7 @@ function removeSubBuilding() {
 
 function OnCollisionEnter2D(collision : Collision2D) {
 	if (collision.gameObject.tag.Equals("PNJScared")) {
+		Debug.Log("npc entered");
 		nbPNJScared++;
 	}
 }

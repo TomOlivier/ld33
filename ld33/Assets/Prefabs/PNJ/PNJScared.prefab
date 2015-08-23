@@ -41,10 +41,10 @@ GameObject:
   m_Component:
   - 4: {fileID: 424294}
   - 58: {fileID: 5830468}
-  - 61: {fileID: 6114138}
   - 114: {fileID: 11488822}
   - 114: {fileID: 11483478}
   - 50: {fileID: 5012456}
+  - 58: {fileID: 5833324}
   m_Layer: 11
   m_Name: PNJScared
   m_TagString: PNJScared
@@ -119,19 +119,19 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: .5
---- !u!61 &6114138
-BoxCollider2D:
+--- !u!58 &5833324
+CircleCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 180130}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: .5}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Radius: .5
 --- !u!114 &11483478
 MonoBehaviour:
   m_ObjectHideFlags: 1
