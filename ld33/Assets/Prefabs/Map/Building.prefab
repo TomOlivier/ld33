@@ -83,6 +83,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aef130e31e4724baebe2daed56ebbb47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pnjPrefab: {fileID: 180130, guid: d8bc6b5da9e98a443808e05577bd8dd5, type: 2}
   bottomLeft: {fileID: 0}
   bottomMiddle: {fileID: 0}
   bottomInterMiddle: {fileID: 0}
