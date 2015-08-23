@@ -22,8 +22,8 @@ function Start () {
 function Update () {
 	var inputDevicesController : InputDevicesController = InputDevicesController.GetInstance();
 	
-	var moveX : float = Input.GetAxis ("Horizontal");
-	var moveY : float = -Input.GetAxis ("Vertical");
+	var moveX : float = inputDevicesController.GetAxisForDevice("Horizontal", playerInfo.device);
+	var moveY : float = -inputDevicesController.GetAxisForDevice("Vertical", playerInfo.device);
 	var rb : Rigidbody2D = GetComponent.<Rigidbody2D>();
 	if (numberOfPushesLeft >= 0) {
 		if (numberOfPushesLeft == 0) {
@@ -51,14 +51,14 @@ function Update () {
 }
 
 function OnTriggerEnter2D(collider : Collider2D) {
-	if (collider.isTrigger) {
+	if (collider.gameObject.tag.Equals("Player") == false) {
 		return;
 	}
 	touchedUnits.Push(collider.gameObject);
 	Debug.Log(this.gameObject + " canHit : " + touchedUnits);
 }
 function OnTriggerExit2D(collider : Collider2D) {
-	if (collider.isTrigger) {
+	if (collider.gameObject.tag.Equals("Player") == false) {
 		return;
 	}
 	Debug.Log("canHit");
@@ -72,7 +72,7 @@ function OnTriggerExit2D(collider : Collider2D) {
 }
 
 function OnCollisionEnter2D(collision : Collision2D) {
-	if (collision.gameObject.tag != "PNJScared") {
+	if (collision.gameObject.tag.Equals("PNJScared") == false) {
 		return;
 	}
 	collision.gameObject.SendMessage ("Die");
