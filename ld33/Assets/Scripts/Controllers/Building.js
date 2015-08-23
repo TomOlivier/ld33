@@ -25,13 +25,18 @@ function Start () {
 
 	boxCollider.offset = new Vector2((width-1)/2f, (height-1)/2f);
 	boxCollider.size = new Vector2(width,height);
+	
+	boxCollider.offset = new Vector2(-(width-1)/2f, 0);
+	boxCollider.size = new Vector2(width,1);
 
 
 	//Peuple les sprites
 	var s_building : GameObject;
-
-	s_building = Instantiate (bottomLeft, new Vector3 (this.transform.position.x, this.transform.position.y, 0f), Quaternion.identity) as GameObject;
-	s_building.transform.SetParent(this.transform);
+	var root_asset_building = GameObject();
+	root_asset_building.transform.SetParent(this.transform);
+	s_building = Instantiate (bottomLeft, new Vector3 (root_asset_building.transform.position.x, root_asset_building.transform.position.y, 0f), Quaternion.identity) as GameObject;
+	s_building.transform.SetParent(root_asset_building.transform);
+	root_asset_building.transform.localPosition = Vector3(0,0,0);
 
 	//création des sprites du milieu
 	var i : int;
@@ -45,8 +50,8 @@ function Start () {
 
 		for(j = 1 ; j < height ; j++){
 
-			s_building = Instantiate (middleMiddle, new Vector3 (this.transform.position.x + i, this.transform.position.y + j, 0f), Quaternion.identity) as GameObject;
-			s_building.transform.SetParent(this.transform);
+			s_building = Instantiate (middleMiddle, new Vector3 (root_asset_building.transform.position.x + i, root_asset_building.transform.position.y + j, 0f), Quaternion.identity) as GameObject;
+			s_building.transform.SetParent(root_asset_building.transform);
 		}
 
 
@@ -57,32 +62,32 @@ function Start () {
 
 		if(i == doorX)
 			continue;
-		s_building = Instantiate (bottomInterMiddle, new Vector3 (this.transform.position.x + i, this.transform.position.y, 0f), Quaternion.identity) as GameObject;
-		s_building.transform.SetParent(this.transform);
+		s_building = Instantiate (bottomInterMiddle, new Vector3 (root_asset_building.transform.position.x + i, root_asset_building.transform.position.y, 0f), Quaternion.identity) as GameObject;
+		s_building.transform.SetParent(root_asset_building.transform);
 	}
 
 	for(j = 1 ; j < height ; j++){
 
-		s_building = Instantiate (middleLeft, new Vector3 (this.transform.position.x, this.transform.position.y + j, 0f), Quaternion.identity) as GameObject;
-		s_building.transform.SetParent(this.transform);
+		s_building = Instantiate (middleLeft, new Vector3 (root_asset_building.transform.position.x, root_asset_building.transform.position.y + j, 0f), Quaternion.identity) as GameObject;
+		s_building.transform.SetParent(root_asset_building.transform);
 
-		s_building = Instantiate (middleLeft, new Vector3 (this.transform.position.x + width -1, this.transform.position.y + j, 0f), Quaternion.identity) as GameObject;
-		s_building.transform.SetParent(this.transform);
+		s_building = Instantiate (middleLeft, new Vector3 (root_asset_building.transform.position.x + width -1, root_asset_building.transform.position.y + j, 0f), Quaternion.identity) as GameObject;
+		s_building.transform.SetParent(root_asset_building.transform);
 
 	}
 
 	for (i = 0; i < width; i++) {
-		s_building = Instantiate (top, new Vector3 (this.transform.position.x + i, this.transform.position.y + height - 0.49f, 0f), Quaternion.identity) as GameObject;
-		s_building.transform.SetParent(this.transform);
+		s_building = Instantiate (top, new Vector3 (root_asset_building.transform.position.x + i, root_asset_building.transform.position.y + height - 0.49f, 0f), Quaternion.identity) as GameObject;
+		s_building.transform.SetParent(root_asset_building.transform);
 		s_building.transform.Rotate(new Vector3(90f,0f,0f));
 	}
 
 
-	s_building = Instantiate (bottomMiddle, new Vector3 (this.transform.position.x + doorX, this.transform.position.y, 0f), Quaternion.identity) as GameObject;
-	s_building.transform.SetParent(this.transform);
+	s_building = Instantiate (bottomMiddle, new Vector3 (root_asset_building.transform.position.x + doorX, root_asset_building.transform.position.y, 0f), Quaternion.identity) as GameObject;
+	s_building.transform.SetParent(root_asset_building.transform);
 
-	this.transform.Rotate(new Vector3(270f,180f,0f));
-	this.transform.position.z = 0.5f;
+	root_asset_building.transform.Rotate(new Vector3(270f,180f,0f));
+	root_asset_building.transform.position.z = 0.5f;
 
 
 }
