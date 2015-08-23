@@ -101,7 +101,7 @@ function generateTree(x: float, y: float){
 	var instance : GameObject;
 	var toInstantiate : GameObject = trees[Random.Range (0,trees.Length)];
 	instance = Instantiate (toInstantiate, new Vector3 (x, y, 0.5f), Quaternion.identity) as GameObject;
-	instance.transform.Rotate(new Vector3(250f,1,0));
+	instance.transform.Rotate(new Vector3(290f,180f,0));
 	instance.transform.localScale = new Vector3(0.5f,1f,1f);
     instance.transform.SetParent (boardHolder);
 
