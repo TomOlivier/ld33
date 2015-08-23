@@ -21,7 +21,11 @@ private var boardHolder : Transform;
 private var roadList : int[,];
 private var tmpRotate : int;
 
-function Start () {
+function Start() {
+
+}
+
+function Generate () {
 
 	var toInstantiate : GameObject;
 	var instance : GameObject;

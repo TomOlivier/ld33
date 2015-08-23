@@ -75,7 +75,7 @@ class InputDevicesController
 
     public function UnassignDeviceFromPlayer(dev : CompatibleDevice, player : Player)
     {
-    	if (dev != null)
+    	if (dev != null && player != null)
     	{
     		dev.isUsed = false;
     		player.device = null;
@@ -111,5 +111,14 @@ class InputDevicesController
         	devicesCount++;
         	Debug.Log("Controller: " + js + " functionnal");
         }
+    }
+
+    public function DebugDevices() 
+    {
+    	Debug.Log("Devstate--------------");
+    	for (var dev : CompatibleDevice in devices)
+    	{
+    		Debug.Log(dev + " isused=" + dev.isUsed + " name=" + dev.name);
+    	}
     }
 }
