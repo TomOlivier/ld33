@@ -35,7 +35,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 195130}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fc704c7cfaf40490b85e72def3f01b78, type: 3}
   m_Name: 
@@ -64,7 +64,7 @@ MonoBehaviour:
   roadsCross:
   - {fileID: 136662, guid: fdc49b0cdb67941689c66e7086663f7f, type: 2}
   - {fileID: 139998, guid: 70b1e9fcf06c14e79b59732aca162baf, type: 2}
-  nbBuildings: 20
+  nbBuildings: 300
   nbPNJScared: 100
   grass:
   - {fileID: 154748, guid: 0c8897bf573b546f399b4ca52d8e2e32, type: 2}
@@ -79,10 +79,10 @@ MonoBehaviour:
   - {fileID: 179114, guid: fe711852adfbe401da59680525ab977c, type: 2}
   - {fileID: 178580, guid: 395b511d69d2346239055c7061bd0fd9, type: 2}
   - {fileID: 153580, guid: 91375be61f77f4bb184897b50fff16f3, type: 2}
-  startPosX: -50
-  startPosY: -50
-  nbCol: 100
-  nbRow: 100
+  startPosX: -25
+  startPosY: -25
+  nbCol: 50
+  nbRow: 50
   trees:
   - {fileID: 151010, guid: 98688faea174a4cdeac645791ab1c68a, type: 2}
   - {fileID: 151010, guid: a7de2c0070b4e40c4aa4ad457b7b08d2, type: 2}
@@ -127,19 +127,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: startPosX
-      value: -50
+      value: -25
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: startPosY
-      value: -50
+      value: -25
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: nbCol
-      value: 100
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: nbRow
-      value: 100
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: buildingFactory
@@ -148,7 +148,7 @@ Prefab:
         type: 2}
     - target: {fileID: 0}
       propertyPath: nbBuildings
-      value: 100
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: trees.Array.data[0]
@@ -166,6 +166,10 @@ Prefab:
       propertyPath: trees.Array.data[3]
       value: 
       objectReference: {fileID: 177444, guid: fd0347ef62c464781b0d2f374a53c1ff, type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 195130}

@@ -25,6 +25,7 @@ public var pnjFactory : PNJFactory;
 private var boardHolder : Transform;
 
 private var roadList : int[,];
+private var buildingList : int[,];
 private var tmpRotate : int;
 
 function Start() {
@@ -39,6 +40,7 @@ function Generate () {
 	var j : int;
 
 	roadList = new int [nbCol, nbRow];
+	buildingList = new int [nbCol, nbRow];
 	//Init road list avec random
 	for ( i = startPosX; i < nbCol + startPosX; i++) {
 		for (j = startPosY; j < nbRow + startPosY; j++){
@@ -76,11 +78,30 @@ function Generate () {
 	cleanRoads();
 	buildRoads();
 
+	var posX : int;
+	var posY : int;
+	var width : int;
+	var height : int;
 
 	for (i = 0; i < nbBuildings; i++) {
 		var evenNumber : int = Random.Range(0,6)/2 +1;
 
-		buildingFactory.generateBuilding(Random.Range(startPosX, nbCol + startPosX), Random.Range(startPosY, nbRow + startPosY), evenNumber, Random.Range(2,5));
+		posX = Random.Range(0, nbCol) + startPosX;
+		posY = Random.Range(0, nbRow) + startPosY;
+		width = evenNumber;
+		height = Random.Range(2,5);
+
+		//si on peut placer le building (ie : endroit vide), on le place. Sinon on reesaye
+		if(canPlaceBuilding(posX, posY, width)){
+			buildingFactory.generateBuilding(posX, posY, width, height);
+		}
+		else
+		{
+			i--;
+			continue;
+		}
+
+		
 	};
 	for (i = 0; i < nbPNJScared; i++) {
 		pnjFactory.generatePNJScared(Random.Range(startPosX, nbCol + startPosX), Random.Range(startPosX, nbCol + startPosX));
@@ -97,11 +118,34 @@ function Generate () {
 }
 
 
+function canPlaceBuilding(x: int, y: int, width: int) : int{
+
+	var i : int = 0;
+	var xShift : int = x - startPosX;
+	var yShift : int = y - startPosY;
+
+	if(xShift + width >= nbCol)
+		return 0;
+
+	for (i = 0; i < width; i++) {
+		if(buildingList[xShift + i, yShift] || roadList[xShift + i, yShift])
+			return 0;
+	};
+
+
+	for (i = 0; i < width; i++) {
+		buildingList[xShift + i, yShift] = 1;
+	};
+
+
+	return 1;
+}
+
 function generateTree(x: float, y: float){
 	var instance : GameObject;
 	var toInstantiate : GameObject = trees[Random.Range (0,trees.Length)];
 	instance = Instantiate (toInstantiate, new Vector3 (x, y, 0.5f), Quaternion.identity) as GameObject;
-	instance.transform.Rotate(new Vector3(250f,1,0));
+	instance.transform.Rotate(new Vector3(290f,180f,0));
 	instance.transform.localScale = new Vector3(0.5f,1f,1f);
     instance.transform.SetParent (boardHolder);
 
