@@ -12,6 +12,7 @@ GameObject:
   - 114: {fileID: 11416950}
   - 61: {fileID: 6199726}
   - 50: {fileID: 5065656}
+  - 114: {fileID: 11457724}
   m_Layer: 0
   m_Name: Building
   m_TagString: Building
@@ -26,7 +27,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 123128}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.19383335, y: .829838157, z: 11.4807577}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -91,6 +92,19 @@ MonoBehaviour:
   height: 0
   width: 0
   subBuilding: {fileID: 199522, guid: 5ca8dee622e064e638e8e1dbd5f1abb8, type: 2}
+--- !u!114 &11457724
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 123128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01fb64da1bcc299488438e081d287e6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitPrefab: {fileID: 138392, guid: 9e93e34486f12fa4999b35608ffd43c5, type: 2}
+  deadPrefab: {fileID: 138392, guid: 9e93e34486f12fa4999b35608ffd43c5, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
