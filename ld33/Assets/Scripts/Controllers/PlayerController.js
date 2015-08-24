@@ -70,8 +70,6 @@ function Update () {
 		if (!playerInfo.isIA) {
 			moveX = inputDevicesController.GetAxisForDevice("Horizontal", playerInfo.device);
 			moveY = -inputDevicesController.GetAxisForDevice("Vertical", playerInfo.device);
-
-			Debug.Log(moveX + '--' + moveY);
 		} else {
 			// Remind to attach the script PlayerAI to the AI
 			var move : Vector3 = playerAI.WhatShouldIDo(speed);
