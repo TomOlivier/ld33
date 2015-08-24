@@ -9,6 +9,11 @@ var visiblePwr : float;
 
 var stateAlive : boolean;
 var linkedOverlayBox : GameObject;
+var overlayPickupsEffects : GameObject;
+
+var overlayPickupsEffectsHP : GameObject;
+var overlayPickupsEffectsSPEED : GameObject;
+var overlayPickupsEffectsDMG : GameObject;
 
 function Start () {
 
