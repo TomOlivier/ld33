@@ -33,22 +33,22 @@ public var soundEat : AudioClip [];
 public var soundDead : AudioClip [];
 
 function Animate(animName : String, conserve: boolean) {
-	if (anim.GetCurrentAnimatorStateInfo(0).IsName(animName))
+	if (!conserve)
 	{
-		return ;
-	}
-	if (activeCompleteAnim != "" && anim.GetCurrentAnimatorStateInfo(0).IsName(activeCompleteAnim))
-	{
-		Debug.Log("it is");
-		return ;
+		if (anim.GetCurrentAnimatorStateInfo(0).IsName(animName))
+		{
+			return ;
+		}
+		if (activeCompleteAnim != "" && anim.GetCurrentAnimatorStateInfo(0).IsName(activeCompleteAnim))
+		{
+			return ;
+		}	
 	}
 	anim.Play(animName);
 	if (conserve) {
-		Debug.Log("it is set");
 		activeCompleteAnim = animName;
 	}
 	else {
-		Debug.Log("it is clr");
 		activeCompleteAnim = "";
 	}
 }
