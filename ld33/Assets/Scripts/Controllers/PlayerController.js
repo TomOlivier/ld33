@@ -62,6 +62,7 @@ function Update () {
 	var activeAnim : String = "MobIdle";
 
 	if (GameController.isInGUI == false && GameController.gamePlaying) {
+		
 		var inputDevicesController : InputDevicesController = InputDevicesController.GetInstance();
 		var rb : Rigidbody2D = GetComponent.<Rigidbody2D>();
 
@@ -128,10 +129,10 @@ function Update () {
 				cooldownAttack = attackCooldownDef;
 			}
 		}
-	}
 
-	rb.angularVelocity = 0;
-	rb.velocity = Vector2 (moveX * speed, moveY * speed) + pushedVector;
+		rb.angularVelocity = 0;
+		rb.velocity = Vector2 (moveX * speed, moveY * speed) + pushedVector;
+	}
 
 	if (activeAnim == "MobIdle") {
 		if (moveX != 0 || moveY != 0) activeAnim = "MobWalk";
@@ -230,6 +231,7 @@ function Push(playerToPush:GameObject) {
 		playerInfo.points += pointStealed;
 
 	}
+	ShouldPointsScale();
 }
 
 function AttackBuilding(buildingToHit:GameObject) {
