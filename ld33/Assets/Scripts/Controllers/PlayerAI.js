@@ -44,6 +44,11 @@ function init () {
 function WhatShouldIDo () {
     // Let's find the best other player
 
+    // Debug only
+    // currentMode = "chill";
+
+    if (currentMode == 'chill') return Vector3(0, 0, 0);
+
     var newMode : String;
     var rM : int = Random.Range(0, 100);
 

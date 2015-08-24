@@ -34,7 +34,7 @@ private var root_asset_building : GameObject;
 function Start () {
 	if (lifeDef == 0)
 		lifeDef = height * 50;
-	
+
 	currentLife = lifeDef;
 	spriteRenderer = GetComponent.<SpriteRenderer> ();
 	boxCollider = GetComponent.<BoxCollider2D> ();
@@ -43,7 +43,7 @@ function Start () {
 
 	boxCollider.offset = new Vector2((width-1)/2f, (height-1)/2f);
 	boxCollider.size = new Vector2(width,height);
-	
+
 	boxCollider.offset = new Vector2(-(width-1)/2f, 0);
 	boxCollider.size = new Vector2(width,1);
 
@@ -87,9 +87,9 @@ function Start () {
 
 		if(width > 1){
 			s_building = Instantiate (middleLeft, new Vector3 (root_asset_building.transform.position.x + width -1, root_asset_building.transform.position.y + j, 0f), Quaternion.identity) as GameObject;
-			s_building.transform.SetParent(root_asset_building.transform);	
+			s_building.transform.SetParent(root_asset_building.transform);
 		}
-		
+
 
 	}
 
@@ -137,9 +137,9 @@ function GetDamaged(damage:float) {
 	var curLifeIndex : int = currentLife/(height * width) + width;
 	var nextLifeIndex : int = (currentLife-damage)/(height * width);
 
-	
+
 	currentLife -= damage;
-	
+
 	//si on doit perdre au moins un étage
 	if(nextLifeIndex < curLifeIndex)
 	{
@@ -158,11 +158,16 @@ function GetDamaged(damage:float) {
 		/*for (var i : int = 0; i < (curLifeIndex - nextLifeIndex); i++) {*/
 		removeSubBuilding();
 		/*};*/
-		
+
 	}
 
 	if (currentLife < 0) {
-		Instantiate(bonusPrefab, this.transform.TransformPoint(toSpawnLocalPosition), Quaternion.identity);
+		var r : int = Random.Range(0, 100);
+		if (r < 200) {
+			var posBonus = this.transform.TransformPoint(toSpawnLocalPosition);
+			// posBonus.z = 1;
+			Instantiate(bonusPrefab, posBonus, Quaternion.identity);
+		}
 		this.gameObject.GetComponent.<Hittable>().Die();
 	}
 	else {
@@ -186,7 +191,7 @@ function removeSubBuilding() {
 				yToRemove = sub_child.localPosition.y;
 				objectToRemove = sub_child.gameObject;
 			}
-			
+
 		}
 
 		if(yToRemove){
@@ -198,7 +203,7 @@ function removeSubBuilding() {
 
 			for (sub_child in child) {
 				//destroy de tous les prefabs tag building_destroyed avec le meme Y
-				
+
 				if(sub_child.tag == 'building_damaged' && sub_child.localPosition.x == objectToRemove.transform.localPosition.x){
 					Destroy(sub_child.gameObject);
 					break;
@@ -237,7 +242,7 @@ function removeSubBuilding() {
 
 			for (sub_child in child) {
 				//destroy de tous les prefabs tag building_destroyed avec le meme Y
-				
+
 				if(sub_child.tag == 'building_damaged' && sub_child.localPosition.x == objectToRemove.transform.localPosition.x){
 					Destroy(sub_child.gameObject);
 					break;

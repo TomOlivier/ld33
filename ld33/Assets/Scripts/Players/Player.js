@@ -97,4 +97,9 @@ class Player
 			GameObject.Find("Game").BroadcastMessage("PlayerDied", this);
 		}
 	}
+
+	function AddLife (l : int) {
+		life = Mathf.Min(life + l, maxLife);
+		Debug.Log('Life ' + life);
+	}
 }

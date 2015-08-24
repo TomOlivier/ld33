@@ -41,7 +41,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 2d2a7d868ea8748d0b67621023eaeeb9, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -88,9 +88,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitPrefab: {fileID: 148478, guid: 360c34f7f4f26461f98ac79bf8f91373, type: 2}
   deadPrefab: {fileID: 148478, guid: 360c34f7f4f26461f98ac79bf8f91373, type: 2}
-  speedMultiplier: 1.5
-  strengthMultiplier: 1.5
-  flatBonusHP: 50
+  bonusSpeed:
+    multiplier: 5
+    flatValue: 0
+    duration: 2
+  bonusStrength:
+    multiplier: 1.5
+    flatValue: 0
+    duration: 2
+  bonusLife:
+    multiplier: 1
+    flatValue: 50
+    duration: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -77,12 +77,12 @@ function Update () {
 
 	if (GameController.isInGUI == false && GameController.gamePlaying) {
 		var i : int = 0;
-		
+
 		// BONUSES
 		var calculatedSpeed : float = speed;
 		var calculatedStrength : float = pushStrength;
 		var calculatedLife : float = playerInfo.life; // TODO: implement this
-		
+
 		// SPEED
 		var bonusDef : BonusDefinition;
 		for (i = 0; i < bonusSpeed.length;i++) {
@@ -90,6 +90,10 @@ function Update () {
 			// FIXME: getting multiple multiplier will result in the flat value to boost too much !
 			calculatedSpeed *= bonusDef.multiplier;
 			calculatedSpeed += bonusDef.flatValue * Time.deltaTime;
+			calculatedSpeed /= 3;
+
+			calculatedSpeed = Mathf.Min(calculatedSpeed, 30.0);
+
 			if (bonusDef.duration > 0) {
 				bonusDef.duration -= Time.deltaTime;
 				if (bonusDef.duration <= 0) {
@@ -102,8 +106,9 @@ function Update () {
 		for (i = 0; i < bonusStrength.length;i++) {
 			bonusDef = bonusStrength[i];
 			// FIXME: getting multiple multiplier will result in the flat value to boost too much !
-			calculatedStrength *= bonusDef.multiplier;
+			calculatedStrength = DamageLevel() * bonusDef.multiplier;
 			calculatedStrength += bonusDef.flatValue;
+
 			if (bonusDef.duration > 0) {
 				bonusDef.duration -= Time.deltaTime;
 				if (bonusDef.duration <= 0) {
@@ -112,11 +117,18 @@ function Update () {
 				}
 			}
 		}
-		
-		// TODO: life (perhaps logic in player ?)
-		
+
+		// Life
+		for (i = 0; i < bonusLife.length;i++) {
+			bonusDef = bonusLife[i];
+
+			playerInfo.AddLife(bonusDef.flatValue);
+			bonusLife.RemoveAt(i);
+		}
+
+
 		// END BONUSES
-		
+
 		var inputDevicesController : InputDevicesController = InputDevicesController.GetInstance();
 
 		var moveX : float;
@@ -142,7 +154,7 @@ function Update () {
 			}
 			numberOfPushesLeft--;
 		}
-		
+
 		if (moveX != 0 || moveY != 0) { // TODO: check if there's no pause / gui display
 			var rot_z:float = Mathf.Atan2(moveX, -moveY) * Mathf.Rad2Deg; // - moveY because we did shit with cameras
 	    	transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, rot_z - 90f);
@@ -189,7 +201,7 @@ function Update () {
 
 	var rb : Rigidbody2D = GetComponent.<Rigidbody2D>();
 	rb.angularVelocity = 0;
-	
+
 	// FIXME: this velocity might be set to 0 if we don't enter this conditionnal statement
 	rb.velocity = Vector2 (moveX * calculatedSpeed, moveY * calculatedSpeed) + pushedVector;
 	}
@@ -305,6 +317,12 @@ function AttackBuilding(buildingToHit:GameObject, strength:float) {
 	buildingToHit.GetComponent.<Building>().GetDamaged(strength);
 }
 
+function ApplyBonus (mode : String, bonus : BonusDefinition) {
+	if (mode == 'speed') ApplyBonusSpeed(bonus);
+	else if (mode == 'strength') ApplyBonusStrength(bonus);
+	else ApplyBonusLife(bonus);
+}
+
 function ApplyBonusSpeed(bonus:BonusDefinition) {;
 	this.bonusSpeed.Add(new BonusDefinition(bonus.multiplier, bonus.flatValue, bonus.duration));
 }
@@ -314,5 +332,5 @@ function ApplyBonusLife(bonus:BonusDefinition) {
 }
 
 function ApplyBonusStrength(bonus:BonusDefinition) {
-	this.bonusStrength.Add(new BonusDefinition(bonus.multiplier, bonus.flatValue, bonus.duration));	
+	this.bonusStrength.Add(new BonusDefinition(bonus.multiplier, bonus.flatValue, bonus.duration));
 }
