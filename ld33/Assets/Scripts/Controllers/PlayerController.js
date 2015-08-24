@@ -33,23 +33,23 @@ public var soundEat : AudioClip [];
 public var soundDead : AudioClip [];
 
 function Animate(animName : String, conserve: boolean) {
-	if (anim.GetCurrentAnimatorStateInfo(0).IsName(animName))
+	if (!conserve)
 	{
-		return ;
-	}
-	if (activeCompleteAnim != "" && anim.GetCurrentAnimatorStateInfo(0).IsName(activeCompleteAnim))
-	{
-//		Debug.Log("it is");
-		return ;
+		if (anim.GetCurrentAnimatorStateInfo(0).IsName(animName))
+		{
+			return ;
+		}
+		if (activeCompleteAnim != "" && anim.GetCurrentAnimatorStateInfo(0).IsName(activeCompleteAnim))
+		{
+			return ;
+		}	
 	}
 	anim.Play(animName);
 	if (conserve) {
-//		Debug.Log("it is set");
 		activeCompleteAnim = animName;
 	}
 	else {
-//		Debug.Log("it is clr");
-		activeCompleteAnim = "";
+		return ;
 	}
 }
 
@@ -62,6 +62,7 @@ function Update () {
 	var activeAnim : String = "MobIdle";
 
 	if (GameController.isInGUI == false && GameController.gamePlaying) {
+		
 		var inputDevicesController : InputDevicesController = InputDevicesController.GetInstance();
 
 		var moveX : float;
@@ -127,11 +128,11 @@ function Update () {
 				cooldownAttack = attackCooldownDef;
 			}
 		}
-	}
 
 	var rb : Rigidbody2D = GetComponent.<Rigidbody2D>();
 	rb.angularVelocity = 0;
 	rb.velocity = Vector2 (moveX * speed, moveY * speed) + pushedVector;
+	}
 
 	if (activeAnim == "MobIdle") {
 		if (moveX != 0 || moveY != 0) activeAnim = "MobWalk";
@@ -230,6 +231,7 @@ function Push(playerToPush:GameObject) {
 		playerInfo.points += pointStealed;
 
 	}
+	ShouldPointsScale();
 }
 
 function AttackBuilding(buildingToHit:GameObject) {

@@ -3,7 +3,7 @@
 static var isInGUI : boolean = true;						// Is GUI visible and locking other controls
 static var guiLock : boolean = false;						// Is GUI locking all controls
 static var gamePlaying : boolean = false;					// If game is playing or over
-static var activeState: GameState = GameState.LOAD;			// FSM state
+static var activeState : GameState = GameState.LOAD;			// FSM state
 static var roundCount : int = 0;							// Total of rounds played
 
 var nextState: GameState = GameState.NONE;
