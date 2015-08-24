@@ -87,8 +87,8 @@ function CalculatePanic() {
 }
 
 function startPanicking(delayPanic:float) {
-	Debug.Log("start Panicking");
-	Debug.Log("relayPanic: " + delayPanic);
+//	Debug.Log("start Panicking");
+//	Debug.Log("relayPanic: " + delayPanic);
   	delayBeforePanic = delayPanic;
 	panicTimeLeft = panicDuration;
   	var results : Collider2D[] = Physics2D.OverlapCircleAll(Vector2(this.transform.position.x, this.transform.position.y), 10);
@@ -152,14 +152,13 @@ function triggerAnimations (a : float) {
 function OnTriggerEnter2D(collider : Collider2D) {
 	if (collider.gameObject.tag.Equals("Building") || collider.gameObject.tag.Equals("Border")) {
 		//print("PNJ: OnTriggerEnter2D building");
-		if (decisionTimer >= timeBeforeChangeDecision) {
-			if (this.IsPanicking()) { // not a lot of chance to reevaluate route when seeing a building
-				AcquireNewTargetPosition();// TODO: straight to building
+		//if (decisionTimer >= timeBeforeChangeDecision) {
+			if (isPanicking) { // not a lot of chance to reevaluate route when seeing a building
+				//AcquireNewTargetPosition();// TODO: straight to building
 			} else {
-				setNewTargetLocalPosition(-localTargetPosition);
+				setNewTargetLocalPosition(-localTargetPosition); // try to avoid
 			}
-			//decisionTimer = 0;
-		}
+		//}
 	}
 }
 
