@@ -11,6 +11,7 @@ TagManager:
   - building_top
   - building_bot
   - Border
+  - building_damaged
   layers:
   - Default
   - TransparentFX
