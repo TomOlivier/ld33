@@ -207,7 +207,7 @@ AnimatorState:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: MobKick 1
-  m_Speed: 1.5
+  m_Speed: 2.5
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 110115304}
@@ -254,7 +254,7 @@ AnimatorState:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: MobWalk
-  m_Speed: .800000012
+  m_Speed: .899999976
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []
@@ -277,7 +277,7 @@ AnimatorState:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: MobEat
-  m_Speed: .699999988
+  m_Speed: 1.20000005
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 110121718}

@@ -49,6 +49,8 @@ MonoBehaviour:
   bottomInterMiddle2: {fileID: 173396, guid: a42064583684f41a5bc376c70c04f47a, type: 2}
   middleLeft2: {fileID: 191812, guid: c35a2ffa1f7904ef4968d8ab65634246, type: 2}
   middleMiddle2: {fileID: 195322, guid: 98a7e3db5320d4c56ad137d4597ae565, type: 2}
+  buildingDamaged: {fileID: 176804, guid: de45d57b0429b764ab6af6fcd2db7dcb, type: 2}
+  buildingDecorator: []
   prefabBuilding: {fileID: 123128, guid: 7c7a88d7b434e4da6b98ff451234f7e9, type: 2}
 --- !u!1001 &100100000
 Prefab:
@@ -133,6 +135,10 @@ Prefab:
       propertyPath: middleLeft2
       value: 
       objectReference: {fileID: 191812, guid: c35a2ffa1f7904ef4968d8ab65634246, type: 2}
+    - target: {fileID: 0}
+      propertyPath: buildingDamaged
+      value: 
+      objectReference: {fileID: 176804, guid: de45d57b0429b764ab6af6fcd2db7dcb, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 171198}

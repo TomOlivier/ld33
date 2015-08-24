@@ -73,8 +73,8 @@ function Update () {
 		} else {
 			// Remind to attach the script PlayerAI to the AI
 			var move : Vector3 = playerAI.WhatShouldIDo(speed);
-			moveX = move.x;
-			moveY = move.y;
+			moveX = -move.x;
+			moveY = -move.y;
 		}
 
 		if (numberOfPushesLeft >= 0) {
