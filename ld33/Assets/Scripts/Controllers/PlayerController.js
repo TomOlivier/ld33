@@ -107,6 +107,7 @@ function Update () {
 			if (cooldownAttack > 0) {
 				
 			} else {
+				activeAnim = "MobKick 1";
 				// ATTACK !
 				for (var i = 0; i < touchedUnits.length; i++) {
 					var objectToHit : GameObject = touchedUnits[i] as GameObject;
@@ -115,15 +116,13 @@ function Update () {
 					} else {
 						if (objectToHit.tag == "Player") {
 							this.Push(objectToHit);
-							activeAnim = "MobKick 1";
-							Animate(activeAnim, true);
 						} else if (objectToHit.tag == "Building") {
 							this.AttackBuilding(objectToHit);
 							activeAnim = "MobEat";
-							Animate(activeAnim, true);
 						}
 					}
 				}
+				Animate(activeAnim, true);
 				cooldownAttack = attackCooldownDef;
 			}
 		}
