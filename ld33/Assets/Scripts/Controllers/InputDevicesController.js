@@ -17,6 +17,7 @@ enum ActionButton
 {
 	ATTACK,
 	BACK,
+    START,
 }
 
 class InputDevicesController
@@ -119,6 +120,29 @@ class InputDevicesController
         }
     }
 
+    public function GetNextAvailableDevice(activeDev: CompatibleDevice) : CompatibleDevice
+    {
+        var nextDev = null;
+        
+        for (var dev : CompatibleDevice in devices)
+        {
+            if (dev == activeDev) {
+                nextDev = dev;
+            }
+            if (!dev.isUsed)
+            {
+                if (nextDev || activeDev == null)
+                    return (dev);
+            }
+        }
+
+        if (activeDev != null)
+        {
+            // Go back to index 0 and find first available
+            return GetNextAvailableDevice(null);
+        }
+    }
+
     public function DebugDevices() 
     {
     	Debug.Log("Devstate--------------");
@@ -211,6 +235,9 @@ class InputDevicesController
     				case ActionButton.ATTACK:
     					res = Input.GetKeyDown("space");
     					break;
+                    case ActionButton.START:
+                        res = Input.GetKeyDown("enter");
+                        break;
     				default:
 	    				break;
     			}
@@ -222,7 +249,10 @@ class InputDevicesController
     				case ActionButton.ATTACK:
     					res = Input.GetKeyDown("joystick "+ (dev.joystickId) +" button 0");
     					break;
-    				default:
+    				case ActionButton.START:
+                        res = Input.GetKeyDown("joystick "+ (dev.joystickId) +" button 7");
+                        break;
+                    default:
 	    				break;
     			}
     		}

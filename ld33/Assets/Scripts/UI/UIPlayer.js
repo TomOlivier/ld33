@@ -12,6 +12,8 @@ var pInputKB : GameObject;
 var pInputJS : GameObject;
 var pInputUnknown : GameObject;
 
+var devices : List.<CompatibleDevice>;
+
 function Start () {
 
 }
@@ -24,6 +26,7 @@ function RefreshCharacter()
 {
 	pCImage.SetActive(false);
 	pInput.SetActive(false);
+	devices = InputDevicesController.GetInstance().devices; 
 	
 	if (player.isIA || player.isActive)
 	{
@@ -70,7 +73,7 @@ function RefreshCharacter()
 	} else {
 		if (player.device.isJoystick) {
 			pInputJS.SetActive(true);
-			pInputJS.Find("Image/Text").GetComponent(UI.Text).text = (player.device.joystickId).ToString();
+			pInputJS.transform.Find("Image/Text").GetComponent(UI.Text).text = (player.device.joystickId).ToString();
 		} else {
 			pInputKB.SetActive(true);
 		}
@@ -125,22 +128,23 @@ function OnPlayerInputTypeClick() {
 		return ;
 
 	var idc : InputDevicesController = InputDevicesController.GetInstance();
-	var getkb = (player.device == null || player.device.isJoystick);
-	var getjoy = (player.device == null || player.device.isKeyboard);
+	//var getkb = (player.device == null || player.device.isJoystick);
+	//var getjoy = (player.device == null || player.device.isKeyboard);
+	var nextDev : CompatibleDevice = idc.GetNextAvailableDevice(player.device);
 
 	idc.UnassignDeviceFromPlayer(player.device, player);
 
-	var dev : CompatibleDevice = idc.GetAvailableDevice(getkb, getjoy);
+	// var dev : CompatibleDevice = idc.GetAvailableDevice(getkb, getjoy);
 
-	if (dev == null && getkb == false) {
-		dev = idc.GetAvailableKeyboard();
-	} else if (dev == null) {
-		dev = idc.GetAvailableJoypad();
-	}
+	// if (dev == null && getkb == false) {
+	// 	dev = idc.GetAvailableKeyboard();
+	// } else if (dev == null) {
+	// 	dev = idc.GetAvailableJoypad();
+	// }
 
-	if (dev == null) {
+	if (nextDev == null) {
 	} else {
-		idc.AssignDeviceToPlayer(dev, player);
+		idc.AssignDeviceToPlayer(nextDev, player);
 	}
 	RefreshCharacter();
 	uiCharacter.gameSetupUpdated = true;

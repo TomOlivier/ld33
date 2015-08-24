@@ -451,6 +451,7 @@ MonoBehaviour:
   pInputKB: {fileID: 184628}
   pInputJS: {fileID: 132588}
   pInputUnknown: {fileID: 195752}
+  devices: []
 --- !u!114 &11409938
 MonoBehaviour:
   m_ObjectHideFlags: 1
