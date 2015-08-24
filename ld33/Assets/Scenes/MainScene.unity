@@ -186,6 +186,7 @@ Transform:
   - {fileID: 713338727}
   - {fileID: 56966950}
   - {fileID: 557069276}
+  - {fileID: 1952063388}
   m_Father: {fileID: 0}
   m_RootOrder: 1
 --- !u!114 &42648967
@@ -378,6 +379,7 @@ MonoBehaviour:
     maxLife: 100
     maxLifeDef: 100
     isAlive: 1
+    roundDeathId: 0
     roundKills: 0
     kills: 0
     deaths: 0
@@ -395,6 +397,8 @@ MonoBehaviour:
       isKeyboard: 0
       name: 
     playerInstance: {fileID: 0}
+    soundHit: []
+    soundDead: []
   - controller: {fileID: 0}
     character:
       name: Unknown
@@ -415,6 +419,7 @@ MonoBehaviour:
     maxLife: 100
     maxLifeDef: 100
     isAlive: 1
+    roundDeathId: 0
     roundKills: 0
     kills: 0
     deaths: 0
@@ -432,6 +437,8 @@ MonoBehaviour:
       isKeyboard: 0
       name: 
     playerInstance: {fileID: 0}
+    soundHit: []
+    soundDead: []
   - controller: {fileID: 0}
     character:
       name: Unknown
@@ -452,6 +459,7 @@ MonoBehaviour:
     maxLife: 100
     maxLifeDef: 100
     isAlive: 1
+    roundDeathId: 0
     roundKills: 0
     kills: 0
     deaths: 0
@@ -469,6 +477,8 @@ MonoBehaviour:
       isKeyboard: 0
       name: 
     playerInstance: {fileID: 0}
+    soundHit: []
+    soundDead: []
   - controller: {fileID: 0}
     character:
       name: Unknown
@@ -489,6 +499,7 @@ MonoBehaviour:
     maxLife: 100
     maxLifeDef: 100
     isAlive: 1
+    roundDeathId: 0
     roundKills: 0
     kills: 0
     deaths: 0
@@ -506,6 +517,8 @@ MonoBehaviour:
       isKeyboard: 0
       name: 
     playerInstance: {fileID: 0}
+    soundHit: []
+    soundDead: []
   spawnPositions:
   - {x: 5, y: 5}
   - {x: 2, y: 2}
@@ -6510,6 +6523,52 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -10}
   m_SizeDelta: {x: 675, y: -100}
   m_Pivot: {x: .5, y: 1}
+--- !u!1001 &1952063387
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 42648966}
+    m_Modifications:
+    - target: {fileID: 496000, guid: 490b0dacc9dd4484fa390454ab914588, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 496000, guid: 490b0dacc9dd4484fa390454ab914588, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 496000, guid: 490b0dacc9dd4484fa390454ab914588, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 496000, guid: 490b0dacc9dd4484fa390454ab914588, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 496000, guid: 490b0dacc9dd4484fa390454ab914588, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 496000, guid: 490b0dacc9dd4484fa390454ab914588, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 496000, guid: 490b0dacc9dd4484fa390454ab914588, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 496000, guid: 490b0dacc9dd4484fa390454ab914588, type: 2}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 490b0dacc9dd4484fa390454ab914588, type: 2}
+  m_IsPrefabParent: 0
+--- !u!4 &1952063388 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 496000, guid: 490b0dacc9dd4484fa390454ab914588, type: 2}
+  m_PrefabInternal: {fileID: 1952063387}
 --- !u!1 &1958569512
 GameObject:
   m_ObjectHideFlags: 0
