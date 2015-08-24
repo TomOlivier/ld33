@@ -37,16 +37,16 @@ function Animate(animName : String, conserve: boolean) {
 	}
 	if (activeCompleteAnim != "" && anim.GetCurrentAnimatorStateInfo(0).IsName(activeCompleteAnim))
 	{
-		Debug.Log("it is");
+//		Debug.Log("it is");
 		return ;
 	}
 	anim.Play(animName);
 	if (conserve) {
-		Debug.Log("it is set");
+//		Debug.Log("it is set");
 		activeCompleteAnim = animName;
 	}
 	else {
-		Debug.Log("it is clr");
+//		Debug.Log("it is clr");
 		activeCompleteAnim = "";
 	}
 }
