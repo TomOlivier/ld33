@@ -11,6 +11,7 @@ class Player
 	public var color: Color;
 	public var name: String;
 	public var uid: int;
+
 	
 	public var points : int = 0;					// Active points/Force
 	public var pointsMax : int = 100;				// Points required to enter RAMPAGE mode
@@ -18,8 +19,8 @@ class Player
 	public var lifeDef : int = 100;					// HP on start
 	public var maxLife : int = 100;					// max hp
 	public var maxLifeDef : int = 100;				// max hp on start
-	public var hitDamage : int = 10;				// hit damage
-	public var rampageDamage : int = 30;			// rampage damage;
+	public var hitDamage : int = 8;					// hit damage
+	public var rampageDamage : int = 40;			// rampage damage;
 	public var rampageResistance : float = 3.0f;	// damage divider when on rampage
 	public var isAlive : boolean = true;			// if player is alive
 	public var isRampage : boolean = false;			// player on rampage mode (insta kill)
@@ -90,7 +91,7 @@ class Player
 		if (life > 0 && isAlive) {
 			playerInstance.GetComponent.<Hittable>().GetHit(damage);
 		}
-		else 
+		else
 		{
 			if (playerInstance)
 			{

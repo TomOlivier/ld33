@@ -63,29 +63,33 @@ function Start () {
 
 	var doorX : int = Mathf.Floor(width/2f);
 
-	for(i = 1; i < width ; i++){
-
-
+	for(i = 1; i < width-1 ; i++){
 
 		for(j = 1 ; j < height ; j++){
-
 			s_building = Instantiate (middleMiddle, new Vector3 (root_asset_building.transform.position.x + i, root_asset_building.transform.position.y + j, 0f), Quaternion.identity) as GameObject;
 			s_building.transform.SetParent(root_asset_building.transform);
 		}
 
+
+	}
+
+	for (i = 1; i < width ; i++) {
 		if(i == doorX)
 			continue;
 		s_building = Instantiate (bottomInterMiddle, new Vector3 (root_asset_building.transform.position.x + i, root_asset_building.transform.position.y, 0f), Quaternion.identity) as GameObject;
 		s_building.transform.SetParent(root_asset_building.transform);
-	}
+	};
 
 	for(j = 1 ; j < height ; j++){
 
 		s_building = Instantiate (middleLeft, new Vector3 (root_asset_building.transform.position.x, root_asset_building.transform.position.y + j, 0f), Quaternion.identity) as GameObject;
 		s_building.transform.SetParent(root_asset_building.transform);
 
-		s_building = Instantiate (middleLeft, new Vector3 (root_asset_building.transform.position.x + width -1, root_asset_building.transform.position.y + j, 0f), Quaternion.identity) as GameObject;
-		s_building.transform.SetParent(root_asset_building.transform);
+		if(width > 1){
+			s_building = Instantiate (middleLeft, new Vector3 (root_asset_building.transform.position.x + width -1, root_asset_building.transform.position.y + j, 0f), Quaternion.identity) as GameObject;
+			s_building.transform.SetParent(root_asset_building.transform);	
+		}
+		
 
 	}
 
@@ -151,9 +155,9 @@ function GetDamaged(damage:float) {
 		}
 
 		// Debug.Log("idjfosdf : " + (curLifeIndex - nextLifeIndex));
-		for (var i : int = 0; i < (curLifeIndex - nextLifeIndex); i++) {
-			removeSubBuilding();
-		};
+		/*for (var i : int = 0; i < (curLifeIndex - nextLifeIndex); i++) {*/
+		removeSubBuilding();
+		/*};*/
 		
 	}
 
@@ -189,16 +193,27 @@ function removeSubBuilding() {
 			if(soundExplosion && soundExplosion.length > 0)
 				SoundManager.instance.PlaySfx(soundExplosion[Random.Range(0,soundExplosion.length)]);
 
+			/*Debug.Log("On remove un etage : local : " + objectToRemove.transform.localPosition.x + ", " +  objectToRemove.transform.localPosition.y + ' | global : ' + objectToRemove.transform.position.x + ", " +  objectToRemove.transform.position.y);
+*/
+
 			for (sub_child in child) {
 				//destroy de tous les prefabs tag building_destroyed avec le meme Y
-				if(sub_child.tag == 'building_destroyed' && sub_child.localPosition.x == objectToRemove.transform.localPosition.x){
+				
+				if(sub_child.tag == 'building_damaged' && sub_child.localPosition.x == objectToRemove.transform.localPosition.x){
 					Destroy(sub_child.gameObject);
 					break;
 				}
 			}
 
-			destroyed_part = Instantiate (buildingDamaged, new Vector3 (0f, yToRemove, 0f), Quaternion.identity) as GameObject;
+			destroyed_part = Instantiate (buildingDamaged) as GameObject;
 			destroyed_part.transform.SetParent(root_asset_building.transform);
+			destroyed_part.transform.localPosition.x = objectToRemove.transform.localPosition.x;
+			destroyed_part.transform.localPosition.y = yToRemove-1;
+			destroyed_part.transform.localPosition.z = 0;
+			destroyed_part.transform.localScale = new Vector3(1,1,1);
+			destroyed_part.transform.rotation = objectToRemove.transform.rotation;
+
+			/*destroyed_part.transform.position.y = objectToRemove.transform.position.y;*/
 
 			Destroy(objectToRemove);
 
@@ -217,16 +232,27 @@ function removeSubBuilding() {
 			if(soundExplosion && soundExplosion.length > 0)
 				SoundManager.instance.PlaySfx(soundExplosion[Random.Range(0,soundExplosion.length)]);
 
+			/*Debug.Log("On remove un etage : local : " + objectToRemove.transform.localPosition.x + ", " +  objectToRemove.transform.localPosition.y + ' | global : ' + objectToRemove.transform.position.x + ", " +  objectToRemove.transform.position.y);
+*/
+
 			for (sub_child in child) {
-				//destroy de tous les prefabs tag destroyedPart avec le meme Y
-				if(sub_child.tag == 'building_destroyed' && sub_child.localPosition.y == yToRemove){
+				//destroy de tous les prefabs tag building_destroyed avec le meme Y
+				
+				if(sub_child.tag == 'building_damaged' && sub_child.localPosition.x == objectToRemove.transform.localPosition.x){
 					Destroy(sub_child.gameObject);
 					break;
 				}
 			}
 
-			destroyed_part = Instantiate (buildingDamaged, new Vector3 (objectToRemove.transform.position.x, objectToRemove.transform.position.y, 0f), Quaternion.identity) as GameObject;
+			destroyed_part = Instantiate (buildingDamaged) as GameObject;
 			destroyed_part.transform.SetParent(root_asset_building.transform);
+			destroyed_part.transform.localPosition.x = objectToRemove.transform.localPosition.x;
+			destroyed_part.transform.localPosition.y = yToRemove-1;
+			destroyed_part.transform.localPosition.z = 0;
+			destroyed_part.transform.localScale = new Vector3(1,1,1);
+			destroyed_part.transform.rotation = objectToRemove.transform.rotation;
+
+			/*destroyed_part.transform.position.y = objectToRemove.transform.position.y;*/
 
 			Destroy(objectToRemove);
 
