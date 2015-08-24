@@ -63,7 +63,6 @@ function Update () {
 
 	if (GameController.isInGUI == false && GameController.gamePlaying) {
 		var inputDevicesController : InputDevicesController = InputDevicesController.GetInstance();
-		var rb : Rigidbody2D = GetComponent.<Rigidbody2D>();
 
 		var moveX : float;
 		var moveY : float;
@@ -130,6 +129,7 @@ function Update () {
 		}
 	}
 
+	var rb : Rigidbody2D = GetComponent.<Rigidbody2D>();
 	rb.angularVelocity = 0;
 	rb.velocity = Vector2 (moveX * speed, moveY * speed) + pushedVector;
 
