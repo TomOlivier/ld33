@@ -11,7 +11,7 @@ class Player
 	public var color: Color;
 	public var name: String;
 	public var uid: int;
-	
+
 	public var points : int = 0;			// Active points/Force
 	public var pointsMax : int = 100;		// Points required to enter RAMPAGE mode
 	public var life : int = 100;			// active HP
@@ -70,11 +70,11 @@ class Player
 	}
 
 	public function GetDamaged(damage:int) {
-		life = life - 1;//damage;
+		life = life - damage;
 		if (life > 0 && isAlive) {
 			playerInstance.GetComponent.<Hittable>().GetHit(damage);
 		}
-		else 
+		else
 		{
 			if (playerInstance)
 			{

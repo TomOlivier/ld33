@@ -42,7 +42,7 @@ function Animate(animName : String, conserve: boolean) {
 		if (activeCompleteAnim != "" && anim.GetCurrentAnimatorStateInfo(0).IsName(activeCompleteAnim))
 		{
 			return ;
-		}	
+		}
 	}
 	anim.Play(animName);
 	if (conserve) {
@@ -62,7 +62,7 @@ function Update () {
 	var activeAnim : String = "MobIdle";
 
 	if (GameController.isInGUI == false && GameController.gamePlaying) {
-		
+
 		var inputDevicesController : InputDevicesController = InputDevicesController.GetInstance();
 
 		var moveX : float;
@@ -193,7 +193,11 @@ function OnCollisionEnter2D(collision : Collision2D) {
 }
 
 function ShouldPointsScale () {
-	transform.localScale = Vector3(1, 1, 1) * (1 + playerInfo.points / 33f);
+	transform.localScale = Vector3(1, 1, 1) * (1 + playerInfo.points / 40f);
+}
+
+function DamageLevel () {
+	return (7 + 3 * Mathf.Log(playerInfo.points));
 }
 
 function Push(playerToPush:GameObject) {
@@ -207,7 +211,8 @@ function Push(playerToPush:GameObject) {
 	player.initialPushVector = direction;
 	player.numberOfPushesLeft = player.weakness;
 
-	var dmg : int = 25;
+	var dmg : int = DamageLevel();
+	Debug.Log('Damages ' + dmg);
 	var pointsToSteal : int = 10;
 	var pointStealed : int = 0;
 
