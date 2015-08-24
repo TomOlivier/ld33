@@ -62,7 +62,10 @@ function Update () {
 	}
 
 
-	//decisionTimer += Time.deltaTime;
+	decisionTimer += Time.deltaTime;
+	if (decisionTimer > timeBeforeChangeDecision) {
+		AcquireNewTargetPosition();
+	}
 }
 
 function CalculatePanic() {
@@ -92,7 +95,6 @@ function startPanicking(delayPanic:float) {
   	delayBeforePanic = delayPanic;
 	panicTimeLeft = panicDuration;
   	var results : Collider2D[] = Physics2D.OverlapCircleAll(Vector2(this.transform.position.x, this.transform.position.y), 10);
- 	// FIXME: layer collision shouldn't be hardcoded (line before)
 	for (var rc : Collider2D in results) {
 		if (rc.gameObject.tag == "PNJScared") {
 			var realDistance : float = Vector3.Distance(rc.gameObject.transform.position, this.gameObject.transform.position);
@@ -112,7 +114,7 @@ function IsPanicking() {
 }
 
 function AcquireNewTargetPosition() {
-	setNewTargetLocalPosition(Vector3(Random.Range(-10,10), Random.Range(-10,10)));
+	setNewTargetLocalPosition(Random.insideUnitCircle * 10);
 }
 
 function setNewTargetLocalPosition(localPTarget:Vector3) {
@@ -128,6 +130,7 @@ function setNewTargetLocalPosition(localPTarget:Vector3) {
 	distanceDone = 0;
 
 	triggerAnimations(angle);
+	decisionTimer = 0;
 	//var direction : Vector3 = (targetPosition - transform.position).normalized;
 	//var rot_z:float = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
 	//transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, rot_z - 90f);

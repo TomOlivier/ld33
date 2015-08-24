@@ -41,7 +41,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: .508000016
+  m_Volume: .201000005
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -110,7 +110,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: .702000022
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -179,19 +179,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d45a243ba21c14c888bff021e56cd146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  efxSource: {fileID: 8244024}
+  sfxPrefab: {fileID: 104660, guid: 134a018f14728e948b399ac8201548f9, type: 2}
   musicSource: {fileID: 8211972}
   titleMusic: {fileID: 8300000, guid: 5c4771b552e2e4403a0032e9e40157df, type: 3}
   characterMusic: {fileID: 8300000, guid: 3776a0d8efe5e4279a618daf9b8c2be9, type: 3}
   gameMusic: {fileID: 8300000, guid: 708128d3c6b5a421e96f67e20f60fc04, type: 3}
   rampageMusic: {fileID: 8300000, guid: 66bdf4406b9df4007a7ae18167463992, type: 3}
+  maxSfx: 10
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_Volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: sfxPrefab
+      value: 
+      objectReference: {fileID: 104660, guid: 134a018f14728e948b399ac8201548f9, type: 2}
+    - target: {fileID: 0}
+      propertyPath: maxSfx
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 187536}
