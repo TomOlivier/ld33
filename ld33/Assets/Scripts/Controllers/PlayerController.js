@@ -105,7 +105,7 @@ function Update () {
 			cooldownAttack -= Time.deltaTime;
 		} else if (isHitting) {
 			if (cooldownAttack > 0) {
-				
+
 			} else {
 				activeAnim = "MobKick 1";
 				// ATTACK !
@@ -216,7 +216,7 @@ function ShouldPointsScale () {
 			rampageScale = 1.5f;
 			this.pushStrength *= 3;
 			playerInfo.TriggerRampage();
-		}		
+		}
 	}
 	transform.localScale = Vector3(1, 1, 1) * (1 + playerInfo.points / 40f + rampageScale);
 }
@@ -237,9 +237,7 @@ function Push(playerToPush:GameObject) {
 	player.numberOfPushesLeft = player.weakness;
 
 	var dmg : int = DamageLevel();
-	Debug.Log('Damages ' + dmg);
-
-	var pointsToSteal : int = 10;
+	var pointsToSteal : int = dmg / 4;
 	var pointStealed : int = 0;
 
 	if (playerInfo.isRampage)
@@ -248,8 +246,7 @@ function Push(playerToPush:GameObject) {
 		return ;
 	player.playerInfo.GetDamaged(dmg);
 
-	if (player.playerInfo.isAlive == false)
-	{
+	if (player.playerInfo.isAlive == false) {
 		playerInfo.kills++;
 		playerInfo.roundKills++;
 
@@ -258,14 +255,13 @@ function Push(playerToPush:GameObject) {
 
 		//Si on porte le coup fatal, on vole plus de points
 		pointsToSteal = 1.5 * pointsToSteal;
-		
-		pointStealed = player.playerInfo.GetPoints(pointsToSteal);
-		
-		playerInfo.points += pointStealed;
 
+		pointStealed = player.playerInfo.GetPoints(pointsToSteal);
+
+		playerInfo.points += pointStealed;
 	}
-	else
-	{
+
+	else {
 		//joue le son de dmg du jouer
 		if(player.soundHit && player.soundHit.length > 0)
 			SoundManager.instance.PlaySfx(player.soundHit[Random.Range(0,player.soundHit.length)]);
@@ -274,9 +270,10 @@ function Push(playerToPush:GameObject) {
 			pointStealed = player.playerInfo.GetPoints(pointsToSteal);
 
 		playerInfo.points += pointStealed;
-
 	}
+
 	ShouldPointsScale();
+	player.ShouldPointsScale();
 }
 
 function AttackBuilding(buildingToHit:GameObject) {
