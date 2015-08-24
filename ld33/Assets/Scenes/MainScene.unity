@@ -367,7 +367,6 @@ MonoBehaviour:
       logoMini: {fileID: 0}
       logoMedium: {fileID: 0}
       selectSound: {fileID: 0}
-    playerPrefab: {fileID: 113178, guid: 1727b0b7c644e6249a77d11c24566dea, type: 2}
     relatedSelectionBox: {fileID: 0}
     color: {r: .669117689, g: .201719299, b: .201719299, a: 1}
     name: 
@@ -397,8 +396,6 @@ MonoBehaviour:
       isKeyboard: 0
       name: 
     playerInstance: {fileID: 0}
-    soundHit: []
-    soundDead: []
   - controller: {fileID: 0}
     character:
       name: Unknown
@@ -407,7 +404,6 @@ MonoBehaviour:
       logoMini: {fileID: 0}
       logoMedium: {fileID: 0}
       selectSound: {fileID: 0}
-    playerPrefab: {fileID: 142084, guid: f5decd1b58425c541b4643e4dde7dc68, type: 2}
     relatedSelectionBox: {fileID: 0}
     color: {r: .134948075, g: .470588207, b: .2067056, a: 1}
     name: 
@@ -437,8 +433,6 @@ MonoBehaviour:
       isKeyboard: 0
       name: 
     playerInstance: {fileID: 0}
-    soundHit: []
-    soundDead: []
   - controller: {fileID: 0}
     character:
       name: Unknown
@@ -447,7 +441,6 @@ MonoBehaviour:
       logoMini: {fileID: 0}
       logoMedium: {fileID: 0}
       selectSound: {fileID: 0}
-    playerPrefab: {fileID: 142084, guid: f5decd1b58425c541b4643e4dde7dc68, type: 2}
     relatedSelectionBox: {fileID: 0}
     color: {r: 0, g: .167900592, b: .566176474, a: 1}
     name: 
@@ -477,8 +470,6 @@ MonoBehaviour:
       isKeyboard: 0
       name: 
     playerInstance: {fileID: 0}
-    soundHit: []
-    soundDead: []
   - controller: {fileID: 0}
     character:
       name: Unknown
@@ -487,7 +478,6 @@ MonoBehaviour:
       logoMini: {fileID: 0}
       logoMedium: {fileID: 0}
       selectSound: {fileID: 0}
-    playerPrefab: {fileID: 142084, guid: f5decd1b58425c541b4643e4dde7dc68, type: 2}
     relatedSelectionBox: {fileID: 0}
     color: {r: .772058845, g: .335446239, b: 0, a: 1}
     name: 
@@ -517,8 +507,6 @@ MonoBehaviour:
       isKeyboard: 0
       name: 
     playerInstance: {fileID: 0}
-    soundHit: []
-    soundDead: []
   spawnPositions:
   - {x: 5, y: 5}
   - {x: 2, y: 2}

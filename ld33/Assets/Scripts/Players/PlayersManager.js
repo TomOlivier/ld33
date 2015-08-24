@@ -77,7 +77,7 @@ function StartGame() {
 			var randomIndex : int = Random.Range(0, spawnPositionsCopy.Count);
 			var randomSpawn : Vector2 = spawnPositionsCopy[randomIndex];
 			spawnPositionsCopy.RemoveAt(randomIndex);
-			pl.playerInstance = Instantiate(pl.playerPrefab, Vector3(randomSpawn.x,randomSpawn.y,0), Quaternion.identity);
+			pl.playerInstance = Instantiate(pl.character.prefab, Vector3(randomSpawn.x,randomSpawn.y,0), Quaternion.identity);
 			pl.playerInstance.GetComponent.<PlayerController>().playerInfo = pl;
 		}
 	}

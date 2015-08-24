@@ -22,16 +22,42 @@ private var cooldownAttack : float = 0;
 
 public var playerInfo: Player;
 
+// Animation
+private var anim : Animator;
+private var activeCompleteAnim: String = "";
 
 //Partie SFX
 public var soundHit : AudioClip [];
 public var soundDead : AudioClip [];
 
+function Animate(animName : String, conserve: boolean) {
+	if (anim.GetCurrentAnimatorStateInfo(0).IsName(animName))
+	{
+		return ;
+	}
+	if (activeCompleteAnim != "" && anim.GetCurrentAnimatorStateInfo(0).IsName(activeCompleteAnim))
+	{
+		Debug.Log("it is");
+		return ;
+	}
+	anim.Play(animName);
+	if (conserve) {
+		Debug.Log("it is set");
+		activeCompleteAnim = animName;
+	}
+	else {
+		Debug.Log("it is clr");
+		activeCompleteAnim = "";
+	}
+}
 
 function Start () {
+	anim = transform.GetComponentInChildren(Animator);
 }
 
 function Update () {
+
+	var activeAnim : String = "MobIdle";
 
 	if (GameController.isInGUI == false && GameController.gamePlaying) {
 		var inputDevicesController : InputDevicesController = InputDevicesController.GetInstance();
@@ -72,10 +98,15 @@ function Update () {
 					} else {
 						if (objectToHit.tag == "Player") {
 							this.Push(objectToHit);
+							activeAnim = "MobKick 1";
+							Animate(activeAnim, true);
 						} else if (objectToHit.tag == "Building") {
 							this.AttackBuilding(objectToHit);
+							activeAnim = "MobEat";
+							Animate(activeAnim, true);
 						}
 					}
+					
 				}
 				cooldownAttack = attackCooldownDef;
 			}
@@ -84,6 +115,12 @@ function Update () {
 	var rb : Rigidbody2D = GetComponent.<Rigidbody2D>();
 	rb.angularVelocity = 0;
 	rb.velocity = Vector2 (moveX * speed, moveY * speed) + pushedVector;
+	if (activeAnim == "MobIdle")
+	{
+		if (moveX != 0 || moveY != 0)
+			activeAnim = "MobWalk";
+		Animate(activeAnim, false);
+	}
 }
 
 function OnTriggerEnter2D(collider : Collider2D) {
