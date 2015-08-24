@@ -11,6 +11,8 @@ TagManager:
   - building_top
   - building_bot
   - Border
+  - Fire
+  - Bonus
   layers:
   - Default
   - TransparentFX
@@ -24,7 +26,7 @@ TagManager:
   - Tree
   - Building
   - PNJ
-  - 
+  - Bonus
   - 
   - 
   - 
