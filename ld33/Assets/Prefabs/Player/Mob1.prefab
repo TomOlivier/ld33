@@ -646,7 +646,7 @@ BoxCollider2D:
   m_Material: {fileID: 6200000, guid: 2b1cea787984b0c409be55aed77a15d5, type: 2}
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_Offset: {x: 1.46879721, y: .00652674027}
+  m_Offset: {x: 1, y: 0}
   serializedVersion: 2
   m_Size: {x: 1.3062669, y: 1.31769717}
 --- !u!64 &6480770
@@ -804,6 +804,7 @@ MonoBehaviour:
       isKeyboard: 0
       name: Unknown Device
     playerInstance: {fileID: 0}
+  playerAI: {fileID: 0}
   soundHit:
   - {fileID: 8300000, guid: 0b8007c24a1886847a4a95e5da5f32c4, type: 3}
   - {fileID: 8300000, guid: 598b9cb3718cd984785d0a3c2349c9f4, type: 3}
