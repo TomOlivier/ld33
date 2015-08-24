@@ -763,8 +763,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   spriteRenderer: {fileID: 0}
-  pushStrength: 10
-  weakness: 15
+  pushStrength: 25
+  weakness: 20
   attackCooldownDef: .349999994
   eatCooldownDef: .200000003
   playerInfo:
@@ -868,12 +868,8 @@ Prefab:
       value: .349999994
       objectReference: {fileID: 0}
     - target: {fileID: 0}
-      propertyPath: pushStrength
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
       propertyPath: weakness
-      value: 15
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
