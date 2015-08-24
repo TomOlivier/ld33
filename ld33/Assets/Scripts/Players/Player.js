@@ -4,7 +4,6 @@ class Player
 {
 	public var controller: PlayerController;
 	public var character: Character = null;
-	public var playerPrefab: GameObject; // set to load correct display of player
 
 	// UI Vars
 	public var relatedSelectionBox: GameObject; // related char selection Player box on bottom
