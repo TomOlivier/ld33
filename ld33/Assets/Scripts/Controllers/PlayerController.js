@@ -2,15 +2,23 @@
 @script RequireComponent(Rigidbody2D)
 
 import System.Collections.Generic;
+public var spriteRenderer : SpriteRenderer = null;
+
 
 public var speed : float = 5;
+
 public var spriteRenderer : SpriteRenderer = null;
 public var pushStrength : float = 10;
 public var weakness : float = 20; // the higher, the more it will the pushed
 public var attackCooldownDef : float = 0.5;
+
 public var eatCooldownDef : float = 0.25;
 
 //public var particleSystem : ParticleSystem;
+
+private var bonusSpeed : Array = new Array();
+private var bonusLife : Array = new Array();
+private var bonusStrength : Array = new Array();
 
 private var pushedVector : Vector2;
 private var numberOfPushesLeft : int = 0; // number of time the push has to be applied
@@ -62,7 +70,47 @@ function Update () {
 	var activeAnim : String = "MobIdle";
 
 	if (GameController.isInGUI == false && GameController.gamePlaying) {
-
+		var i : int = 0;
+		
+		// BONUSES
+		var calculatedSpeed : float = speed;
+		var calculatedStrength : float = pushStrength;
+		var calculatedLife : float = playerInfo.life; // TODO: implement this
+		
+		// SPEED
+		var bonusDef : BonusDefinition;
+		for (i = 0; i < bonusSpeed.length;i++) {
+			bonusDef = bonusSpeed[i];
+			// FIXME: getting multiple multiplier will result in the flat value to boost too much !
+			calculatedSpeed *= bonusDef.multiplier;
+			calculatedSpeed += bonusDef.flatValue * Time.deltaTime;
+			if (bonusDef.duration > 0) {
+				bonusDef.duration -= Time.deltaTime;
+				if (bonusDef.duration <= 0) {
+					bonusSpeed.RemoveAt(i);
+					i--;
+				}
+			}
+		}
+		// Strength
+		for (i = 0; i < bonusStrength.length;i++) {
+			bonusDef = bonusStrength[i];
+			// FIXME: getting multiple multiplier will result in the flat value to boost too much !
+			calculatedStrength *= bonusDef.multiplier;
+			calculatedStrength += bonusDef.flatValue;
+			if (bonusDef.duration > 0) {
+				bonusDef.duration -= Time.deltaTime;
+				if (bonusDef.duration <= 0) {
+					bonusStrength.RemoveAt(i);
+					i--;
+				}
+			}
+		}
+		
+		// TODO: life (perhaps logic in player ?)
+		
+		// END BONUSES
+		
 		var inputDevicesController : InputDevicesController = InputDevicesController.GetInstance();
 
 		var moveX : float;
@@ -88,7 +136,7 @@ function Update () {
 			}
 			numberOfPushesLeft--;
 		}
-
+		
 		if (moveX != 0 || moveY != 0) { // TODO: check if there's no pause / gui display
 			var rot_z:float = Mathf.Atan2(moveX, -moveY) * Mathf.Rad2Deg; // - moveY because we did shit with cameras
 	    	transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, rot_z - 90f);
@@ -110,16 +158,17 @@ function Update () {
 				activeAnim = "MobKick 1";
 				// ATTACK !
 				cooldownAttack = 0;
-
-				for (var i = 0; i < touchedUnits.length; i++) {
+				for (i = 0; i < touchedUnits.length; i++) {
 					var objectToHit : GameObject = touchedUnits[i] as GameObject;
 					if (!objectToHit) {
 						touchedUnits.RemoveAt(i);
 					} else {
 						if (objectToHit.tag == "Player") {
-							this.Push(objectToHit);
+							this.Push(objectToHit, calculatedStrength);
+							activeAnim = "MobKick 1";
+							Animate(activeAnim, true);
 						} else if (objectToHit.tag == "Building") {
-							this.AttackBuilding(objectToHit);
+							this.AttackBuilding(objectToHit, calculatedStrength);
 							activeAnim = "MobEat";
 							if (cooldownAttack < eatCooldownDef)
 								cooldownAttack = eatCooldownDef;
@@ -134,7 +183,9 @@ function Update () {
 
 	var rb : Rigidbody2D = GetComponent.<Rigidbody2D>();
 	rb.angularVelocity = 0;
-	rb.velocity = Vector2 (moveX * speed, moveY * speed) + pushedVector;
+	
+	// FIXME: this velocity might be set to 0 if we don't enter this conditionnal statement
+	rb.velocity = Vector2 (moveX * calculatedSpeed, moveY * calculatedSpeed) + pushedVector;
 	}
 
 	if (activeAnim == "MobIdle") {
@@ -200,7 +251,7 @@ function OnCollisionEnter2D(collision : Collision2D) {
 	} else if (playerInfo.isRampage) {
 		if (collision.gameObject.tag.Equals("Building"))
 		{
-			this.AttackBuilding(collision.gameObject);
+			this.AttackBuilding(collision.gameObject, pushStrength);
 		}
 	}
 }
@@ -225,17 +276,18 @@ function DamageLevel () {
 	return (playerInfo.hitDamage + 3 * Mathf.Log(playerInfo.points));
 }
 
-function Push(playerToPush:GameObject) {
+function Push(playerToPush:GameObject, strength:float) {
 
 	var direction:Vector3 = (playerToPush.transform.position - this.gameObject.transform.position);
 	direction.Normalize();
-	direction *= pushStrength;
+	direction *= strength;
 
 	var player : PlayerController = playerToPush.GetComponent.<PlayerController>();
 	player.pushedVector = direction;
 	player.initialPushVector = direction;
 	player.numberOfPushesLeft = player.weakness;
 
+	//	var dmg : int = strength; // FIXME: shouldn't dmg scale with pushstrength ?
 	var dmg : int = DamageLevel();
 	var pointsToSteal : int = dmg / 4;
 	var pointStealed : int = 0;
@@ -276,9 +328,21 @@ function Push(playerToPush:GameObject) {
 	player.ShouldPointsScale();
 }
 
-function AttackBuilding(buildingToHit:GameObject) {
+function AttackBuilding(buildingToHit:GameObject, strength:float) {
 	if(soundEat && soundEat.length > 0)
 		SoundManager.instance.PlaySfx(soundEat[Random.Range(0,soundEat.length)]);
 
-	buildingToHit.GetComponent.<Building>().GetDamaged(this.pushStrength);
+	buildingToHit.GetComponent.<Building>().GetDamaged(strength);
+}
+
+function ApplyBonusSpeed(bonus:BonusDefinition) {;
+	this.bonusSpeed.Add(new BonusDefinition(bonus.multiplier, bonus.flatValue, bonus.duration));
+}
+
+function ApplyBonusLife(bonus:BonusDefinition) {
+	this.bonusLife.Add(new BonusDefinition(bonus.multiplier, bonus.flatValue, bonus.duration));
+}
+
+function ApplyBonusStrength(bonus:BonusDefinition) {
+	this.bonusStrength.Add(new BonusDefinition(bonus.multiplier, bonus.flatValue, bonus.duration));	
 }
