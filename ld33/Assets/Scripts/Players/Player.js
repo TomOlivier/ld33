@@ -12,14 +12,19 @@ class Player
 	public var name: String;
 	public var uid: int;
 
-	public var points : int = 0;			// Active points/Force
-	public var pointsMax : int = 100;		// Points required to enter RAMPAGE mode
-	public var life : int = 100;			// active HP
-	public var lifeDef : int = 100;			// HP on start
-	public var maxLife : int = 100;			// max hp
-	public var maxLifeDef : int = 100;		// max hp on start
-	public var isAlive : boolean = true;
-
+	
+	public var points : int = 0;					// Active points/Force
+	public var pointsMax : int = 100;				// Points required to enter RAMPAGE mode
+	public var life : int = 100;					// active HP
+	public var lifeDef : int = 100;					// HP on start
+	public var maxLife : int = 100;					// max hp
+	public var maxLifeDef : int = 100;				// max hp on start
+	public var hitDamage : int = 8;					// hit damage
+	public var rampageDamage : int = 40;			// rampage damage;
+	public var rampageResistance : float = 3.0f;	// damage divider when on rampage
+	public var isAlive : boolean = true;			// if player is alive
+	public var isRampage : boolean = false;			// player on rampage mode (insta kill)
+	
 	public var roundDeathId : int = 0;
 	public var roundKills : int = 0;		// Total of kills this round
 	public var kills : int = 0;				// Total of kills
@@ -52,6 +57,7 @@ class Player
 		maxLife = maxLifeDef;
 		isAlive = true;
 		roundKills = 0;
+		isRampage = false;
 	}
 
 	public function GetPoints(damage : int) : int {
@@ -65,7 +71,18 @@ class Player
 		}
 	}
 
+	public function TriggerRampage()
+	{
+		if (isRampage)
+			return ;
+		isRampage = true;
+		GameObject.Find("Game").BroadcastMessage("PlayerRampage", this);
+	}
+
 	public function GetDamaged(damage:int) {
+		if (isRampage) {
+			damage /= rampageResistance;
+		}
 		life = life - damage;
 
 		if (life > 0 && isAlive) {

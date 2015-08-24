@@ -101,13 +101,13 @@ function Update () {
 			isHitting = playerAI.CanHit();
 		}
 
-		cooldownAttack -= Time.deltaTime;
 		if (cooldownAttack > 0) {
 			cooldownAttack -= Time.deltaTime;
 		} else if (isHitting) {
 			if (cooldownAttack > 0) {
-				cooldownAttack -= Time.deltaTime;
+
 			} else {
+				activeAnim = "MobKick 1";
 				// ATTACK !
 				for (var i = 0; i < touchedUnits.length; i++) {
 					var objectToHit : GameObject = touchedUnits[i] as GameObject;
@@ -116,15 +116,13 @@ function Update () {
 					} else {
 						if (objectToHit.tag == "Player") {
 							this.Push(objectToHit);
-							activeAnim = "MobKick 1";
-							Animate(activeAnim, true);
 						} else if (objectToHit.tag == "Building") {
 							this.AttackBuilding(objectToHit);
 							activeAnim = "MobEat";
-							Animate(activeAnim, true);
 						}
 					}
 				}
+				Animate(activeAnim, true);
 				cooldownAttack = attackCooldownDef;
 			}
 		}
@@ -147,6 +145,11 @@ function OnTriggerEnter2D(collider : Collider2D) {
 	/*if (ArrayUtility.Contains(touchedUnits.ToBuiltin(GameObject), collider.gameObject)) {
 		return;
 	}*/
+	for (var i = 0; i < touchedUnits.Count; i++) {
+		if (touchedUnits[i] == collider.gameObject) {
+			return ;
+		}
+	}
 	touchedUnits.Add(collider.gameObject);
 	//Debug.Log("canHit: " + collider.gameObject.tag);
 	//Debug.Log("touchedUnits: " + touchedUnits);
@@ -189,15 +192,32 @@ function OnCollisionEnter2D(collision : Collision2D) {
 	} else if (collision.gameObject.tag.Equals("Tree")) {
 		collision.gameObject.GetComponent.<Hittable>().Die();
 		Destroy(collision.gameObject);
+	} else if (playerInfo.isRampage) {
+		if (collision.gameObject.tag.Equals("Building"))
+		{
+			this.AttackBuilding(collision.gameObject);
+		}
 	}
 }
 
 function ShouldPointsScale () {
-	transform.localScale = Vector3(1, 1, 1) * (1 + playerInfo.points / 40f);
+	var rampageScale = 0.0f;
+
+	if (playerInfo.points >= 100)
+	{
+		playerInfo.points = 100;
+		if (playerInfo.isRampage == false)
+		{
+			rampageScale = 1.5f;
+			this.pushStrength *= 3;
+			playerInfo.TriggerRampage();
+		}
+	}
+	transform.localScale = Vector3(1, 1, 1) * (1 + playerInfo.points / 40f + rampageScale);
 }
 
 function DamageLevel () {
-	return (5 + 3 * Mathf.Log(playerInfo.points));
+	return (playerInfo.hitDamage + 3 * Mathf.Log(playerInfo.points));
 }
 
 function Push(playerToPush:GameObject) {
@@ -215,6 +235,10 @@ function Push(playerToPush:GameObject) {
 	var pointsToSteal : int = dmg / 4;
 	var pointStealed : int = 0;
 
+	if (playerInfo.isRampage)
+		dmg = playerInfo.rampageDamage;
+	if (!playerInfo.isRampage && player.playerInfo.isRampage)
+		return ;
 	player.playerInfo.GetDamaged(dmg);
 
 	if (player.playerInfo.isAlive == false) {
@@ -228,6 +252,7 @@ function Push(playerToPush:GameObject) {
 		pointsToSteal = 1.5 * pointsToSteal;
 
 		pointStealed = player.playerInfo.GetPoints(pointsToSteal);
+
 		playerInfo.points += pointStealed;
 	}
 
@@ -236,7 +261,9 @@ function Push(playerToPush:GameObject) {
 		if(player.soundHit && player.soundHit.length > 0)
 			SoundManager.instance.PlaySfx(player.soundHit[Random.Range(0,player.soundHit.length)]);
 
-		pointStealed = player.playerInfo.GetPoints(pointsToSteal);
+		if (!player.playerInfo.isRampage)
+			pointStealed = player.playerInfo.GetPoints(pointsToSteal);
+
 		playerInfo.points += pointStealed;
 	}
 

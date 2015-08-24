@@ -112,3 +112,8 @@ function GameTimeOver()
 {
 	hudController.TimeOverAnimate();
 }
+
+function PlayerRampage(pl: Player)
+{
+	hudController.Rampage(pl);
+}
