@@ -185,6 +185,8 @@ function Push(playerToPush:GameObject) {
 	player.numberOfPushesLeft = player.weakness;
 	
 	var dmg : int = 25;
+	var pointsToSteal : int = 10;
+	var pointStealed : int = 0;
 
 	player.playerInfo.GetDamaged(dmg);
 
@@ -194,7 +196,13 @@ function Push(playerToPush:GameObject) {
 		playerInfo.roundKills++;
 
 		if(player.soundDead && player.soundDead.length > 0)
-			SoundManager.instance.PlaySfx(player.soundDead[Random.Range(0,player.soundDead.length)]);	
+			SoundManager.instance.PlaySfx(player.soundDead[Random.Range(0,player.soundDead.length)]);
+
+		//Si on porte le coup fatal, on vole plus de points
+		pointsToSteal = 1.5 * pointsToSteal;
+
+		pointStealed = player.playerInfo.GetPoints(pointsToSteal);
+		playerInfo.points += pointStealed;
 
 	}
 	else
@@ -202,6 +210,9 @@ function Push(playerToPush:GameObject) {
 		//joue le son de dmg du jouer
 		if(player.soundHit && player.soundHit.length > 0)
 			SoundManager.instance.PlaySfx(player.soundHit[Random.Range(0,player.soundHit.length)]);
+
+		pointStealed = player.playerInfo.GetPoints(pointsToSteal);
+		playerInfo.points += pointStealed;
 
 	}
 }
