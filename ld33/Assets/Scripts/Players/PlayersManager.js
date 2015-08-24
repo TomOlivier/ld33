@@ -8,7 +8,7 @@ public var spawnPositions : Vector2[]; // needs to be as many as players
 public var leaderboard: List.<Player>;
 public var gameLeaderboard: List.<Player>;
 
-function Start () 
+function Start ()
 {
 	var ui : ControllerUI = GameObject.Find("Game").GetComponent(ControllerUI);
 
@@ -41,7 +41,7 @@ function AreAllPlayersReady() : boolean {
 		}
 	}
 	Debug.Log("Yes they are");
-	return (true);	
+	return (true);
 }
 
 function ResetAll(hard: boolean) {
@@ -63,7 +63,7 @@ function Update () {
 
 function StartGame() {
 	var spawnPositionsCopy : List.<Vector2> = new List.<Vector2>(spawnPositions);
-	
+
 	CreateGameLeaderboard();
 	for (var pl:Player in players) {
 		if (pl.playerInstance)
@@ -71,20 +71,27 @@ function StartGame() {
 			Destroy(pl.playerInstance);
 			pl.playerInstance = null;
 		}
+
+		// Player Class has been Filled
 		if (pl.isActive && pl.playerInstance == null) {
-			pl.GameReset();	
-			Debug.Log("new Player");
+			pl.GameReset();
 			var randomIndex : int = Random.Range(0, spawnPositionsCopy.Count);
 			var randomSpawn : Vector2 = spawnPositionsCopy[randomIndex];
 			spawnPositionsCopy.RemoveAt(randomIndex);
 			pl.playerInstance = Instantiate(pl.character.prefab, Vector3(randomSpawn.x,randomSpawn.y,0), Quaternion.identity);
 			pl.playerInstance.GetComponent.<PlayerController>().playerInfo = pl;
+
+			if (pl.isIA) {
+				var c = pl.playerInstance.AddComponent.<PlayerAI>();
+				pl.playerInstance.GetComponent.<PlayerController>().playerAI = c;
+				pl.playerInstance.GetComponent.<PlayerController>().playerAI.init();
+			}
 		}
 	}
 }
 
-function EndGame() 
-{	
+function EndGame()
+{
 	ApplyScoring();
 	CreateLeaderboard();
 }
@@ -137,11 +144,11 @@ function CreateLeaderboard()
 	for (var it = 0; it < players.length; it++)
 	{
 		players[it].rank = -1;
-	}	
+	}
 	while (cnt < players.length)
 	{
 		var selectedPl : Player = null;
-		
+
 		for (var i = 0; i < players.length; i++)
 		{
 			var activePl = players[i];
@@ -151,7 +158,7 @@ function CreateLeaderboard()
 			else if (selectedPl && selectedPl.score < activePl.score && activePl.rank == -1)
 				selectedPl = activePl;
 		}
-		
+
 		if (selectedPl)
 		{
 			selectedPl.rank = cnt + 1;
@@ -165,7 +172,7 @@ function PlayerDied(pl : Player)
 {
 	var alive : int = 0;
 	var plAlive : Player;
-	
+
 	pl.deaths++;
 
 	for (var apl in players)
@@ -203,7 +210,7 @@ function PlayerDied(pl : Player)
 		GameObject.Find("Game").GetComponent(GameController).gamePlaying = false;
 		GameObject.Find("Game").BroadcastMessage("GameTimeOver");
 	} else {
-		
-		
+
+
 	}
 }

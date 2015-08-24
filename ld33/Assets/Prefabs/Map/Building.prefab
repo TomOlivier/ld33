@@ -92,6 +92,9 @@ MonoBehaviour:
   top: {fileID: 0}
   height: 0
   width: 0
+  soundExplosion:
+  - {fileID: 8300000, guid: 62948e04f4bcd4fc09614c77395cdbb8, type: 3}
+  - {fileID: 8300000, guid: 88ace19035d0a469a902376c96f29db1, type: 3}
   subBuilding: {fileID: 199522, guid: 5ca8dee622e064e638e8e1dbd5f1abb8, type: 2}
   lifeDef: 0
 --- !u!114 &11457724
@@ -114,6 +117,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: soundExplosion.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_GravityScale
       value: 0

@@ -1,6 +1,6 @@
 ﻿#pragma strict
 
-public var efxSource : AudioSource;
+public var sfxPrefab : GameObject;
 public var musicSource : AudioSource;
 
 public static var instance : SoundManager = null;
@@ -12,10 +12,19 @@ public var rampageMusic : AudioClip;
 
 private var currentMusic : String;
 
+public var maxSfx : int;
+private var sfxPlayers : GameObject[];
+
 function Awake () {
 
-    if (instance == null)
+    if (instance == null){
         instance = this;
+        sfxPlayers = new GameObject[maxSfx];
+        for (var i : int = 0; i < maxSfx; i++) {
+        	var newSfx : GameObject = Instantiate(sfxPrefab, Vector3.zero, Quaternion.identity);
+        	sfxPlayers[i] = newSfx;
+        }
+    }
     else if (instance != this)
         Destroy (gameObject);
     
@@ -24,8 +33,14 @@ function Awake () {
 
 public function PlaySfx(clip : AudioClip){
     
-    efxSource.clip = clip;
-    efxSource.Play ();
+    for (var i = 0; i < sfxPlayers.length; i++) {
+    	var currentSfxPlayer : AudioSource = sfxPlayers[i].GetComponent.<AudioSource>();
+    	if(currentSfxPlayer.isPlaying)
+    		continue;
+	    currentSfxPlayer.clip = clip;
+	    currentSfxPlayer.Play ();
+	    break;
+    };
 }
 
 public function PlayMusic(musicName : String){

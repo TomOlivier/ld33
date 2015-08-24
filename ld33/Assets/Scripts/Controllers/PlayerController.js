@@ -21,6 +21,7 @@ private var touchedUnits : Array = new Array();
 private var cooldownAttack : float = 0;
 
 public var playerInfo: Player;
+public var playerAI : PlayerAI;
 
 // Animation
 private var anim : Animator;
@@ -28,6 +29,7 @@ private var activeCompleteAnim: String = "";
 
 //Partie SFX
 public var soundHit : AudioClip [];
+public var soundEat : AudioClip [];
 public var soundDead : AudioClip [];
 
 function Animate(animName : String, conserve: boolean) {
@@ -61,9 +63,22 @@ function Update () {
 
 	if (GameController.isInGUI == false && GameController.gamePlaying) {
 		var inputDevicesController : InputDevicesController = InputDevicesController.GetInstance();
-		
-		var moveX : float = inputDevicesController.GetAxisForDevice("Horizontal", playerInfo.device);
-		var moveY : float = -inputDevicesController.GetAxisForDevice("Vertical", playerInfo.device);
+
+		var moveX : float;
+		var moveY : float;
+
+		if (!playerInfo.isIA) {
+			moveX = inputDevicesController.GetAxisForDevice("Horizontal", playerInfo.device);
+			moveY = -inputDevicesController.GetAxisForDevice("Vertical", playerInfo.device);
+
+			Debug.Log(moveX + '--' + moveY);
+		} else {
+			// Remind to attach the script PlayerAI to the AI
+			var move : Vector3 = playerAI.WhatShouldIDo(speed);
+			moveX = move.x;
+			moveY = move.y;
+		}
+
 		if (numberOfPushesLeft >= 0) {
 			if (numberOfPushesLeft == 0) {
 				pushedVector = Vector2(0,0);
@@ -73,13 +88,13 @@ function Update () {
 			}
 			numberOfPushesLeft--;
 		}
-		
+
 
 		if (moveX != 0 || moveY != 0) { // TODO: check if there's no pause / gui display
 			var rot_z:float = Mathf.Atan2(moveX, -moveY) * Mathf.Rad2Deg; // - moveY because we did shit with cameras
 	    	transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, rot_z - 90f);
 		}
-		
+
 		var isHitting : boolean = inputDevicesController.GetButtonForDevice(ActionButton.ATTACK, playerInfo.device);
 //		Debug.Log("isHitting: " + isHitting);
 		cooldownAttack -= Time.deltaTime;
@@ -89,7 +104,7 @@ function Update () {
 			if (cooldownAttack > 0) {
 				cooldownAttack -= Time.deltaTime;
 				Debug.Log("can't attack !");
-			} else { 
+			} else {
 				// ATTACK !
 				for (var i = 0; i < touchedUnits.length; i++) {
 					var objectToHit : GameObject = touchedUnits[i] as GameObject;
@@ -173,7 +188,7 @@ function ShouldPointsScale () {
 }
 
 function Push(playerToPush:GameObject) {
-	
+
 	var direction:Vector3 = (playerToPush.transform.position - this.gameObject.transform.position);
 	direction.Normalize();
 	direction *= pushStrength;
@@ -182,18 +197,26 @@ function Push(playerToPush:GameObject) {
 	player.pushedVector = direction;
 	player.initialPushVector = direction;
 	player.numberOfPushesLeft = player.weakness;
-	
+
 	var dmg : int = 25;
+	var pointsToSteal : int = 10;
+	var pointStealed : int = 0;
 
 	player.playerInfo.GetDamaged(dmg);
 
-	if (player.playerInfo.isAlive == false) 
+	if (player.playerInfo.isAlive == false)
 	{
 		playerInfo.kills++;
 		playerInfo.roundKills++;
 
 		if(player.soundDead && player.soundDead.length > 0)
-			SoundManager.instance.PlaySfx(player.soundDead[Random.Range(0,player.soundDead.length)]);	
+			SoundManager.instance.PlaySfx(player.soundDead[Random.Range(0,player.soundDead.length)]);
+
+		//Si on porte le coup fatal, on vole plus de points
+		pointsToSteal = 1.5 * pointsToSteal;
+
+		pointStealed = player.playerInfo.GetPoints(pointsToSteal);
+		playerInfo.points += pointStealed;
 
 	}
 	else
@@ -202,9 +225,15 @@ function Push(playerToPush:GameObject) {
 		if(player.soundHit && player.soundHit.length > 0)
 			SoundManager.instance.PlaySfx(player.soundHit[Random.Range(0,player.soundHit.length)]);
 
+		pointStealed = player.playerInfo.GetPoints(pointsToSteal);
+		playerInfo.points += pointStealed;
+
 	}
 }
 
 function AttackBuilding(buildingToHit:GameObject) {
+	if(soundEat && soundEat.length > 0)
+		SoundManager.instance.PlaySfx(soundEat[Random.Range(0,soundEat.length)]);
+
 	buildingToHit.GetComponent.<Building>().GetDamaged(this.pushStrength);
 }
