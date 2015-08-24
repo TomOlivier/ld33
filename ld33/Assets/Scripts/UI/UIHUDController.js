@@ -46,7 +46,8 @@ function TimeOverAnimate()
 
 function Rampage(pl: Player)
 {
-	this.gameObject.Find("Splashs/Rampage/Text").GetComponent(UI.Text).text = "PLAYER " + pl.uid;
+	this.transform.Find("Splashs/Rampage/Text").GetComponent(UI.Text).text = "PLAYER " + pl.uid;
+	Debug.Log("RAMPAGE START");
 	anim.Play("Rampage");
 }
 
