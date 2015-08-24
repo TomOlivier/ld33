@@ -62,8 +62,8 @@ function Update () {
 	var activeAnim : String = "MobIdle";
 
 	if (GameController.isInGUI == false && GameController.gamePlaying) {
+		
 		var inputDevicesController : InputDevicesController = InputDevicesController.GetInstance();
-		var rb : Rigidbody2D = GetComponent.<Rigidbody2D>();
 
 		var moveX : float;
 		var moveY : float;
@@ -128,10 +128,11 @@ function Update () {
 				cooldownAttack = attackCooldownDef;
 			}
 		}
-	}
 
+	var rb : Rigidbody2D = GetComponent.<Rigidbody2D>();
 	rb.angularVelocity = 0;
 	rb.velocity = Vector2 (moveX * speed, moveY * speed) + pushedVector;
+	}
 
 	if (activeAnim == "MobIdle") {
 		if (moveX != 0 || moveY != 0) activeAnim = "MobWalk";
@@ -154,15 +155,22 @@ function OnTriggerExit2D(collider : Collider2D) {
 	if (!collider.gameObject.tag.Equals("Building") && !collider.gameObject.tag.Equals("Player")) {
 		return;
 	}
-	//Debug.Log("cantHit: " + collider.gameObject.tag);
-	for (var i = 0; i < touchedUnits.Count; i++) {
-		if (touchedUnits[i] == collider.gameObject) {
-			//Debug.Log("removed 1 at index: " + i);
-			touchedUnits.RemoveAt(i);
-			break;
+
+	var cleared : boolean = false;
+	while (cleared == false)
+	{
+		cleared = true;
+		//Debug.Log("cantHit: " + collider.gameObject.tag);
+		for (var i = 0; i < touchedUnits.Count; i++) {
+			if (touchedUnits[i] == collider.gameObject) {
+				//Debug.Log("removed 1 at index: " + i);
+				touchedUnits.RemoveAt(i);
+				cleared = false;
+				break;
+			}
 		}
 	}
-	//Debug.Log(this.gameObject + "touchedUnits : " + touchedUnits);
+		//Debug.Log(this.gameObject + "touchedUnits : " + touchedUnits);
 }
 
 function OnCollisionEnter2D(collision : Collision2D) {
@@ -230,6 +238,7 @@ function Push(playerToPush:GameObject) {
 		playerInfo.points += pointStealed;
 
 	}
+	ShouldPointsScale();
 }
 
 function AttackBuilding(buildingToHit:GameObject) {
