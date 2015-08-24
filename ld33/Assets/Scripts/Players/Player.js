@@ -56,35 +56,28 @@ class Player
 
 	public function GetPoints(damage : int) : int {
 		if(points > damage){
-			points = points - damage;
+			points -= damage;
 			return damage;
-		}
-		else
-		{
+		} else {
 			var diff : int = points;
 			points = 0;
-			return diff;
+			return points;
 		}
-
-
 	}
 
 	public function GetDamaged(damage:int) {
 		life = life - damage;
+
 		if (life > 0 && isAlive) {
 			playerInstance.GetComponent.<Hittable>().GetHit(damage);
-		}
-		else
-		{
-			if (playerInstance)
-			{
+		} else {
+			if (playerInstance) {
 				playerInstance.GetComponent.<Hittable>().Die();
 			}
 
 			playerInstance = null;
 			isAlive = false;
 			GameObject.Find("Game").BroadcastMessage("PlayerDied", this);
-			//GameReset();
 		}
 	}
 }

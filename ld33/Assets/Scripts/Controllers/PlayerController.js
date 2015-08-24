@@ -197,7 +197,7 @@ function ShouldPointsScale () {
 }
 
 function DamageLevel () {
-	return (7 + 3 * Mathf.Log(playerInfo.points));
+	return (5 + 3 * Mathf.Log(playerInfo.points));
 }
 
 function Push(playerToPush:GameObject) {
@@ -212,14 +212,12 @@ function Push(playerToPush:GameObject) {
 	player.numberOfPushesLeft = player.weakness;
 
 	var dmg : int = DamageLevel();
-	Debug.Log('Damages ' + dmg);
-	var pointsToSteal : int = 10;
+	var pointsToSteal : int = dmg / 4;
 	var pointStealed : int = 0;
 
 	player.playerInfo.GetDamaged(dmg);
 
-	if (player.playerInfo.isAlive == false)
-	{
+	if (player.playerInfo.isAlive == false) {
 		playerInfo.kills++;
 		playerInfo.roundKills++;
 
@@ -231,19 +229,19 @@ function Push(playerToPush:GameObject) {
 
 		pointStealed = player.playerInfo.GetPoints(pointsToSteal);
 		playerInfo.points += pointStealed;
-
 	}
-	else
-	{
+
+	else {
 		//joue le son de dmg du jouer
 		if(player.soundHit && player.soundHit.length > 0)
 			SoundManager.instance.PlaySfx(player.soundHit[Random.Range(0,player.soundHit.length)]);
 
 		pointStealed = player.playerInfo.GetPoints(pointsToSteal);
 		playerInfo.points += pointStealed;
-
 	}
+
 	ShouldPointsScale();
+	player.ShouldPointsScale();
 }
 
 function AttackBuilding(buildingToHit:GameObject) {
