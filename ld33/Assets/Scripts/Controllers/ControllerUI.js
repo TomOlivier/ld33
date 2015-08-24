@@ -1,10 +1,14 @@
 ﻿#pragma strict
 
+// Menus and top renders
 var panelMainMenu: GameObject;
 var panelPlaySelect: GameObject;
 var panelPlayingHUD: GameObject;
 var panelGameover: GameObject;
 var panelLoadingSplash : GameObject;
+
+// Overlays
+var panelPlayingHUDOverlay : GameObject;
 
 var characterSelection: UICharacterSelection;
 var hudController: UIHUDController;
@@ -26,6 +30,8 @@ function HideAll() {
 	panelPlayingHUD.SetActive(false);
 	panelGameover.SetActive(false);
 	panelLoadingSplash.SetActive(false);
+
+	panelPlayingHUDOverlay.SetActive(false);
 }
 
 function OnStateChanged(state: GameState)
@@ -55,6 +61,7 @@ function SwapUIState(state: GameState)
 		case GameState.PLAYING:
 			SoundManager.instance.PlayMusic("gameMusic");
 			panelPlayingHUD.SetActive(true);
+			panelPlayingHUDOverlay.SetActive(true);
 			break;
 		case GameState.GAME_OVER:
 			SoundManager.instance.PlayMusic("titleMusic");

@@ -40,7 +40,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 138392}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .119999997, y: -1.30999994, z: 0}
+  m_LocalPosition: {x: 1.65157449, y: -3.41073871, z: 5.89377832}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 491034}
@@ -75,7 +75,7 @@ ParticleSystem:
   InitialModule:
     enabled: 1
     startLifetime:
-      scalar: 1.89999998
+      scalar: .600000024
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -374,10 +374,15 @@ ParticleSystem:
           inSlope: 0
           outSlope: 0
           tangentMode: 0
-        - time: 1
-          value: 0
-          inSlope: -3.70352244
-          outSlope: -3.70352244
+        - time: .417520136
+          value: .498110265
+          inSlope: -2.38521957
+          outSlope: -2.38521957
+          tangentMode: 0
+        - time: .993610203
+          value: .0138888955
+          inSlope: .183685482
+          outSlope: .183685482
           tangentMode: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -1121,7 +1126,7 @@ ParticleSystemRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 6ca75e177134a4e0eaa2e09facdb7531, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -1143,7 +1148,7 @@ ParticleSystemRenderer:
   m_SortingFudge: 0
   m_NormalDirection: 1
   m_SortMode: 0
-  m_Mesh: {fileID: 0}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}

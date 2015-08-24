@@ -14,6 +14,8 @@ public var bottomInterMiddle2: GameObject;
 public var middleLeft2 : GameObject;
 public var middleMiddle2 : GameObject;
 
+public var buildingDamaged : GameObject;
+public var buildingDecorator : GameObject [];
 
 public var prefabBuilding : GameObject;
 
@@ -62,8 +64,12 @@ function generateBuilding(x : int, y : int, width : int, height : int) : GameObj
 		buildingScript.middleMiddle = middleMiddle2;
     }
 
+    buildingScript.buildingDamaged = buildingDamaged;
 
-
+    var randomIndex : int = Random.Range(0,buildingDecorator.length+2);
+    if(randomIndex < buildingDecorator.length)
+    	buildingScript.buildingDecorator = buildingDecorator[randomIndex];
+    
 	buildingScript.width = width;
 	buildingScript.height = height;
 

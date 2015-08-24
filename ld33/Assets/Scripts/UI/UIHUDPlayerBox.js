@@ -8,6 +8,7 @@ var visibleHP : float;
 var visiblePwr : float;
 
 var stateAlive : boolean;
+var linkedOverlayBox : GameObject;
 
 function Start () {
 
@@ -27,6 +28,7 @@ function UIEventGameStart() {
 	visibleHP = 0.0f;
 	visiblePwr = 0.0f;
 	stateAlive = true;
+	linkedOverlayBox.SetActive(true);
 }
 
 function Update () {
@@ -45,7 +47,7 @@ function Update () {
 				Mathf.Floor(visiblePwr).ToString() + "%";
 			displayObj.transform.Find("TorusInfos/HPValue").GetComponent(UI.Text).text = 
 				Mathf.Floor(visibleHP).ToString();
-			displayObj.transform.Find("TorusInfos/PwrTorus").GetComponent(UI.Image).fillAmount = 
+			displayObj.transform.Find("TorusInfos/PwrTorusBG/PwrTorus").GetComponent(UI.Image).fillAmount = 
 				Mathf.Clamp(visiblePwr / 100.0f, 0.0f, 1.0f);
 			displayObj.transform.Find("TorusInfos/HPTorus").GetComponent(UI.Image).fillAmount = 
 				Mathf.Clamp(visibleHP / player.maxLife, 0.0f, 1.0f);
@@ -57,4 +59,25 @@ function Update () {
 			displayObj.transform.Find("DeadInfo").gameObject.SetActive(true);
 		}
 	}
+
+	// Render player overlay
+	if (player.isActive && player.isAlive)
+	{
+		var pli : GameObject = player.playerInstance;
+		var pos : Vector3 = GameObject.Find("Main Camera").GetComponent(Camera).
+			WorldToScreenPoint(pli.transform.position + Vector3(0.0f, 0.0f, 3.0f * pli.transform.localScale.x));
+        
+		linkedOverlayBox.transform.Find("PName/Image").GetComponent(UI.Image).color = player.color;
+		if (player.isIA) {
+			linkedOverlayBox.transform.Find("PName/Text").GetComponent(UI.Text).text = "BOT";
+		} else {
+			linkedOverlayBox.transform.Find("PName/Text").GetComponent(UI.Text).text = "P" + player.uid;			
+		}
+		linkedOverlayBox.transform.position = pos;
+	}
+	else
+	{
+		linkedOverlayBox.SetActive(false);
+	}
+
 }

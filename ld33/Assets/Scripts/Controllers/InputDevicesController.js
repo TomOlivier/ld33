@@ -205,21 +205,23 @@ class InputDevicesController
 
     	if (dev != null)
     	{
-    		if (dev.isKeyboard) {
+    		if (dev.isKeyboard) 
+            {
     			switch (btnId)
     			{
     				case ActionButton.ATTACK:
-    					res = Input.GetKeyDown("space") != 0;
+    					res = Input.GetKeyDown("space");
     					break;
     				default:
 	    				break;
     			}
     		}
-    		else if (dev.isJoystick) {
+    		else if (dev.isJoystick) 
+            {
     			switch (btnId)
     			{
     				case ActionButton.ATTACK:
-    					res = Input.GetKey("joystick "+ (dev.joystickId) +" button 0") != 0;
+    					res = Input.GetKeyDown("joystick "+ (dev.joystickId) +" button 0");
     					break;
     				default:
 	    				break;

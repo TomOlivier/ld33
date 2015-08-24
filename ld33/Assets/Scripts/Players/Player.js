@@ -54,8 +54,23 @@ class Player
 		roundKills = 0;
 	}
 
+	public function GetPoints(damage : int) : int {
+		if(points > damage){
+			points = points - damage;
+			return damage;
+		}
+		else
+		{
+			var diff : int = points;
+			points = 0;
+			return diff;
+		}
+
+
+	}
+
 	public function GetDamaged(damage:int) {
-		life = life - damage;
+		life = life - 1;//damage;
 		if (life > 0 && isAlive) {
 			playerInstance.GetComponent.<Hittable>().GetHit(damage);
 		}
