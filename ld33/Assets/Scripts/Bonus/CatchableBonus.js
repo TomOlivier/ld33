@@ -3,29 +3,36 @@
 public class CatchableBonus extends Hittable
 {
 
-public var bonusSpeed : BonusDefinition = new BonusDefinition(5, 0, 2);
-public var bonusStrength : BonusDefinition = new BonusDefinition(1.5, 0, 2);
-public var bonusLife : BonusDefinition = new BonusDefinition(1, 50, 0);
+var bonus : BonusDefinition;
+var bonusType : String;
 
-function Start () {
+public var bonusSpeed : BonusDefinition = new BonusDefinition(1.3, 0, 2);
+public var bonusStrength : BonusDefinition = new BonusDefinition(1.1, 0, 2);
+public var bonusLife : BonusDefinition = new BonusDefinition(1, 25, 0);
 
-}
+function Awake () {
+	var r : int = Random.Range(0, 9);
 
-function Update () {
+	if (r <= 4) {
+		bonus = bonusSpeed;
+		bonusType = 'speed';
+	} else if (r <= 8) {
+		bonus = bonusStrength;
+		bonusType = 'strength';
+	} else {
+		bonus = bonusLife;
+		bonusType = 'life';
+	}
 
+	// Debug.Log(r + '--' + bonusType);
 }
 
 function OnTriggerEnter2D(col : Collider2D) {
 	if (col.gameObject.tag == "Player" && !col.isTrigger) { // only collide on base player
-		// TODO: notify player
-		
-//		Debug.Log("enter");
+
 		var playerToApplyBonus : PlayerController = col.gameObject.GetComponent.<PlayerController>();
-		
-		playerToApplyBonus.ApplyBonusSpeed(bonusSpeed);
-		playerToApplyBonus.ApplyBonusStrength(bonusSpeed);
-		playerToApplyBonus.ApplyBonusLife(bonusLife);
-		
+		playerToApplyBonus.ApplyBonus(bonusType, bonus);
+
 		Die();
 	}
 }
