@@ -22,6 +22,12 @@ private var cooldownAttack : float = 0;
 
 public var playerInfo: Player;
 
+
+//Partie SFX
+public var soundHit : AudioClip [];
+public var soundDead : AudioClip [];
+
+
 function Start () {
 }
 
@@ -132,7 +138,22 @@ function Push(playerToPush:GameObject) {
 	player.pushedVector = direction;
 	player.initialPushVector = direction;
 	player.numberOfPushesLeft = player.weakness;
-	player.playerInfo.GetDamaged(25);
+
+	var dmg : int = 25;
+
+	if(player.playerInfo.life > dmg)
+	{
+		//joue le son de dmg du jouer
+		if(player.soundHit && player.soundHit.length > 0)
+			SoundManager.instance.PlaySfx(player.soundHit[Random.Range(0,player.soundHit.length)]);
+	}
+	else
+	{
+		if(player.soundDead && player.soundDead.length > 0)
+			SoundManager.instance.PlaySfx(player.soundDead[Random.Range(0,player.soundDead.length)]);	
+	}
+
+	player.playerInfo.GetDamaged(dmg);
 }
 
 function AttackBuilding(buildingToHit:GameObject) {
