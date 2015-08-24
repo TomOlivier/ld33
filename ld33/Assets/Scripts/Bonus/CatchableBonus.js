@@ -10,6 +10,8 @@ public var bonusSpeed : BonusDefinition = new BonusDefinition(1.3, 0, 2);
 public var bonusStrength : BonusDefinition = new BonusDefinition(1.1, 0, 2);
 public var bonusLife : BonusDefinition = new BonusDefinition(1, 25, 0);
 
+public var pickupAudio : AudioClip [];
+
 function Awake () {
 	var r : int = Random.Range(0, 9);
 
@@ -32,6 +34,8 @@ function OnTriggerEnter2D(col : Collider2D) {
 
 		var playerToApplyBonus : PlayerController = col.gameObject.GetComponent.<PlayerController>();
 		playerToApplyBonus.ApplyBonus(bonusType, bonus);
+
+		SoundManager.instance.PlaySfx(pickupAudio[Random.Range(0,pickupAudio.length)]);
 
 		Die();
 	}

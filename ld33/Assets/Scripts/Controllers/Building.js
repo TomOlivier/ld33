@@ -25,6 +25,11 @@ public var subBuilding : GameObject;
 
 public var lifeDef : float = 0; // if lifeDef == 0; lifeDef = height * 50;
 
+
+public var pickupSpeed : AudioClip [];
+public var pickupLife : AudioClip [];
+public var pickupStr : AudioClip [];
+
 private var currentLife : float = 10;
 
 private var nbPNJScared : int = 5;
@@ -166,7 +171,19 @@ function GetDamaged(damage:float) {
 		if (r < 200) {
 			var posBonus = this.transform.TransformPoint(toSpawnLocalPosition);
 			// posBonus.z = 1;
-			Instantiate(bonusPrefab, posBonus, Quaternion.identity);
+			var newBonus : CatchableBonus = Instantiate(bonusPrefab, posBonus, Quaternion.identity).GetComponent.<CatchableBonus>();
+			var bonusType : String = newBonus.bonusType;
+
+			if(bonusType == "speed"){
+				newBonus.pickupAudio = pickupSpeed;
+			}
+			else if(bonusType == "life"){
+				newBonus.pickupAudio = pickupLife;
+			}
+			else {
+				newBonus.pickupAudio = pickupStr;
+			}
+
 		}
 		this.gameObject.GetComponent.<Hittable>().Die();
 	}
