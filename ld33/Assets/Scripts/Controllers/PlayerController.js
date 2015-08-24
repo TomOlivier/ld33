@@ -9,10 +9,8 @@ public var speed : float = 5;
 public var pushStrength : float = 25;
 public var weakness : float = 20; // the higher, the more it will the pushed
 public var attackCooldownDef : float = 0.5;
-<<<<<<< HEAD
-=======
+
 public var eatCooldownDef : float = 0.25;
->>>>>>> e847066f826b7bcbe8f8dbfb9c34307a2dfe8f22
 
 //public var particleSystem : ParticleSystem;
 
@@ -70,7 +68,6 @@ function Update () {
 	var activeAnim : String = "MobIdle";
 
 	if (GameController.isInGUI == false && GameController.gamePlaying) {
-<<<<<<< HEAD
 		var i : int = 0;
 		
 		// BONUSES
@@ -112,9 +109,6 @@ function Update () {
 		
 		// END BONUSES
 		
-=======
-
->>>>>>> e847066f826b7bcbe8f8dbfb9c34307a2dfe8f22
 		var inputDevicesController : InputDevicesController = InputDevicesController.GetInstance();
 
 		var moveX : float;
@@ -161,25 +155,16 @@ function Update () {
 			} else {
 				activeAnim = "MobKick 1";
 				// ATTACK !
-<<<<<<< HEAD
-				for (i = 0; i < touchedUnits.length; i++) {
-=======
 				cooldownAttack = 0;
-
-				for (var i = 0; i < touchedUnits.length; i++) {
->>>>>>> e847066f826b7bcbe8f8dbfb9c34307a2dfe8f22
+				for (i = 0; i < touchedUnits.length; i++) {
 					var objectToHit : GameObject = touchedUnits[i] as GameObject;
 					if (!objectToHit) {
 						touchedUnits.RemoveAt(i);
 					} else {
 						if (objectToHit.tag == "Player") {
-<<<<<<< HEAD
 							this.Push(objectToHit, calculatedStrength);
 							activeAnim = "MobKick 1";
 							Animate(activeAnim, true);
-=======
-							this.Push(objectToHit);
->>>>>>> e847066f826b7bcbe8f8dbfb9c34307a2dfe8f22
 						} else if (objectToHit.tag == "Building") {
 							this.AttackBuilding(objectToHit, calculatedStrength);
 							activeAnim = "MobEat";
@@ -264,7 +249,7 @@ function OnCollisionEnter2D(collision : Collision2D) {
 	} else if (playerInfo.isRampage) {
 		if (collision.gameObject.tag.Equals("Building"))
 		{
-			this.AttackBuilding(collision.gameObject);
+			this.AttackBuilding(collision.gameObject, pushStrength);
 		}
 	}
 }
