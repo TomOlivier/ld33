@@ -20,7 +20,7 @@ function Start () {
 function ResetGameConditions() {
 	timeLeft = timeLeftDef;
 	playersManager.ResetAll(false);
-	
+
 }
 
 function FullReset() {
@@ -47,13 +47,13 @@ function Update () {
 			Debug.Log("Game state LOAD completed");
 			break;
 		case GameState.MAIN_MENU:
-			break;	
+			break;
 		case GameState.PLAY_LOADING:
 			if (generator.generationStateComplete)
 			{
 				nextState = GameState.PLAY_LOADING_FINISHED;
 			}
-			break;		
+			break;
 		case GameState.PLAY_LOADING_FINISHED:
 			roundCount++;
 			ResetGameConditions();
@@ -70,7 +70,7 @@ function Update () {
 					timeLeft = 0.0f;
 					gamePlaying = false;
 					BroadcastMessage("GameTimeOver");
-				}				
+				}
 			}
 			break;
 		default:
@@ -101,11 +101,11 @@ function ApplyStateSwitch()
 		case GameState.MAIN_MENU:
 			FullReset();
 			isInGUI = true;
-			break;	
+			break;
 		case GameState.PLAY_LOADING:
 			var testCoroutineFunction : function():System.Collections.IEnumerator = generator.Generate;
 
-			generator.Clear();		
+			generator.Clear();
 			isInGUI = true;
 			generator.generationStateComplete = false;
 			StartCoroutine(testCoroutineFunction());
@@ -115,8 +115,8 @@ function ApplyStateSwitch()
 			break;
 		case GameState.GAME_OVER:
 			isInGUI = true;
-			playersManager.EndGame();		
-			break;	
+			playersManager.EndGame();
+			break;
 		default:
 			break;
 	}
