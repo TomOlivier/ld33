@@ -529,10 +529,10 @@ MonoBehaviour:
       name: 
     playerInstance: {fileID: 0}
   spawnPositions:
+  - {x: -5, y: -5}
+  - {x: -5, y: 5}
+  - {x: 5, y: -5}
   - {x: 5, y: 5}
-  - {x: 2, y: 2}
-  - {x: 1, y: 1}
-  - {x: -3, y: -3}
   leaderboard: []
   gameLeaderboard: []
 --- !u!1 &83043042
@@ -1433,7 +1433,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11479966, guid: 1bffea54f383b48e6b26eb9e74e24fb6, type: 2}
       propertyPath: nbBuildings
-      value: 200
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 11479966, guid: 1bffea54f383b48e6b26eb9e74e24fb6, type: 2}
       propertyPath: startPosX

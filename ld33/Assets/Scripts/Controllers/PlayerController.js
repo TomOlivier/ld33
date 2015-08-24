@@ -319,8 +319,8 @@ function AttackBuilding(buildingToHit:GameObject, strength:float) {
 }
 
 function ApplyBonus (mode : String, bonus : BonusDefinition) {
-	if (mode == 'speed') ApplyBonusSpeed(bonus);
-	else if (mode == 'strength') ApplyBonusStrength(bonus);
+	/*if (mode == 'speed') ApplyBonusSpeed(bonus);*/
+	if (mode == 'strength') ApplyBonusStrength(bonus);
 	else ApplyBonusLife(bonus);
 }
 

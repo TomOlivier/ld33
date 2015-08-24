@@ -151,7 +151,7 @@ function Generate () : System.Collections.IEnumerator {
 	yield;
 
 	for (i = 0; i < nbForest; i++) {
-		generateForest(startPosX + Random.Range(0, (nbCol)*100) / 100f, startPosY + Random.Range(0, (nbRow)*100) / 100f, Random.Range(5,16));
+		generateForest(startPosX + Random.Range(5, (nbCol-5)*100) / 100f, startPosY + Random.Range(5, (nbRow-5)*100) / 100f, Random.Range(5,16));
 	};
 
 	yield;
