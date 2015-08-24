@@ -21,12 +21,14 @@ private var pushedVector : Vector2;
 private var numberOfPushesLeft : int = 0; // number of time the push has to be applied
 private var initialPushVector : Vector2;
 
-private var touchedUnits : Array = new Array();
+public var touchedUnits : Array = new Array();
 
 private var cooldownAttack : float = 0;
 
 public var playerInfo: Player;
 public var playerAI : PlayerAI;
+
+public var hitColliderWrapper : GameObject;
 
 // Animation
 private var anim : Animator;
@@ -60,6 +62,13 @@ function Animate(animName : String, conserve: boolean) {
 
 function Start () {
 	anim = transform.GetComponentInChildren(Animator);
+}
+
+function OnTriggerEnter2D(collider : Collider2D) {
+	return;	
+}
+function OnTriggerExit2D(collider : Collider2D) {
+	return;
 }
 
 function Update () {
@@ -191,43 +200,7 @@ function Update () {
 	}
 }
 
-function OnTriggerEnter2D(collider : Collider2D) {
-	if (!collider.gameObject.tag.Equals("Building") && !collider.gameObject.tag.Equals("Player")) {
-		return;
-	}
-	/*if (ArrayUtility.Contains(touchedUnits.ToBuiltin(GameObject), collider.gameObject)) {
-		return;
-	}*/
-	for (var i = 0; i < touchedUnits.Count; i++) {
-		if (touchedUnits[i] == collider.gameObject) {
-			return ;
-		}
-	}
-	touchedUnits.Add(collider.gameObject);
-	//Debug.Log("canHit: " + collider.gameObject.tag);
-	//Debug.Log("touchedUnits: " + touchedUnits);
-}
-function OnTriggerExit2D(collider : Collider2D) {
-	if (!collider.gameObject.tag.Equals("Building") && !collider.gameObject.tag.Equals("Player")) {
-		return;
-	}
 
-	var cleared : boolean = false;
-	while (cleared == false)
-	{
-		cleared = true;
-		//Debug.Log("cantHit: " + collider.gameObject.tag);
-		for (var i = 0; i < touchedUnits.Count; i++) {
-			if (touchedUnits[i] == collider.gameObject) {
-				//Debug.Log("removed 1 at index: " + i);
-				touchedUnits.RemoveAt(i);
-				cleared = false;
-				break;
-			}
-		}
-	}
-		//Debug.Log(this.gameObject + "touchedUnits : " + touchedUnits);
-}
 
 function OnCollisionEnter2D(collision : Collision2D) {
 	if (collision.gameObject.tag.Equals("PNJScared")) {

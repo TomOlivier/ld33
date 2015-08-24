@@ -1,5 +1,22 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &100318
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 467950}
+  - 61: {fileID: 6188826}
+  - 114: {fileID: 11432838}
+  m_Layer: 0
+  m_Name: HitColliderWrapper
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &105182
 GameObject:
   m_ObjectHideFlags: 1
@@ -282,6 +299,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 446404}
+  - {fileID: 467950}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &446404
@@ -328,6 +346,18 @@ Transform:
   - {fileID: 497438}
   m_Father: {fileID: 446404}
   m_RootOrder: 0
+--- !u!4 &467950
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100318}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 439104}
+  m_RootOrder: 1
 --- !u!4 &480362
 Transform:
   m_ObjectHideFlags: 1
@@ -642,13 +672,26 @@ BoxCollider2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 113178}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Material: {fileID: 6200000, guid: 2b1cea787984b0c409be55aed77a15d5, type: 2}
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_Offset: {x: 1, y: 0}
   serializedVersion: 2
   m_Size: {x: 1.3062669, y: 1.31769717}
+--- !u!61 &6188826
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100318}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 1, y: 0}
+  serializedVersion: 2
+  m_Size: {x: 1.29999995, y: 1.29999995}
 --- !u!64 &6421712
 MeshCollider:
   m_ObjectHideFlags: 1
@@ -761,8 +804,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efb584fa0406e6141a0dfabfdaaa1b0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
   spriteRenderer: {fileID: 0}
+  speed: 5
   pushStrength: 25
   weakness: 20
   attackCooldownDef: .349999994
@@ -811,6 +854,7 @@ MonoBehaviour:
       name: Unknown Device
     playerInstance: {fileID: 0}
   playerAI: {fileID: 0}
+  hitColliderWrapper: {fileID: 100318}
   soundHit:
   - {fileID: 8300000, guid: 0b8007c24a1886847a4a95e5da5f32c4, type: 3}
   - {fileID: 8300000, guid: 598b9cb3718cd984785d0a3c2349c9f4, type: 3}
@@ -823,6 +867,17 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 33080dbe08d0cfb448248a0ebef5a3e9, type: 3}
   soundDead:
   - {fileID: 0}
+--- !u!114 &11432838
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e86fb89838edaa74480a653ba6e5cba0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11455968
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -874,6 +929,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: weakness
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
