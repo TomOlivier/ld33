@@ -122,6 +122,7 @@ function OnCollisionEnter2D(collision : Collision2D) {
 		collision.gameObject.GetComponent.<Hittable>().Die();
 
 		playerInfo.points++;
+		ShouldPointsScale();
 
 		Destroy(collision.gameObject);
 	} else if (collision.gameObject.tag.Equals("Tree")) {
@@ -130,6 +131,9 @@ function OnCollisionEnter2D(collision : Collision2D) {
 	}
 }
 
+function ShouldPointsScale () {
+	transform.localScale = Vector3(1, 1, 1) * (1 + playerInfo.points / 33f);
+}
 
 function Push(playerToPush:GameObject) {
 	
