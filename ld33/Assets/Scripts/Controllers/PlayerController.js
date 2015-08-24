@@ -25,6 +25,7 @@ public var playerInfo: Player;
 
 //Partie SFX
 public var soundHit : AudioClip [];
+public var soundEat : AudioClip [];
 public var soundDead : AudioClip [];
 
 
@@ -169,5 +170,8 @@ function Push(playerToPush:GameObject) {
 }
 
 function AttackBuilding(buildingToHit:GameObject) {
+	if(soundEat && soundEat.length > 0)
+		SoundManager.instance.PlaySfx(soundEat[Random.Range(0,soundEat.length)]);
+
 	buildingToHit.GetComponent.<Building>().GetDamaged(this.pushStrength);
 }

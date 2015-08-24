@@ -12,6 +12,8 @@ public var top : GameObject;
 public var height : int;
 public var width : int;
 
+public var soundExplosion : AudioClip [];
+
 private var spriteRenderer : SpriteRenderer;
 private var boxCollider : BoxCollider2D;
 private var rb2D : Rigidbody2D;
@@ -166,6 +168,8 @@ function removeSubBuilding() {
 		}
 
 		if(shouldbreak){
+			if(soundExplosion && soundExplosion.length > 0)
+				SoundManager.instance.PlaySfx(soundExplosion[Random.Range(0,soundExplosion.length)]);
 			Destroy(objectToRemove);
 			// Debug.Log("Removing " + objectToRemove);
 			break;
@@ -179,6 +183,8 @@ function removeSubBuilding() {
 		}
 
 		if(shouldbreak){
+			if(soundExplosion && soundExplosion.length > 0)
+				SoundManager.instance.PlaySfx(soundExplosion[Random.Range(0,soundExplosion.length)]);
 			Destroy(objectToRemove);
 			// Debug.Log("Removing " + objectToRemove);
 			break;

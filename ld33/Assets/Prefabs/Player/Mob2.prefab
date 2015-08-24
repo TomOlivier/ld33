@@ -800,10 +800,14 @@ MonoBehaviour:
     maxLife: 100
     maxLifeDef: 100
     isAlive: 1
-    rank: 0
-    score: 0
+    roundDeathId: 0
+    roundKills: 0
+    kills: 0
+    deaths: 0
     wins: 0
     loses: 0
+    rank: 0
+    score: 0
     isIA: 0
     isActive: 0
     device:
@@ -814,12 +818,16 @@ MonoBehaviour:
       isKeyboard: 0
       name: Unknown Device
     playerInstance: {fileID: 0}
-    soundHit: []
-    soundDead: []
   soundHit:
   - {fileID: 8300000, guid: 0b8007c24a1886847a4a95e5da5f32c4, type: 3}
   - {fileID: 8300000, guid: 598b9cb3718cd984785d0a3c2349c9f4, type: 3}
   - {fileID: 8300000, guid: 36b40cb4f2fb8514a8de01e5be39ee7a, type: 3}
+  soundEat:
+  - {fileID: 8300000, guid: f47b16c4df98bc54faaf263326fded43, type: 3}
+  - {fileID: 8300000, guid: 90258de68fb548440a5c1dc7d8f1a388, type: 3}
+  - {fileID: 8300000, guid: b9ee2cd773dc2134c893cbfcf1e8b5e1, type: 3}
+  - {fileID: 8300000, guid: f4d75bcb662c319428d78b65b8fa4287, type: 3}
+  - {fileID: 8300000, guid: 33080dbe08d0cfb448248a0ebef5a3e9, type: 3}
   soundDead:
   - {fileID: 8300000, guid: 4c4df431f5c2d504a82296ca8577e0da, type: 3}
 --- !u!1001 &100100000
@@ -832,6 +840,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: soundHit.Array.size
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: soundEat.Array.size
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: soundDead.Array.size
