@@ -14,9 +14,8 @@ private var isFading : boolean = true;
 
 function Start () {
 	isFading = playOnStart;
-	startColor = renderersToFade[0].material.color;
-	// ?
-	//endColor = Color(startColor.r, startColor.g, startColor.b, 0.0);
+	if (renderersToFade.Length > 0)
+		startColor = renderersToFade[0].material.color;
 }
 
 function Update () {
