@@ -374,11 +374,16 @@ MonoBehaviour:
     uid: 1
     points: 0
     pointsMax: 100
+    pointsPerNPC: 3
     life: 100
     lifeDef: 100
     maxLife: 100
     maxLifeDef: 100
+    hitDamage: 10
+    rampageDamage: 30
+    rampageResistance: 3
     isAlive: 1
+    isRampage: 0
     roundDeathId: 0
     roundKills: 0
     kills: 0
@@ -411,11 +416,16 @@ MonoBehaviour:
     uid: 2
     points: 0
     pointsMax: 100
+    pointsPerNPC: 3
     life: 100
     lifeDef: 100
     maxLife: 100
     maxLifeDef: 100
+    hitDamage: 10
+    rampageDamage: 30
+    rampageResistance: 3
     isAlive: 1
+    isRampage: 0
     roundDeathId: 0
     roundKills: 0
     kills: 0
@@ -448,11 +458,16 @@ MonoBehaviour:
     uid: 3
     points: 0
     pointsMax: 100
+    pointsPerNPC: 3
     life: 100
     lifeDef: 100
     maxLife: 100
     maxLifeDef: 100
+    hitDamage: 10
+    rampageDamage: 30
+    rampageResistance: 3
     isAlive: 1
+    isRampage: 0
     roundDeathId: 0
     roundKills: 0
     kills: 0
@@ -485,11 +500,16 @@ MonoBehaviour:
     uid: 4
     points: 0
     pointsMax: 100
+    pointsPerNPC: 3
     life: 100
     lifeDef: 100
     maxLife: 100
     maxLifeDef: 100
+    hitDamage: 10
+    rampageDamage: 30
+    rampageResistance: 3
     isAlive: 1
+    isRampage: 0
     roundDeathId: 0
     roundKills: 0
     kills: 0
@@ -1381,7 +1401,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11479966, guid: 1bffea54f383b48e6b26eb9e74e24fb6, type: 2}
       propertyPath: nbBuildings
-      value: 30
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 11479966, guid: 1bffea54f383b48e6b26eb9e74e24fb6, type: 2}
       propertyPath: startPosX

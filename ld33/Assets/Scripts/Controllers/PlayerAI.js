@@ -99,7 +99,7 @@ function WhatShouldIDo () {
         }
     }
 
-    move = MoveTowardsTarget(target);
+    if (target != null) move = MoveTowardsTarget(target);
 
     return move;
 }
@@ -182,7 +182,7 @@ function GetPlayerTarget (mode : String) : GameObject {
 
     // Random
     else{
-        var r : int = Random.Range(0, otherPlayers.Count);
+        var r : int = Random.Range(0, otherPlayers.Count-1);
         target = otherPlayers[r];
     }
 
@@ -193,9 +193,13 @@ function GetClosestPlayer () : GameObject {
     var currentClosestPlayer : GameObject = null;
     var dist = Mathf.Infinity;
     otherPlayers.ForEach(function(elem) {
-        if (Vector3.Distance(elem.transform.position, gameObject.transform.position) < dist) {
-            dist = Vector3.Distance(elem.transform.position, gameObject.transform.position);
-            currentClosestPlayer = elem;
+        if (isPlayerAlive(elem)) {
+            if (Vector3.Distance(elem.transform.position, gameObject.transform.position) < dist) {
+                dist = Vector3.Distance(elem.transform.position, gameObject.transform.position);
+                currentClosestPlayer = elem;
+            }
+        } else {
+            otherPlayers.Remove(elem);
         }
     });
 
@@ -207,13 +211,17 @@ function GetBestPlayer () : GameObject {
     var bestScore : int = -1;
 
     otherPlayers.ForEach (function(elem){
-        if (currentBestPlayer == null) currentBestPlayer = elem;
-        else {
-            var tempScore = getPlayerObjectPoints(elem);
-            if (bestScore < tempScore) {
-                bestScore = tempScore;
-                currentBestPlayer = elem;
+        if (isPlayerAlive(elem)) {
+            if (currentBestPlayer == null) currentBestPlayer = elem;
+            else {
+                var tempScore = getPlayerObjectPoints(elem);
+                if (bestScore < tempScore) {
+                    bestScore = tempScore;
+                    currentBestPlayer = elem;
+                }
             }
+        } else {
+            otherPlayers.Remove(elem);
         }
     });
 
@@ -225,13 +233,17 @@ function GetWorstPlayer () : GameObject {
     var worstScore : int = Mathf.Infinity;
 
     otherPlayers.ForEach (function(elem){
-        if (currentWorstPlayer == null) currentWorstPlayer = elem;
-        else {
-            var tempScore = getPlayerObjectPoints(elem);
-            if (worstScore > tempScore) {
-                worstScore = tempScore;
-                currentWorstPlayer = elem;
+        if (isPlayerAlive(elem)) {
+            if (currentWorstPlayer == null) currentWorstPlayer = elem;
+            else {
+                var tempScore = getPlayerObjectPoints(elem);
+                if (worstScore > tempScore) {
+                    worstScore = tempScore;
+                    currentWorstPlayer = elem;
+                }
             }
+        } else {
+            otherPlayers.Remove(elem);
         }
     });
 
@@ -240,4 +252,8 @@ function GetWorstPlayer () : GameObject {
 
 function getPlayerObjectPoints (playerObject : GameObject) : int {
     return playerObject.GetComponent.<PlayerController>().playerInfo.points;
+}
+
+function isPlayerAlive (playerObject : GameObject) : boolean {
+    return playerObject != null;
 }

@@ -9,6 +9,10 @@ public var speed : float = 5;
 public var pushStrength : float = 25;
 public var weakness : float = 20; // the higher, the more it will the pushed
 public var attackCooldownDef : float = 0.5;
+<<<<<<< HEAD
+=======
+public var eatCooldownDef : float = 0.25;
+>>>>>>> e847066f826b7bcbe8f8dbfb9c34307a2dfe8f22
 
 //public var particleSystem : ParticleSystem;
 
@@ -46,7 +50,7 @@ function Animate(animName : String, conserve: boolean) {
 		if (activeCompleteAnim != "" && anim.GetCurrentAnimatorStateInfo(0).IsName(activeCompleteAnim))
 		{
 			return ;
-		}	
+		}
 	}
 	anim.Play(animName);
 	if (conserve) {
@@ -66,6 +70,7 @@ function Update () {
 	var activeAnim : String = "MobIdle";
 
 	if (GameController.isInGUI == false && GameController.gamePlaying) {
+<<<<<<< HEAD
 		var i : int = 0;
 		
 		// BONUSES
@@ -107,6 +112,9 @@ function Update () {
 		
 		// END BONUSES
 		
+=======
+
+>>>>>>> e847066f826b7bcbe8f8dbfb9c34307a2dfe8f22
 		var inputDevicesController : InputDevicesController = InputDevicesController.GetInstance();
 
 		var moveX : float;
@@ -145,31 +153,44 @@ function Update () {
 			isHitting = playerAI.CanHit();
 		}
 
-		cooldownAttack -= Time.deltaTime;
 		if (cooldownAttack > 0) {
 			cooldownAttack -= Time.deltaTime;
 		} else if (isHitting) {
 			if (cooldownAttack > 0) {
-				cooldownAttack -= Time.deltaTime;
+
 			} else {
+				activeAnim = "MobKick 1";
 				// ATTACK !
+<<<<<<< HEAD
 				for (i = 0; i < touchedUnits.length; i++) {
+=======
+				cooldownAttack = 0;
+
+				for (var i = 0; i < touchedUnits.length; i++) {
+>>>>>>> e847066f826b7bcbe8f8dbfb9c34307a2dfe8f22
 					var objectToHit : GameObject = touchedUnits[i] as GameObject;
 					if (!objectToHit) {
 						touchedUnits.RemoveAt(i);
 					} else {
 						if (objectToHit.tag == "Player") {
+<<<<<<< HEAD
 							this.Push(objectToHit, calculatedStrength);
 							activeAnim = "MobKick 1";
 							Animate(activeAnim, true);
+=======
+							this.Push(objectToHit);
+>>>>>>> e847066f826b7bcbe8f8dbfb9c34307a2dfe8f22
 						} else if (objectToHit.tag == "Building") {
 							this.AttackBuilding(objectToHit, calculatedStrength);
 							activeAnim = "MobEat";
-							Animate(activeAnim, true);
+							if (cooldownAttack < eatCooldownDef)
+								cooldownAttack = eatCooldownDef;
 						}
 					}
 				}
-				cooldownAttack = attackCooldownDef;
+				if (cooldownAttack == 0)
+					cooldownAttack = attackCooldownDef;
+				Animate(activeAnim, true);
 			}
 		}
 
@@ -193,6 +214,11 @@ function OnTriggerEnter2D(collider : Collider2D) {
 	/*if (ArrayUtility.Contains(touchedUnits.ToBuiltin(GameObject), collider.gameObject)) {
 		return;
 	}*/
+	for (var i = 0; i < touchedUnits.Count; i++) {
+		if (touchedUnits[i] == collider.gameObject) {
+			return ;
+		}
+	}
 	touchedUnits.Add(collider.gameObject);
 	//Debug.Log("canHit: " + collider.gameObject.tag);
 	//Debug.Log("touchedUnits: " + touchedUnits);
@@ -228,18 +254,39 @@ function OnCollisionEnter2D(collision : Collision2D) {
 		SoundManager.instance.PlaySfx(dieingAudio[Random.Range(0,dieingAudio.length)]);
 		collision.gameObject.GetComponent.<Hittable>().Die();
 
-		playerInfo.points++;
+		playerInfo.points += playerInfo.pointsPerNPC;
 		ShouldPointsScale();
 
 		Destroy(collision.gameObject);
 	} else if (collision.gameObject.tag.Equals("Tree")) {
 		collision.gameObject.GetComponent.<Hittable>().Die();
 		Destroy(collision.gameObject);
+	} else if (playerInfo.isRampage) {
+		if (collision.gameObject.tag.Equals("Building"))
+		{
+			this.AttackBuilding(collision.gameObject);
+		}
 	}
 }
 
 function ShouldPointsScale () {
-	transform.localScale = Vector3(1, 1, 1) * (1 + playerInfo.points / 33f);
+	var rampageScale = 0.0f;
+
+	if (playerInfo.points >= 100)
+	{
+		playerInfo.points = 100;
+		if (playerInfo.isRampage == false)
+		{
+			rampageScale = 1.5f;
+			this.pushStrength *= 3;
+			playerInfo.TriggerRampage();
+		}
+	}
+	transform.localScale = Vector3(1, 1, 1) * (1 + playerInfo.points / 40f + rampageScale);
+}
+
+function DamageLevel () {
+	return (playerInfo.hitDamage + 3 * Mathf.Log(playerInfo.points));
 }
 
 function Push(playerToPush:GameObject, strength:float) {
@@ -253,14 +300,18 @@ function Push(playerToPush:GameObject, strength:float) {
 	player.initialPushVector = direction;
 	player.numberOfPushesLeft = player.weakness;
 
-	var dmg : int = strength;
-	var pointsToSteal : int = 10;
+	//	var dmg : int = strength; // FIXME: shouldn't dmg scale with pushstrength ?
+	var dmg : int = DamageLevel();
+	var pointsToSteal : int = dmg / 4;
 	var pointStealed : int = 0;
 
+	if (playerInfo.isRampage)
+		dmg = playerInfo.rampageDamage;
+	if (!playerInfo.isRampage && player.playerInfo.isRampage)
+		return ;
 	player.playerInfo.GetDamaged(dmg);
 
-	if (player.playerInfo.isAlive == false)
-	{
+	if (player.playerInfo.isAlive == false) {
 		playerInfo.kills++;
 		playerInfo.roundKills++;
 
@@ -271,20 +322,23 @@ function Push(playerToPush:GameObject, strength:float) {
 		pointsToSteal = 1.5 * pointsToSteal;
 
 		pointStealed = player.playerInfo.GetPoints(pointsToSteal);
-		playerInfo.points += pointStealed;
 
+		playerInfo.points += pointStealed;
 	}
-	else
-	{
+
+	else {
 		//joue le son de dmg du jouer
 		if(player.soundHit && player.soundHit.length > 0)
 			SoundManager.instance.PlaySfx(player.soundHit[Random.Range(0,player.soundHit.length)]);
 
-		pointStealed = player.playerInfo.GetPoints(pointsToSteal);
-		playerInfo.points += pointStealed;
+		if (!player.playerInfo.isRampage)
+			pointStealed = player.playerInfo.GetPoints(pointsToSteal);
 
+		playerInfo.points += pointStealed;
 	}
+
 	ShouldPointsScale();
+	player.ShouldPointsScale();
 }
 
 function AttackBuilding(buildingToHit:GameObject, strength:float) {
