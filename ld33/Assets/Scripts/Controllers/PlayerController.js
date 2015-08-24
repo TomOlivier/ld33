@@ -5,7 +5,7 @@ import System.Collections.Generic;
 
 public var speed : float = 5;
 public var spriteRenderer : SpriteRenderer = null;
-public var pushStrength : float = 25;
+public var pushStrength : float = 10;
 public var weakness : float = 20; // the higher, the more it will the pushed
 public var attackCooldownDef : float = 0.5;
 public var eatCooldownDef : float = 0.25;
