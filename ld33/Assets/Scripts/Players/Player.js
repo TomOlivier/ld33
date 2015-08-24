@@ -37,6 +37,11 @@ class Player
 	public var device : CompatibleDevice = null;
 	public var playerInstance : GameObject; // set once the game starts : instance of the prefab set before
 
+
+	//Partie SFX
+	public var soundHit : AudioClip [];
+	public var soundDead : AudioClip [];
+
 	public function FullReset() {
 		GameReset();
 		wins = 0;
@@ -58,12 +63,16 @@ class Player
 		life = life - damage;
 		if (life > 0 && isAlive) {
 			playerInstance.GetComponent.<Hittable>().GetHit(damage);
+			SoundManager.instance.PlaySfx(soundHit[Random.Range(0,soundHit.length)]);
 		}
-		else {
+		else 
+		{
 			if (playerInstance)
 			{
 				playerInstance.GetComponent.<Hittable>().Die();
 			}
+
+			SoundManager.instance.PlaySfx(soundDead[Random.Range(0,soundDead.length)]);
 			playerInstance = null;
 			isAlive = false;
 			GameObject.Find("Game").BroadcastMessage("PlayerDied", this);

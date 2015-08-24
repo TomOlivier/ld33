@@ -22,6 +22,12 @@ private var cooldownAttack : float = 0;
 
 public var playerInfo: Player;
 
+
+//Partie SFX
+public var soundHit : AudioClip [];
+public var soundDead : AudioClip [];
+
+
 function Start () {
 }
 
@@ -114,6 +120,10 @@ function OnCollisionEnter2D(collision : Collision2D) {
 
 		SoundManager.instance.PlaySfx(dieingAudio[Random.Range(0,dieingAudio.length)]);
 		collision.gameObject.GetComponent.<Hittable>().Die();
+
+		playerInfo.points++;
+		ShouldPointsScale();
+
 		Destroy(collision.gameObject);
 	} else if (collision.gameObject.tag.Equals("Tree")) {
 		collision.gameObject.GetComponent.<Hittable>().Die();
@@ -121,6 +131,9 @@ function OnCollisionEnter2D(collision : Collision2D) {
 	}
 }
 
+function ShouldPointsScale () {
+	transform.localScale = Vector3(1, 1, 1) * (1 + playerInfo.points / 33f);
+}
 
 function Push(playerToPush:GameObject) {
 	
@@ -133,12 +146,25 @@ function Push(playerToPush:GameObject) {
 	player.initialPushVector = direction;
 	player.numberOfPushesLeft = player.weakness;
 	
-	player.playerInfo.GetDamaged(25);
+	var dmg : int = 25;
+
+	player.playerInfo.GetDamaged(dmg);
 
 	if (player.playerInfo.isAlive == false) 
 	{
 		playerInfo.kills++;
 		playerInfo.roundKills++;
+
+		if(player.soundDead && player.soundDead.length > 0)
+			SoundManager.instance.PlaySfx(player.soundDead[Random.Range(0,player.soundDead.length)]);	
+
+	}
+	else
+	{
+		//joue le son de dmg du jouer
+		if(player.soundHit && player.soundHit.length > 0)
+			SoundManager.instance.PlaySfx(player.soundHit[Random.Range(0,player.soundHit.length)]);
+
 	}
 }
 
