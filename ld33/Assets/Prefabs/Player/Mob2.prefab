@@ -778,7 +778,8 @@ MonoBehaviour:
   spriteRenderer: {fileID: 0}
   pushStrength: 25
   weakness: 40
-  attackCooldownDef: .5
+  attackCooldownDef: .349999994
+  eatCooldownDef: .200000003
   playerInfo:
     controller: {fileID: 0}
     character:
@@ -794,11 +795,16 @@ MonoBehaviour:
     uid: 0
     points: 0
     pointsMax: 100
+    pointsPerNPC: 3
     life: 90
     lifeDef: 10
     maxLife: 100
     maxLifeDef: 100
+    hitDamage: 8
+    rampageDamage: 40
+    rampageResistance: 3
     isAlive: 1
+    isRampage: 0
     roundDeathId: 0
     roundKills: 0
     kills: 0
@@ -864,6 +870,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Offset.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: attackCooldownDef
+      value: .349999994
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

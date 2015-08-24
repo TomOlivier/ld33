@@ -12,9 +12,9 @@ class Player
 	public var name: String;
 	public var uid: int;
 
-	
-	public var points : int = 0;					// Active points/Force
-	public var pointsMax : int = 100;				// Points required to enter RAMPAGE mode
+	public var points : float = 0;					// Active points/Force
+	public var pointsMax : float = 100;				// Points required to enter RAMPAGE mode
+	public var pointsPerNPC : float = 3;			// Points aquired per NPC kill
 	public var life : int = 100;					// active HP
 	public var lifeDef : int = 100;					// HP on start
 	public var maxLife : int = 100;					// max hp

@@ -8,7 +8,7 @@ public var spriteRenderer : SpriteRenderer = null;
 public var pushStrength : float = 25;
 public var weakness : float = 20; // the higher, the more it will the pushed
 public var attackCooldownDef : float = 0.5;
-
+public var eatCooldownDef : float = 0.25;
 
 //public var particleSystem : ParticleSystem;
 
@@ -109,6 +109,8 @@ function Update () {
 			} else {
 				activeAnim = "MobKick 1";
 				// ATTACK !
+				cooldownAttack = 0;
+
 				for (var i = 0; i < touchedUnits.length; i++) {
 					var objectToHit : GameObject = touchedUnits[i] as GameObject;
 					if (!objectToHit) {
@@ -119,11 +121,14 @@ function Update () {
 						} else if (objectToHit.tag == "Building") {
 							this.AttackBuilding(objectToHit);
 							activeAnim = "MobEat";
+							if (cooldownAttack < eatCooldownDef)
+								cooldownAttack = eatCooldownDef;
 						}
 					}
 				}
+				if (cooldownAttack == 0)
+					cooldownAttack = attackCooldownDef;
 				Animate(activeAnim, true);
-				cooldownAttack = attackCooldownDef;
 			}
 		}
 
@@ -185,7 +190,7 @@ function OnCollisionEnter2D(collision : Collision2D) {
 		SoundManager.instance.PlaySfx(dieingAudio[Random.Range(0,dieingAudio.length)]);
 		collision.gameObject.GetComponent.<Hittable>().Die();
 
-		playerInfo.points++;
+		playerInfo.points += playerInfo.pointsPerNPC;
 		ShouldPointsScale();
 
 		Destroy(collision.gameObject);
