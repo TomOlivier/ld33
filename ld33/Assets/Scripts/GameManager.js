@@ -43,10 +43,15 @@ function Clear() {
 	if (boardHolder)
 	{
 		Destroy(boardHolder.gameObject);
-		boardHolder = null;		
+		boardHolder = null;
 	}
 	buildingFactory.Clear();
 	pnjFactory.Clear();
+
+	var bonuses = GameObject.FindGameObjectsWithTag("Bonus");
+	for (var i = bonuses.length - 1; i >= 0; i--) {
+		Destroy(bonuses[i]);
+	};
 }
 
 function Generate () : System.Collections.IEnumerator {
@@ -102,7 +107,7 @@ function Generate () : System.Collections.IEnumerator {
 	yield;
 
 	cleanRoads();
-	
+
 	yield;
 
 	buildRoads();
@@ -131,7 +136,7 @@ function Generate () : System.Collections.IEnumerator {
 			i--;
 			continue;
 		}
-		
+
 	};
 	for (i = 0; i < nbPNJScared; i++) {
 		pnjFactory.generatePNJScared(Random.Range(startPosX, nbCol + startPosX), Random.Range(startPosX, nbCol + startPosX));
@@ -368,14 +373,14 @@ function cleanRoads() {
 
 	for ( i = startPosX; i < nbCol + startPosX; i++) {
 		for (j = startPosY; j < nbRow + startPosY; j++){
-			
+
 			if(countRoad(i,j) == 4)
 			{
 
 				if(countRoad(i+1 ,j) == 4 || countRoad(i-1 ,j) == 4 ||
 					countRoad(i ,j+1) == 4 ||	countRoad(i ,j-1) == 4)
 					roadList[i - startPosX, j- startPosY] = 0;
-				
+
 			}
 		}
 	}

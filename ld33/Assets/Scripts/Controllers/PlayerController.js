@@ -87,7 +87,7 @@ function Update () {
 		var bonusDef : BonusDefinition;
 		for (i = 0; i < bonusSpeed.length;i++) {
 			bonusDef = bonusSpeed[i];
-			// FIXME: getting multiple multiplier will result in the flat value to boost too much !
+
 			calculatedSpeed *= bonusDef.multiplier;
 			calculatedSpeed += bonusDef.flatValue * Time.deltaTime;
 			calculatedSpeed /= 3;
@@ -105,7 +105,7 @@ function Update () {
 		// Strength
 		for (i = 0; i < bonusStrength.length;i++) {
 			bonusDef = bonusStrength[i];
-			// FIXME: getting multiple multiplier will result in the flat value to boost too much !
+
 			calculatedStrength = DamageLevel() * bonusDef.multiplier;
 			calculatedStrength += bonusDef.flatValue;
 
