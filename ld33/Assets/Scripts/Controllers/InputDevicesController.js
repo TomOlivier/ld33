@@ -23,7 +23,6 @@ class InputDevicesController
 {
     private static var Instance : InputDevicesController = new InputDevicesController();
 
-
     public var devices : List.<CompatibleDevice>;
     public var devicesCount : int = 0;
 

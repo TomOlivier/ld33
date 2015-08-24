@@ -393,7 +393,7 @@ MonoBehaviour:
     rank: 0
     score: 0
     isIA: 0
-    isActive: 1
+    isActive: 0
     device:
       isJoystick: 0
       joystickId: 0

@@ -58,6 +58,23 @@ function RefreshCharacter()
 		transform.Find("BGImgBt").GetComponent(UI.Image).color = new Color(0.7f, 0.7f, 0.7f, 1.0f);
 		pCName.GetComponent(UI.Text).text = "--";
 	}
+
+	// Refresh boxes
+
+	pInputKB.SetActive(false);
+	pInputJS.SetActive(false);
+	pInputUnknown.SetActive(false);
+
+	if (player.device == null) {
+		pInputUnknown.SetActive(true);
+	} else {
+		if (player.device.isJoystick) {
+			pInputJS.SetActive(true);
+			pInputJS.Find("Image/Text").GetComponent(UI.Text).text = (player.device.joystickId).ToString();
+		} else {
+			pInputKB.SetActive(true);
+		}
+	}
 }
 
 function OnPlayerTypeClick() {
@@ -121,21 +138,10 @@ function OnPlayerInputTypeClick() {
 		dev = idc.GetAvailableJoypad();
 	}
 
-	pInputKB.SetActive(false);
-	pInputJS.SetActive(false);
-	pInputUnknown.SetActive(false);
-
 	if (dev == null) {
-		pInputUnknown.SetActive(true);
 	} else {
 		idc.AssignDeviceToPlayer(dev, player);
-		if (player.device.isJoystick) {
-			pInputJS.SetActive(true);
-			//pInputJS.Find("Image/Text").GetComponent(UI.Text).text = "";//(player.device.joystickId + 1).ToString();
-		} else {
-			pInputKB.SetActive(true);
-		}
 	}
+	RefreshCharacter();
 	uiCharacter.gameSetupUpdated = true;
-
 }
