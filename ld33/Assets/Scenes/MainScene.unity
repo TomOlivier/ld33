@@ -186,6 +186,7 @@ Transform:
   - {fileID: 713338727}
   - {fileID: 56966950}
   - {fileID: 557069276}
+  - {fileID: 1952063388}
   m_Father: {fileID: 0}
   m_RootOrder: 1
 --- !u!114 &42648967
@@ -366,7 +367,6 @@ MonoBehaviour:
       logoMini: {fileID: 0}
       logoMedium: {fileID: 0}
       selectSound: {fileID: 0}
-    playerPrefab: {fileID: 113178, guid: 1727b0b7c644e6249a77d11c24566dea, type: 2}
     relatedSelectionBox: {fileID: 0}
     color: {r: .669117689, g: .201719299, b: .201719299, a: 1}
     name: 
@@ -378,6 +378,7 @@ MonoBehaviour:
     maxLife: 100
     maxLifeDef: 100
     isAlive: 1
+    roundDeathId: 0
     roundKills: 0
     kills: 0
     deaths: 0
@@ -403,7 +404,6 @@ MonoBehaviour:
       logoMini: {fileID: 0}
       logoMedium: {fileID: 0}
       selectSound: {fileID: 0}
-    playerPrefab: {fileID: 142084, guid: f5decd1b58425c541b4643e4dde7dc68, type: 2}
     relatedSelectionBox: {fileID: 0}
     color: {r: .134948075, g: .470588207, b: .2067056, a: 1}
     name: 
@@ -415,6 +415,7 @@ MonoBehaviour:
     maxLife: 100
     maxLifeDef: 100
     isAlive: 1
+    roundDeathId: 0
     roundKills: 0
     kills: 0
     deaths: 0
@@ -440,7 +441,6 @@ MonoBehaviour:
       logoMini: {fileID: 0}
       logoMedium: {fileID: 0}
       selectSound: {fileID: 0}
-    playerPrefab: {fileID: 142084, guid: f5decd1b58425c541b4643e4dde7dc68, type: 2}
     relatedSelectionBox: {fileID: 0}
     color: {r: 0, g: .167900592, b: .566176474, a: 1}
     name: 
@@ -452,6 +452,7 @@ MonoBehaviour:
     maxLife: 100
     maxLifeDef: 100
     isAlive: 1
+    roundDeathId: 0
     roundKills: 0
     kills: 0
     deaths: 0
@@ -477,7 +478,6 @@ MonoBehaviour:
       logoMini: {fileID: 0}
       logoMedium: {fileID: 0}
       selectSound: {fileID: 0}
-    playerPrefab: {fileID: 142084, guid: f5decd1b58425c541b4643e4dde7dc68, type: 2}
     relatedSelectionBox: {fileID: 0}
     color: {r: .772058845, g: .335446239, b: 0, a: 1}
     name: 
@@ -489,6 +489,7 @@ MonoBehaviour:
     maxLife: 100
     maxLifeDef: 100
     isAlive: 1
+    roundDeathId: 0
     roundKills: 0
     kills: 0
     deaths: 0
@@ -6510,6 +6511,52 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -10}
   m_SizeDelta: {x: 675, y: -100}
   m_Pivot: {x: .5, y: 1}
+--- !u!1001 &1952063387
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 42648966}
+    m_Modifications:
+    - target: {fileID: 496000, guid: 490b0dacc9dd4484fa390454ab914588, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 496000, guid: 490b0dacc9dd4484fa390454ab914588, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 496000, guid: 490b0dacc9dd4484fa390454ab914588, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 496000, guid: 490b0dacc9dd4484fa390454ab914588, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 496000, guid: 490b0dacc9dd4484fa390454ab914588, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 496000, guid: 490b0dacc9dd4484fa390454ab914588, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 496000, guid: 490b0dacc9dd4484fa390454ab914588, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 496000, guid: 490b0dacc9dd4484fa390454ab914588, type: 2}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 490b0dacc9dd4484fa390454ab914588, type: 2}
+  m_IsPrefabParent: 0
+--- !u!4 &1952063388 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 496000, guid: 490b0dacc9dd4484fa390454ab914588, type: 2}
+  m_PrefabInternal: {fileID: 1952063387}
 --- !u!1 &1958569512
 GameObject:
   m_ObjectHideFlags: 0
