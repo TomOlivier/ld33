@@ -15,7 +15,7 @@ function Start () {
 }
 
 function UIEventGameStart() {
-	if (player != null && player.isActive) {
+	if (player.isActive) {
 		displayObj.SetActive(true);
 		charIcon.sprite = player.character.logoMini;
 		displayObj.transform.Find("PName/Image").GetComponent(UI.Image).color = player.color;

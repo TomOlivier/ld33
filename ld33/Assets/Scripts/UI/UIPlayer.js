@@ -88,10 +88,11 @@ function OnPlayerTypeClick() {
 	if (!player.isIA)
 	{
 		ClearPlayerControllerDevice();
-		if (player.isActive)
+		if (!player.isActive)
 		{
-			player.isActive = false;
 			player.isIA = false;
+			player.isActive = true;
+			OnPlayerInputTypeClick();
 		}
 		else
 		{
@@ -104,9 +105,8 @@ function OnPlayerTypeClick() {
 	}
 	else
 	{
+		player.isActive = false;
 		player.isIA = false;
-		player.isActive = true;
-		OnPlayerInputTypeClick();
 	}
 	RefreshCharacter();
 	uiCharacter.gameSetupUpdated = true;

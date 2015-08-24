@@ -58,7 +58,7 @@ function Update () {
 			roundCount++;
 			ResetGameConditions();
 			playersManager.StartGame();
-			BroadcastMessage("UIEventGameStart");
+			this.transform.BroadcastMessage("UIEventGameStart");
 			nextState = GameState.PLAYING;
 			break;
 		case GameState.PLAYING:

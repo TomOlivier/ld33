@@ -104,6 +104,7 @@ function UIEventGameStart()
 {
 	for (var i = 0; i < 4; i++)
 	{
+		hudController.pboxHUD[i].player = transform.Find("Players").GetComponent(PlayersManager).players[i];	
 		hudController.pboxHUD[i].UIEventGameStart();
 	}
 }
