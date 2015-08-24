@@ -120,6 +120,9 @@ function OnCollisionEnter2D(collision : Collision2D) {
 
 		SoundManager.instance.PlaySfx(dieingAudio[Random.Range(0,dieingAudio.length)]);
 		collision.gameObject.GetComponent.<Hittable>().Die();
+
+		playerInfo.points++;
+
 		Destroy(collision.gameObject);
 	} else if (collision.gameObject.tag.Equals("Tree")) {
 		collision.gameObject.GetComponent.<Hittable>().Die();

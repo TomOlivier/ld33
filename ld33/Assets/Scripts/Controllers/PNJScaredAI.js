@@ -136,16 +136,21 @@ function setNewTargetLocalPosition(localPTarget:Vector3) {
 function triggerAnimations (a : float) {
 
 	if (a > -45f && a <= 45f) {
-		animators[0].SetTrigger('setBack');
-		animators[1].SetTrigger('setBack');
+		animatorsSetTrigger('setBack');
 	}
 	else if ((a > 45f && a <= 135f) || (a <= -45f && a > -135f)) {
-		animators[0].SetTrigger('setSide');
-		animators[1].SetTrigger('setSide');
+		animatorsSetTrigger('setSide');
 	}
 	else {
-		animators[0].SetTrigger('setFace');
-		animators[1].SetTrigger('setFace');
+		animatorsSetTrigger('setFace');
+	}
+}
+
+function animatorsSetTrigger (event : String) {
+	if (animators.length) {
+		for (var i = animators.length - 1; i >= 0; i--) {
+			animators[i].SetTrigger(event);
+		};
 	}
 }
 
