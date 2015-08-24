@@ -31,14 +31,24 @@ function WhatShouldIDo (speed : float) {
     // Let's find the best other player
     var currentBestPlayer : GameObject = GetBestPlayer();
 
-    // if (currentBestPlayer == currentlyChasingPlayer) {
-    // }
-
     currentlyChasingPlayer = currentBestPlayer;
 
-    var step = speed * Time.deltaTime;
+    var newPos = currentlyChasingPlayer.transform.position - gameObject.transform.position;
 
-    return Vector3.MoveTowards(transform.position, currentlyChasingPlayer.transform.position, step);
+    var ret = Vector3(0,0,0);
+    if (newPos.x < Mathf.Epsilon) {
+        ret.x = 1;
+    } else if (newPos.x > Mathf.Epsilon) {
+        ret.x = -1;
+    }
+
+    if (newPos.y < Mathf.Epsilon) {
+        ret.y = 1;
+    } else if (newPos.y > Mathf.Epsilon) {
+        ret.y = -1;
+    }
+
+    return ret;
 }
 
 function GetBestPlayer () {
