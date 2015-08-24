@@ -866,7 +866,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: f4d75bcb662c319428d78b65b8fa4287, type: 3}
   - {fileID: 8300000, guid: 33080dbe08d0cfb448248a0ebef5a3e9, type: 3}
   soundDead:
-  - {fileID: 0}
+  - {fileID: 8300000, guid: 4c4df431f5c2d504a82296ca8577e0da, type: 3}
 --- !u!114 &11433630
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -938,6 +938,10 @@ Prefab:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: soundDead.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 4c4df431f5c2d504a82296ca8577e0da, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 112720}

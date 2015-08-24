@@ -278,7 +278,6 @@ function Push(playerToPush:GameObject, strength:float) {
 		dmg = playerInfo.rampageDamage;
 	if (!playerInfo.isRampage && player.playerInfo.isRampage)
 		return ;
-	player.playerInfo.GetDamaged(dmg);
 
 	if (player.playerInfo.isAlive == false) {
 		playerInfo.kills++;
@@ -305,6 +304,8 @@ function Push(playerToPush:GameObject, strength:float) {
 
 		playerInfo.points += pointStealed;
 	}
+	
+	player.playerInfo.GetDamaged(dmg);
 
 	ShouldPointsScale();
 	player.ShouldPointsScale();
