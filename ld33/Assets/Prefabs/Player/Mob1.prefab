@@ -8,7 +8,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 432028}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bras droit Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26,7 +26,7 @@ GameObject:
   - 33: {fileID: 3343214}
   - 64: {fileID: 6480770}
   - 23: {fileID: 2397038}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Quad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 442190}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bras gauche Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57,7 +57,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 478020}
   - 95: {fileID: 9539966}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Mob1_Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75,7 +75,7 @@ GameObject:
   - 33: {fileID: 3356650}
   - 65: {fileID: 6523758}
   - 23: {fileID: 2346668}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Corps
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   - 33: {fileID: 3353024}
   - 65: {fileID: 6544070}
   - 23: {fileID: 2377288}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: jambe droit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -113,7 +113,7 @@ GameObject:
   - 50: {fileID: 5097078}
   - 114: {fileID: 11432702}
   - 114: {fileID: 11469728}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Mob1
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -131,7 +131,7 @@ GameObject:
   - 33: {fileID: 3327126}
   - 65: {fileID: 6503296}
   - 23: {fileID: 2349488}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: bras gauche
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -146,7 +146,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 486534}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: jambe gauche pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -164,7 +164,7 @@ GameObject:
   - 33: {fileID: 3334714}
   - 65: {fileID: 6576978}
   - 23: {fileID: 2335462}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tete
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -182,7 +182,7 @@ GameObject:
   - 33: {fileID: 3370630}
   - 65: {fileID: 6540566}
   - 23: {fileID: 2315866}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: bras droit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -200,7 +200,7 @@ GameObject:
   - 33: {fileID: 3335678}
   - 65: {fileID: 6523574}
   - 23: {fileID: 2316000}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: jambe gauche
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -215,7 +215,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 432716}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: jambe droit pivot (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -775,7 +775,6 @@ MonoBehaviour:
       logoMini: {fileID: 0}
       logoMedium: {fileID: 0}
       selectSound: {fileID: 0}
-    playerPrefab: {fileID: 0}
     relatedSelectionBox: {fileID: 0}
     color: {r: 0, g: 0, b: 0, a: 0}
     name: 
@@ -852,6 +851,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_TagString
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

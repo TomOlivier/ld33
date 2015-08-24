@@ -1,6 +1,7 @@
 ﻿#pragma strict
 
 public var pnjPrefab : GameObject;
+public var bonusPrefab : GameObject;
 
 public var bottomLeft : GameObject;
 public var bottomMiddle : GameObject;
@@ -156,8 +157,10 @@ function GetDamaged(damage:float) {
 		
 	}
 
-	if (currentLife < 0)
+	if (currentLife < 0) {
+		Instantiate(bonusPrefab, this.transform.TransformPoint(toSpawnLocalPosition), Quaternion.identity);
 		this.gameObject.GetComponent.<Hittable>().Die();
+	}
 	else {
 		this.gameObject.GetComponent.<Hittable>().GetHit(damage);
 	}

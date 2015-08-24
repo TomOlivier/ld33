@@ -33,23 +33,23 @@ public var soundEat : AudioClip [];
 public var soundDead : AudioClip [];
 
 function Animate(animName : String, conserve: boolean) {
-	if (anim.GetCurrentAnimatorStateInfo(0).IsName(animName))
+	if (!conserve)
 	{
-		return ;
-	}
-	if (activeCompleteAnim != "" && anim.GetCurrentAnimatorStateInfo(0).IsName(activeCompleteAnim))
-	{
-		Debug.Log("it is");
-		return ;
+		if (anim.GetCurrentAnimatorStateInfo(0).IsName(animName))
+		{
+			return ;
+		}
+		if (activeCompleteAnim != "" && anim.GetCurrentAnimatorStateInfo(0).IsName(activeCompleteAnim))
+		{
+			return ;
+		}	
 	}
 	anim.Play(animName);
 	if (conserve) {
-		Debug.Log("it is set");
 		activeCompleteAnim = animName;
 	}
 	else {
-		Debug.Log("it is clr");
-		activeCompleteAnim = "";
+		return ;
 	}
 }
 
@@ -63,16 +63,18 @@ function Update () {
 
 	if (GameController.isInGUI == false && GameController.gamePlaying) {
 		var inputDevicesController : InputDevicesController = InputDevicesController.GetInstance();
+		var rb : Rigidbody2D = GetComponent.<Rigidbody2D>();
 
 		var moveX : float;
 		var moveY : float;
+		var isHitting : boolean = false;
 
 		if (!playerInfo.isIA) {
 			moveX = inputDevicesController.GetAxisForDevice("Horizontal", playerInfo.device);
 			moveY = -inputDevicesController.GetAxisForDevice("Vertical", playerInfo.device);
 		} else {
 			// Remind to attach the script PlayerAI to the AI
-			var move : Vector3 = playerAI.WhatShouldIDo(speed);
+			var move : Vector3 = playerAI.WhatShouldIDo();
 			moveX = -move.x;
 			moveY = -move.y;
 		}
@@ -87,21 +89,24 @@ function Update () {
 			numberOfPushesLeft--;
 		}
 
-
 		if (moveX != 0 || moveY != 0) { // TODO: check if there's no pause / gui display
 			var rot_z:float = Mathf.Atan2(moveX, -moveY) * Mathf.Rad2Deg; // - moveY because we did shit with cameras
 	    	transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, rot_z - 90f);
 		}
 
-		var isHitting : boolean = inputDevicesController.GetButtonForDevice(ActionButton.ATTACK, playerInfo.device);
-//		Debug.Log("isHitting: " + isHitting);
+		// Attack Event : button for normal player, AI-defined otherwise
+		if (!playerInfo.isIA) {
+			isHitting = inputDevicesController.GetButtonForDevice(ActionButton.ATTACK, playerInfo.device);
+		} else {
+			isHitting = playerAI.CanHit();
+		}
+
 		cooldownAttack -= Time.deltaTime;
 		if (cooldownAttack > 0) {
 			cooldownAttack -= Time.deltaTime;
 		} else if (isHitting) {
 			if (cooldownAttack > 0) {
 				cooldownAttack -= Time.deltaTime;
-				Debug.Log("can't attack !");
 			} else {
 				// ATTACK !
 				for (var i = 0; i < touchedUnits.length; i++) {
@@ -119,19 +124,17 @@ function Update () {
 							Animate(activeAnim, true);
 						}
 					}
-					
 				}
 				cooldownAttack = attackCooldownDef;
 			}
 		}
 	}
-	var rb : Rigidbody2D = GetComponent.<Rigidbody2D>();
+
 	rb.angularVelocity = 0;
 	rb.velocity = Vector2 (moveX * speed, moveY * speed) + pushedVector;
-	if (activeAnim == "MobIdle")
-	{
-		if (moveX != 0 || moveY != 0)
-			activeAnim = "MobWalk";
+
+	if (activeAnim == "MobIdle") {
+		if (moveX != 0 || moveY != 0) activeAnim = "MobWalk";
 		Animate(activeAnim, false);
 	}
 }

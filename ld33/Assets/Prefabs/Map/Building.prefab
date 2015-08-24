@@ -84,6 +84,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pnjPrefab: {fileID: 180130, guid: d8bc6b5da9e98a443808e05577bd8dd5, type: 2}
+  bonusPrefab: {fileID: 113568, guid: fc8620b6b37784b69b4c9c7edbf1d222, type: 2}
   bottomLeft: {fileID: 0}
   bottomMiddle: {fileID: 0}
   bottomInterMiddle: {fileID: 0}
