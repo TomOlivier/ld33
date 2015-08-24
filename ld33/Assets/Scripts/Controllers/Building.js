@@ -7,7 +7,9 @@ public var bottomMiddle : GameObject;
 public var bottomInterMiddle : GameObject;
 public var middleLeft : GameObject;
 public var middleMiddle : GameObject;
-public var top : GameObject;
+
+public var buildingDamaged : GameObject;
+public var buildingDecorator : GameObject;
 
 public var height : int;
 public var width : int;
@@ -93,6 +95,14 @@ function Start () {
 	s_building = Instantiate (bottomMiddle, new Vector3 (root_asset_building.transform.position.x + doorX, root_asset_building.transform.position.y, 0f), Quaternion.identity) as GameObject;
 	s_building.transform.SetParent(root_asset_building.transform);
 
+
+	if(buildingDecorator)
+	{
+		s_building = Instantiate (buildingDecorator, new Vector3 (root_asset_building.transform.position.x + doorX, root_asset_building.transform.position.y + height, 0f), Quaternion.identity) as GameObject;
+		s_building.transform.SetParent(root_asset_building.transform);
+	}
+
+
 	root_asset_building.transform.Rotate(new Vector3(270f,180f,0f));
 	root_asset_building.transform.position.z = 0.5f;
 
@@ -122,7 +132,7 @@ function GetDamaged(damage:float) {
 	
 	currentLife -= damage;
 	
-	//si on doit perdre un étage
+	//si on doit perdre au moins un étage
 	if(nextLifeIndex < curLifeIndex)
 	{
 		var npcToSpawn = nbPNJScared * (1 - currentLife / lifeDef);
