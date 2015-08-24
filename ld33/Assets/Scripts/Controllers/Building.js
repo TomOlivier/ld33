@@ -29,6 +29,8 @@ private var currentLife : float = 10;
 
 private var nbPNJScared : int = 5;
 
+private var root_asset_building : GameObject;
+
 function Start () {
 	if (lifeDef == 0)
 		lifeDef = height * 50;
@@ -48,7 +50,8 @@ function Start () {
 
 	//Peuple les sprites
 	var s_building : GameObject;
-	var root_asset_building = GameObject();
+	root_asset_building = GameObject();
+
 	root_asset_building.transform.SetParent(this.transform);
 	s_building = Instantiate (bottomLeft, new Vector3 (root_asset_building.transform.position.x, root_asset_building.transform.position.y, 0f), Quaternion.identity) as GameObject;
 	s_building.transform.SetParent(root_asset_building.transform);
@@ -165,40 +168,68 @@ function GetDamaged(damage:float) {
 
 
 function removeSubBuilding() {
+
 	var i : int = 0;
+	var destroyed_part : GameObject;
 	var sub_child : Transform;
 	var child : Transform;
-	var shouldbreak : int = 0;
+	var yToRemove : int = 0;
 	var objectToRemove : GameObject;
 	for (child in transform) {
 		for (sub_child in child) {
 			// Debug.Log("tag : " + sub_child.tag + ", " + sub_child.localPosition.y);
-			if(sub_child.tag == 'building_top' && sub_child.localPosition.y > shouldbreak){
-				shouldbreak = sub_child.localPosition.y;
+			if(sub_child.tag == 'building_top' && sub_child.localPosition.y > yToRemove){
+				yToRemove = sub_child.localPosition.y;
 				objectToRemove = sub_child.gameObject;
 			}
-
+			
 		}
 
-		if(shouldbreak){
+		if(yToRemove){
 			if(soundExplosion && soundExplosion.length > 0)
 				SoundManager.instance.PlaySfx(soundExplosion[Random.Range(0,soundExplosion.length)]);
+
+			for (sub_child in child) {
+				//destroy de tous les prefabs tag building_destroyed avec le meme Y
+				if(sub_child.tag == 'building_destroyed' && sub_child.localPosition.x == objectToRemove.transform.localPosition.x){
+					Destroy(sub_child.gameObject);
+					break;
+				}
+			}
+
+			destroyed_part = Instantiate (buildingDamaged, new Vector3 (0f, yToRemove, 0f), Quaternion.identity) as GameObject;
+			destroyed_part.transform.SetParent(root_asset_building.transform);
+
 			Destroy(objectToRemove);
+
 			// Debug.Log("Removing " + objectToRemove);
 			break;
 		}
 
 		for (sub_child in child) {
-			if(sub_child.tag == 'building_bot' && sub_child.localPosition.y > shouldbreak){
-				shouldbreak = sub_child.localPosition.y;
+			if(sub_child.tag == 'building_bot' && sub_child.localPosition.y > yToRemove){
+				yToRemove = sub_child.localPosition.y;
 				objectToRemove = sub_child.gameObject;
 			}
 		}
 
-		if(shouldbreak){
+		if(yToRemove){
 			if(soundExplosion && soundExplosion.length > 0)
 				SoundManager.instance.PlaySfx(soundExplosion[Random.Range(0,soundExplosion.length)]);
+
+			for (sub_child in child) {
+				//destroy de tous les prefabs tag destroyedPart avec le meme Y
+				if(sub_child.tag == 'building_destroyed' && sub_child.localPosition.y == yToRemove){
+					Destroy(sub_child.gameObject);
+					break;
+				}
+			}
+
+			destroyed_part = Instantiate (buildingDamaged, new Vector3 (objectToRemove.transform.position.x, objectToRemove.transform.position.y, 0f), Quaternion.identity) as GameObject;
+			destroyed_part.transform.SetParent(root_asset_building.transform);
+
 			Destroy(objectToRemove);
+
 			// Debug.Log("Removing " + objectToRemove);
 			break;
 		}

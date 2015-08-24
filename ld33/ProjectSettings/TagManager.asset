@@ -10,6 +10,7 @@ TagManager:
   - Tree
   - building_top
   - building_bot
+  - building_damaged
   - Border
   - Fire
   - Bonus
