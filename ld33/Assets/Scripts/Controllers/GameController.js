@@ -39,10 +39,17 @@ function Update () {
 
 			var idc : InputDevicesController = InputDevicesController.GetInstance();
 			nextState = GameState.MAIN_MENU;
-			if (idc.AssignDeviceToPlayer(idc.GetAvailableKeyboard(), playersManager.GetPlayer(0)) == false)
-			{
-				Debug.LogError("Warning: No device available to be auto assigned to player 0");
-			}
+			
+			playersManager.players[0].device = idc.GetNextAvailableDevice(null);
+			playersManager.players[0].isActive = true;
+			playersManager.players[0].character = playersManager.characters[0];
+
+			playersManager.players[1].isActive = true;
+			playersManager.players[1].isIA = true;
+			playersManager.players[1].character = playersManager.characters[1];
+
+			playersManager.players[0].relatedSelectionBox.GetComponent(UIPlayer).RefreshCharacter();
+			playersManager.players[1].relatedSelectionBox.GetComponent(UIPlayer).RefreshCharacter();
 
 			Debug.Log("Game state LOAD completed");
 			break;
