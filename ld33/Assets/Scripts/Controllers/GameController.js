@@ -51,6 +51,8 @@ function Update () {
 			playersManager.players[0].relatedSelectionBox.GetComponent(UIPlayer).RefreshCharacter();
 			playersManager.players[1].relatedSelectionBox.GetComponent(UIPlayer).RefreshCharacter();
 
+			transform.GetComponent(ControllerUI).characterSelection.gameSetupUpdated = true;
+
 			Debug.Log("Game state LOAD completed");
 			break;
 		case GameState.MAIN_MENU:
